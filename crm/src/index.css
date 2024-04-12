@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -54,6 +60,69 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+header {
+  background: #212529;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  align-content: baseline;
+  justify-content: space-between;
+}
+
+.logo {
+  border: 1px dashed darkblue;
+  max-width: 17vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.logo_graphic {
+  filter: invert(70%) sepia(47%) saturate(998%) hue-rotate(0deg)
+    brightness(107%) contrast(105%);
+  height: 50px;
+  width: 50px;
+  margin: 0 0 0 0.75rem;
+}
+
+.logo_text {
+  font-size: 1.75rem;
+  font-weight: bolder;
+  margin: 0 0 0 0.25rem;
+}
+
+.navbar {
+  background: orange;
+}
+
+.nav_container {
+  margin: 0 auto;
+  padding: 0 1.4rem;
+}
+
+.nav_link {
+  text-decoration: none;
+  color: #caf0f8;
+}
+
+.nav_link:hover {
+  color: #ffcc00;
+}
+
+.nav_toggler {
+  font-size: 1.5rem;
+}
+
+.nav_link_container {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  /* border: 1px dashed orange; */
+  margin-top: 1rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,5 +133,17 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (min-width: 777px) {
+  .nav_toggler {
+    display: none;
+  }
+}
+
+@media (max-width: 777px) {
+  .nav_link_container {
+    display: none;
   }
 }
