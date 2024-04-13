@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="#" th:action="@{/login}" th:object="${superAdmin}" method="post">
+        <label>Email:</label><br/>
+        <input type="text" th:field="*{emailId}"/><br/>
+        <label>Password:</label><br/>
+        <input type="password" th:field="*{password}"/><br/>
+        <input type="submit" value="Login"/>
+        <p th:if="${param.error}">Invalid email or password</p>
+    </form>
+</body>
+</html>
