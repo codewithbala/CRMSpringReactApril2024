@@ -4,11 +4,15 @@ import "./App.css";
 import Login from "./components/login/login";
 import Homepage from "./components/homepage/homepage";
 import User from "./components/user/user";
+import Header from "./components/header/Header";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
 
   return (
+    <div>
+
+  <Header />
     <BrowserRouter>
       <Routes>
         <Route>
@@ -21,6 +25,8 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </div>
+
   );
 }
 
