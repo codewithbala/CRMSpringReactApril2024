@@ -1,6 +1,11 @@
+import { useState } from "react";
+import "./header.css";
+
 /* Prototype of the Header component, which should only be visible when the user is logged in. Tomorrow I will finish the functionality and make the menu fully responsive. */
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <header className="nav_container">
       <div className="logo">
@@ -14,7 +19,7 @@ const Header = () => {
       </div>
 
       <nav>
-        <ul className="nav_link_container">
+        <ul className={showMenu ? "open_menu" : "nav_link_container"}>
           <li className="nav_item">
             <a href="#" className="nav_link">
               Link One
@@ -37,7 +42,15 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <div className="nav_toggler">&#8801;</div>
+      <div className="nav_toggler">
+        <a
+          href="#"
+          className="menu_collapse"
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          {showMenu ? "X" : <>&#8801;</>}
+        </a>
+      </div>
     </header>
   );
 };
