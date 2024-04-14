@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import '../login/login.css'
 import { useNavigate } from "react-router-dom"
 import axios from 'axios';
@@ -14,7 +14,14 @@ export default function (props) {
   const[usernameInput, setUsernameInput] = useState("");
   const[passwordInput, setPasswordInput] = useState("")
   const[response, setResponse] = useState(false)
+  const [department, setDepartment] = useState();
   let navigate = useNavigate();
+
+
+  //ref on form options to get department
+  const departmentRef = useRef();
+
+
 
   const submit = (e) => {
     e.preventDefault();
@@ -29,8 +36,18 @@ export default function (props) {
   }
 
   const callToPostApi = (data) => {
+    let baseUrl = "http://localhost:8080/api";
+
+    let apiMap = new Map();
+    apiMap.set('business', `${baseUrl}/business-manager-login`);
+    apiMap.set('training', `${baseUrl}/training-admin-login`)
+    apiMap.set('hr', `${baseUrl}/hr-manager-login`)
+
+    let apiEndpoint = apiMap.get(department)
+    props.setTheDepartment(department)
     
-      axios.post(`http://localhost:8080/api/login`, data).then(answer => {
+
+      axios.post(apiEndpoint, data).then(answer => {
       console.log(answer)
       setResponse(answer.data)
       unlockLoggedInPage(answer.data)
@@ -38,8 +55,6 @@ export default function (props) {
     }).catch(error => {
       console.log(error)
     })
-
-
   }
 
   const unlockLoggedInPage = (answer) => {
@@ -47,38 +62,25 @@ export default function (props) {
           //if response from the api was 'login successful' unlock the login page
           if(answer == "Login successful"){
             props.setLoggedIn(true)
-            navigate('/user');
+            if(department == 'business'){
+              navigate('/business-manager-page');
+            }
+            if(department == 'hr'){
+              navigate('/hr-manager-page');
+            }
+            if(department == 'training'){
+              navigate('/training-admin-page');
+            }
+            
           }else{
             alert("Login Unsuccessful./.. please try again")
           }
   }
 
   useEffect(() => {
+    
+  },[department])
 
-  },[response])
-
-  async function getLogin(){
-    // let data = {
-    //   "username": usernameInput,
-    //   "password": passwordInput
-    // }
-
-    // const response = await fetch(`http://localhost:8080/api/login`, data);
-    // const answer = await response.json();
-    // console.log(answer)
-
-
-
-    // fetch('http://localhost:8080/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json, text/plain, */*',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({username:usernameInput, password:passwordInput})
-    // }).then(res => res.json())
-    //   .then(res => console.log(res));
-  }
 
   return (
     <div className="Auth-form-container">
@@ -105,6 +107,15 @@ export default function (props) {
             />
             <p>{passwordInput}</p>
           </div>
+
+          <label>Department</label>
+          <select className="form-select" aria-label="Default select example" ref={departmentRef} onChange={(e) => setDepartment(e.target.value)}>
+            <option defaultValue={""}>Choose Department</option>
+            <option value="hr">HR</option>
+            <option value="business">Business Development</option>
+            <option value="training">Training</option>
+          </select>
+
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
               Submit
