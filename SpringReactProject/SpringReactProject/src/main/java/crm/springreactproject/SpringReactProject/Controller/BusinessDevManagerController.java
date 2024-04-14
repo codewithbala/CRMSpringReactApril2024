@@ -17,7 +17,7 @@ public class BusinessDevManagerController {
 	@Autowired
     private BusinessDevManagerService businessDevManagerService;
 
-    @PostMapping("business-manager-login")
+    @PostMapping("/business-manager-login")
     public ResponseEntity<String> login(@RequestBody BusinessDevManager loginRequest) {
     	BusinessDevManager businessDevManager = businessDevManagerService.findByEmailId(loginRequest.getEmailId());
         if (businessDevManager != null && businessDevManager.getPassword().equals(loginRequest.getPassword())) {
