@@ -9,6 +9,7 @@ import Footer from "./components/footer/Footer";
 import HrManagerHomepage from "./components/user/hrManager/HrManagerHomepage";
 import TrainingManagerHomepage from "./components/user/trainingAdmin/TrainingAdminHomepage";
 import BusinessManagerHomepage from "./components/user/businessManager/BusinessManagerHompage";
+import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -19,6 +20,7 @@ function App() {
   return (
     <div>
       <Header />
+      <CreateHREmployee/>
       <BrowserRouter>
         <Routes>
           <Route>
