@@ -6,6 +6,9 @@ header {
   align-content: baseline;
   justify-content: space-between;
   max-height: 50px;
+  width: 100vw;
+  position: absolute;
+  top: 0;
 }
 
 .logo {

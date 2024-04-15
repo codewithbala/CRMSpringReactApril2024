@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./header.css";
 
-/* Prototype of the Header component, which should only be visible when the user is logged in. Tomorrow I will finish the functionality and make the menu fully responsive. */
-
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
