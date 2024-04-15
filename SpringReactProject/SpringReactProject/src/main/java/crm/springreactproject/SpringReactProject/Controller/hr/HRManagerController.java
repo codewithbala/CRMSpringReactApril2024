@@ -22,7 +22,7 @@ public class HRManagerController {
     public ResponseEntity<String> login(@RequestBody HRManager loginRequest) {
     	HRManager hrManger = hrManagerService.findByEmailId(loginRequest.getEmailId());
         if (hrManger != null && hrManger.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok(hrManger.toString());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }

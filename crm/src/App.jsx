@@ -20,11 +20,9 @@ function App() {
   return (
     <div>
       <Header />
-      <CreateHREmployee/>
       <BrowserRouter>
         <Routes>
           <Route>
-            <Route path="/" element={<Homepage />} />
             <Route
               path="/login"
               element={
@@ -39,7 +37,7 @@ function App() {
             element={loggedIn == true ? <User /> : <Homepage />}
           /> */}
             <Route
-              path="/hr-manager-page"
+              path="/hr-manager-page/:deptId/:managerId"
               element={
                 loggedIn == true && department == "hr" ? (
                   <HrManagerHomepage />
@@ -50,7 +48,7 @@ function App() {
             />
 
             <Route
-              path="/training-admin-page"
+              path="/training-admin-page/:deptId/:managerId"
               element={
                 loggedIn == true && department == "training" ? (
                   <TrainingManagerHomepage />
@@ -70,6 +68,8 @@ function App() {
                 )
               }
             />
+
+            <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -20,7 +20,7 @@ public class TrainingEmployee {
     private Integer hr_employee_id;
 
     @Column(nullable=false)
-    private Integer business_dev_manager_id;
+    private Integer manager_id;
     @Column(nullable=false)
     private Integer departmentId;
     @Column(nullable=false)

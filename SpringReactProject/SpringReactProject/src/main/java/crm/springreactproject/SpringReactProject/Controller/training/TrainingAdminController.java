@@ -22,7 +22,7 @@ public class TrainingAdminController {
     public ResponseEntity<String> login(@RequestBody TrainingAdmin loginRequest) {
     	TrainingAdmin trainingAdmin = trainingAdminService.findByEmailId(loginRequest.getEmailId());
         if (trainingAdmin != null && trainingAdmin.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok(trainingAdmin.toString());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }

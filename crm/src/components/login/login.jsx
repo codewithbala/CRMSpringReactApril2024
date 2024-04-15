@@ -13,6 +13,9 @@ export default function (props) {
   const [passwordInput, setPasswordInput] = useState("");
   const [response, setResponse] = useState(false);
   const [department, setDepartment] = useState();
+  const[identity, setIdentity] = useState();
+  const[hrManagerId, setHrManagerId] = useState("");
+  const[departmentId, setDepartmentId] = useState("");
   let navigate = useNavigate();
 
   //ref on form options to get department
@@ -44,27 +47,38 @@ export default function (props) {
     axios
       .post(apiEndpoint, data)
       .then((answer) => {
-        console.log(answer);
+        console.log(answer.data);
+        // setIdentity(answer.data);
+        // setHrManagerId(identity[0]);
+        let locationOfAdminId = answer.data.indexOf("id=")+3;
+        let locationOfDepartmentId = answer.data.indexOf("departmentId=")+13;
+        let managerId = answer.data.substring(locationOfAdminId,locationOfAdminId+1);
+        let deptId = answer.data.substring(locationOfDepartmentId,locationOfDepartmentId+1)
+
+        console.log(managerId)
+        console.log(deptId)
+        // setDepartment(identity[2])
         setResponse(answer.data);
-        unlockLoggedInPage(answer.data);
+        unlockLoggedInPage(answer.status, managerId, deptId);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const unlockLoggedInPage = (answer) => {
+  const unlockLoggedInPage = (answer, managerId, departmentId) => {
     //if response from the api was 'login successful' unlock the login page
-    if (answer == "Login successful") {
+    if (answer == 200) {
       props.setLoggedIn(true);
       if (department == "business") {
         navigate("/business-manager-page");
       }
       if (department == "hr") {
-        navigate("/hr-manager-page");
+        // navigate(`/hr-manager-page/`+departmentId+"/"+managerId);
+        navigate(`/hr-manager-page/${departmentId}/${managerId}`);
       }
       if (department == "training") {
-        navigate("/training-admin-page");
+        navigate(`/training-admin-page/`+departmentId+"/"+managerId);
       }
     } else {
       alert("Login Unsuccessful./.. please try again");

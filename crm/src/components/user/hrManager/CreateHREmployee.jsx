@@ -1,8 +1,9 @@
 // import BusinessManagerService from "./service/BusinessManagerService";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
+import axios from "axios";
 
-export default function CreateHREmployee() {
+export default function CreateBusinessEmployee() {
   // Corresponding form values stored in state
   const [superAdminId, setSuperAdminId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -18,18 +19,45 @@ export default function CreateHREmployee() {
   const [salary, setSalary] = useState("");
   const [midInitial, setMidInitial] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
+  let navigate = useNavigate();
+  let params = useParams();
 
   // Other variables
   /* discuss with team tomorrow on how to structure this */
 
-  const submitForm = (e) => {
+  const onSubmit = (e) => {
+    const baseUrl = "http://localhost:8080/api/hr"
     e.preventDefault();
+
+    let body = 
+    {
+    "manager_id": params.managerId,
+    "firstName": firstName,
+    "lastName": lastName,
+    "emailId": emailId,
+    "departmentId": params.deptId,
+    "password": password,
+    "hireDate": hireDate,
+    "job": job,
+    "edLevel": edLevel,
+    "sex": sex,
+    "birthdate": birthDate,
+    "salary": salary,
+    "midInitial": midInitial,
+    "phoneNum": phoneNum
+}
+    axios.post(`${baseUrl}/create-employee`, body).then(() => {
+        navigate("/training-admin-page")
+    }).catch((error) => {
+        console.log(error)
+    })
   }
+
 
   return (
     <div>
-      <div className="container" onSubmit={() => submitForm()}>
-        <form action="#">
+      <div className="container">
+        <form onSubmit={(e) => onSubmit(e)}>
           <h1 className="display-4 m-2">Create Business Employee</h1>
           <div className="form-group m-2">
             <label className="m-1">Administator ID</label>
@@ -39,6 +67,8 @@ export default function CreateHREmployee() {
               id="superAdminId"
               name="superAdminId"
               required
+              value={params.managerId}
+              onChange={(e) => setSuperAdminId(e.target.value)}
             />
           </div>
           <div className="form-group m-2">
@@ -48,6 +78,8 @@ export default function CreateHREmployee() {
               className="form-control"
               id="departmentId"
               name="departmentId"
+              value={params.deptId}
+              onChange={(e) => setDepartmentId(e.target.value)}
               required
             />
           </div>
@@ -57,6 +89,7 @@ export default function CreateHREmployee() {
               type="text"
               className="form-control"
               id="firstName"
+              onChange={(e) => setFirstName(e.target.value)}
               name="firstName"
               required
             />
@@ -68,6 +101,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="lastName"
               name="lastName"
+              onChange={(e) => setLastName(e.target.value)}
               required
             />
           </div>
@@ -78,6 +112,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="emailId"
               name="emailId"
+              onChange={(e) => setEmailId(e.target.value)}
               required
             />
           </div>
@@ -88,6 +123,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="password"
               name="password"
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -98,6 +134,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="hireDate"
               name="hireDate"
+              onChange={(e) => setHireDate(e.target.value)}
               required
             />
           </div>
@@ -108,12 +145,13 @@ export default function CreateHREmployee() {
               className="form-control"
               id="job"
               name="job"
+              onChange={(e) => setJob(e.target.value)}
               required
             />
           </div>
           <div className="form-group m-2">
-            <label className="m-1">Highest Level of Education</label>
-            <select name="edLevel" className="form-control" id="edLevel">
+            <label className="m-1" >Highest Level of Education</label>
+            <select name="edLevel" onChange={(e) => setEdLevel(e.target.value)} className="form-control" id="edLevel">
               <option value="GED or less">GED or less</option>
               <option value="High school diploma, no college">
                 High school diploma
@@ -128,19 +166,20 @@ export default function CreateHREmployee() {
           </div>
           <div className="form-group m-2">
             <label className="m-1">Gender</label>
-            <select name="sex" className="form-control" id="sex">
+            <select name="sex"  onChange={(e) => setSex(e.target.value)} className="form-control" id="sex">
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
           </div>
           <div className="form-group m-2">
-            <label className="m-1">Date of Birth</label>
+            <label className="m-1" >Date of Birth</label>
             <input
               type="date"
               className="form-control"
               id="birthdate"
               name="birthdate"
               required
+              onChange={(e) => setBirthDate(e.target.value)}
             />
           </div>
           <div className="form-group m-2">
@@ -150,6 +189,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="salary"
               name="salary"
+              onChange={(e) => setSalary(e.target.value)}
               required
             />
           </div>
@@ -160,6 +200,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="midInitial"
               name="midInitial"
+              onChange={(e) => setMidInitial(e.target.value)}
             />
           </div>
           <div className="form-group m-2">
@@ -169,7 +210,7 @@ export default function CreateHREmployee() {
               className="form-control"
               id="phoneNum"
               name="phoneNum"
-              required
+              onChange={(e) => setPhoneNum(e.target.value)}
             />
           </div>
           <button type="submit" className="btn btn-primary">
