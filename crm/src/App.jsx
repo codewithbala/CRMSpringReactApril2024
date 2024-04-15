@@ -5,52 +5,74 @@ import Login from "./components/login/login";
 import Homepage from "./components/homepage/homepage";
 import User from "./components/user/user";
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 import HrManagerHomepage from "./components/user/hrManager/HrManagerHomepage";
 import TrainingManagerHomepage from "./components/user/trainingAdmin/TrainingAdminHomepage";
 import BusinessManagerHomepage from "./components/user/businessManager/BusinessManagerHompage";
 
-
 function App() {
   const [loggedIn, setLoggedIn] = useState();
-  const[department, setDepartment] = useState();
+  const [department, setDepartment] = useState();
 
-  useEffect(() =>{
-    
-  },[department])
+  useEffect(() => {}, [department]);
 
   return (
     <div>
-
-  <Header />
-    <BrowserRouter>
-      <Routes>
-        <Route>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setTheDepartment={setDepartment}/>} />
-          {/* <Route
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route>
+            <Route path="/" element={<Homepage />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  setLoggedIn={setLoggedIn}
+                  setTheDepartment={setDepartment}
+                />
+              }
+            />
+            {/* <Route
             path="/user"
             element={loggedIn == true ? <User /> : <Homepage />}
           /> */}
-          <Route
-            path="/hr-manager-page"
-            element={loggedIn == true && department == 'hr' ? <HrManagerHomepage /> : <Homepage />}
-          />
+            <Route
+              path="/hr-manager-page"
+              element={
+                loggedIn == true && department == "hr" ? (
+                  <HrManagerHomepage />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
 
-          <Route
-            path="/training-admin-page"
-            element={loggedIn == true && department == 'training' ? <TrainingManagerHomepage /> : <Homepage />}
-          />
+            <Route
+              path="/training-admin-page"
+              element={
+                loggedIn == true && department == "training" ? (
+                  <TrainingManagerHomepage />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
 
-          <Route
-            path="/business-manager-page"
-            element={loggedIn == true && department == 'business'  ? <BusinessManagerHomepage /> : <Homepage />}
-          />
-
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route
+              path="/business-manager-page"
+              element={
+                loggedIn == true && department == "business" ? (
+                  <BusinessManagerHomepage />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </div>
-
   );
 }
 
