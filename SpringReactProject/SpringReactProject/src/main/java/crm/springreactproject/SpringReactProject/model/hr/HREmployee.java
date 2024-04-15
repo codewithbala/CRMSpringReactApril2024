@@ -20,6 +20,8 @@ public class HREmployee {
 
 
     @Column(nullable=false)
+    private Integer hr_dev_manager_id;
+    @Column(nullable=false)
     private Integer departmentId;
     @Column(nullable=false)
     private String firstName;

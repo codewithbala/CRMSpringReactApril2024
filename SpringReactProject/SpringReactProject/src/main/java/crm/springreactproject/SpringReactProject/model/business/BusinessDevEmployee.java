@@ -19,7 +19,8 @@ public class BusinessDevEmployee {
 
     private Integer business_dev_employee_id;
 
-
+    @Column(nullable=false)
+    private Integer business_dev_manager_id;
     @Column(nullable=false)
     private Integer departmentId;
     @Column(nullable=false)
