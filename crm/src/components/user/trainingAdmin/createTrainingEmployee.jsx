@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate  } from "react-router-dom";
 import axios from "axios";
 
-export default function CreateBusinessEmployee() {
+export default function CreateTrainingEmployee() {
   // Corresponding form values stored in state
   const [superAdminId, setSuperAdminId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -31,12 +31,12 @@ export default function CreateBusinessEmployee() {
 
     let body = 
     {
-    "manager_id": superAdminId,
+    "manager_id": params.managerId,
 
     "firstName": firstName,
     "lastName": lastName,
     "emailId": emailId,
-    "departmentId": departmentId,
+    "departmentId": params.deptId,
     "password": password,
     "hireDate": hireDate,
     "job": job,
@@ -48,7 +48,7 @@ export default function CreateBusinessEmployee() {
     "phoneNum": phoneNum
 }
     axios.post(`${baseUrl}/create-employee`, body).then(() => {
-        navigate("/training-admin-page")
+        navigate(`/training-admin-page/${params.deptId}/${params.managerId}`)
     }).catch((error) => {
         console.log(error)
     })
@@ -69,7 +69,6 @@ export default function CreateBusinessEmployee() {
               name="superAdminId"
               required
               value={params.managerId}
-              onChange={(e) => setSuperAdminId(e.target.value)}
             />
           </div>
           <div className="form-group m-2">
@@ -80,7 +79,6 @@ export default function CreateBusinessEmployee() {
               id="departmentId"
               name="departmentId"
               value={params.deptId}
-              onChange={(e) => setDepartmentId(e.target.value)}
               required
             />
           </div>

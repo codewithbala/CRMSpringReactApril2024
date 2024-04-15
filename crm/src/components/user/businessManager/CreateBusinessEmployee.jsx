@@ -1,6 +1,7 @@
 // import BusinessManagerService from "./service/BusinessManagerService";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
+import axios from "axios";
 
 export default function CreateBusinessEmployee() {
   // Corresponding form values stored in state
@@ -18,14 +19,45 @@ export default function CreateBusinessEmployee() {
   const [salary, setSalary] = useState("");
   const [midInitial, setMidInitial] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
+  let navigate = useNavigate();
+  let params = useParams();
 
   // Other variables
   /* discuss with team tomorrow on how to structure this */
 
+  const onSubmit = (e) => {
+    const baseUrl = "http://localhost:8080/api/business"
+    e.preventDefault();
+
+    let body = 
+    {
+    "manager_id": params.managerId,
+    "firstName": firstName,
+    "lastName": lastName,
+    "emailId": emailId,
+    "departmentId": params.deptId,
+    "password": password,
+    "hireDate": hireDate,
+    "job": job,
+    "edLevel": edLevel,
+    "sex": sex,
+    "birthdate": birthDate,
+    "salary": salary,
+    "midInitial": midInitial,
+    "phoneNum": phoneNum
+}
+    axios.post(`${baseUrl}/create-employee`, body).then(() => {
+        navigate(`/business-manager-page/${params.deptId}/${params.managerId}`)
+    }).catch((error) => {
+        console.log(error)
+    })
+  }
+
+
   return (
     <div>
       <div className="container">
-        <form action="#">
+        <form onSubmit={(e) => onSubmit(e)}>
           <h1 className="display-4 m-2">Create Business Employee</h1>
           <div className="form-group m-2">
             <label className="m-1">Administator ID</label>
@@ -35,6 +67,7 @@ export default function CreateBusinessEmployee() {
               id="superAdminId"
               name="superAdminId"
               required
+              value={params.managerId}
             />
           </div>
           <div className="form-group m-2">
@@ -44,7 +77,7 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="departmentId"
               name="departmentId"
-              
+              value={params.deptId}
               required
             />
           </div>
@@ -66,7 +99,7 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="lastName"
               name="lastName"
-              onChange={(e) => lastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
               required
             />
           </div>
@@ -88,7 +121,7 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="password"
               name="password"
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -175,7 +208,6 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="phoneNum"
               name="phoneNum"
-              required
               onChange={(e) => setPhoneNum(e.target.value)}
             />
           </div>

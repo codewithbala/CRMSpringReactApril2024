@@ -71,7 +71,7 @@ export default function (props) {
     if (answer == 200) {
       props.setLoggedIn(true);
       if (department == "business") {
-        navigate("/business-manager-page");
+        navigate(`/business-manager-page/${departmentId}/${managerId}`);
       }
       if (department == "hr") {
         // navigate(`/hr-manager-page/`+departmentId+"/"+managerId);
