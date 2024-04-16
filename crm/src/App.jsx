@@ -12,6 +12,8 @@ import BusinessManagerHomepage from "./components/user/businessManager/BusinessM
 import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
 import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
+// import CreateCandidate from "./components/user/employee/CreateCandidate";
+import UpdateCandidate from "./components/user/employee/CreateCandidate";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -35,10 +37,10 @@ function App() {
                 />
               }
             />
-            {/* <Route
-            path="/user"
-            element={loggedIn == true ? <User /> : <Homepage />}
-          /> */}
+            <Route
+            path="/update-candidate"
+            element={<UpdateCandidate/>}
+          />
 
 
             <Route
