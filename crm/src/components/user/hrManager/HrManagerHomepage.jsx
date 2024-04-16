@@ -1,10 +1,23 @@
-// import Header from "../header/Header";
-// import Footer from "../footer/Footer";
+import React from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 export default function HrManagerHomepage() {
+
+  const navigate = useNavigate();
+  const params = useParams();
+  const deptId = params.deptId;
+  const managerId = params.managerId;
+  console.log(params.deptId);
+  console.log(params.hrManagerId)
+
+  function click (){
+    navigate(`/hr/createEmployee/${deptId}/${managerId}`)
+  }
+
   return (
     <div>
       <h1>Hello HrManager</h1>
+      <button onClick={() => click()}>Create Hr Employee</button>
     </div>
   );
 }

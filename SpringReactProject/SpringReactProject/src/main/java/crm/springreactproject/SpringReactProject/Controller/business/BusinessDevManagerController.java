@@ -21,7 +21,7 @@ public class BusinessDevManagerController {
     public ResponseEntity<String> login(@RequestBody BusinessDevManager loginRequest) {
     	BusinessDevManager businessDevManager = businessDevManagerService.findByEmailId(loginRequest.getEmailId());
         if (businessDevManager != null && businessDevManager.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok(businessDevManager.toString());
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }

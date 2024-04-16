@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate  } from "react-router-dom";
 import axios from "axios";
 
-export default function CreateBusinessEmployee() {
+export default function CreateHREmployee() {
   // Corresponding form values stored in state
   const [superAdminId, setSuperAdminId] = useState("");
   const [departmentId, setDepartmentId] = useState("");
@@ -26,7 +26,7 @@ export default function CreateBusinessEmployee() {
   /* discuss with team tomorrow on how to structure this */
 
   const onSubmit = (e) => {
-    const baseUrl = "http://localhost:8080/api/business"
+    const baseUrl = "http://localhost:8080/api/hr"
     e.preventDefault();
 
     let body = 
@@ -47,7 +47,7 @@ export default function CreateBusinessEmployee() {
     "phoneNum": phoneNum
 }
     axios.post(`${baseUrl}/create-employee`, body).then(() => {
-        navigate(`/business-manager-page/${params.deptId}/${params.managerId}`)
+        navigate(`/hr-manager-page/${params.deptId}/${params.managerId}`)
     }).catch((error) => {
         console.log(error)
     })
@@ -58,7 +58,7 @@ export default function CreateBusinessEmployee() {
     <div>
       <div className="container">
         <form onSubmit={(e) => onSubmit(e)}>
-          <h1 className="display-4 m-2">Create Business Employee</h1>
+          <h1 className="display-4 m-2">Create HR Employee</h1>
           <div className="form-group m-2">
             <label className="m-1">Administator ID</label>
             <input
@@ -68,6 +68,7 @@ export default function CreateBusinessEmployee() {
               name="superAdminId"
               required
               value={params.managerId}
+
             />
           </div>
           <div className="form-group m-2">

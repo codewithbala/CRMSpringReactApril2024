@@ -9,6 +9,9 @@ import Footer from "./components/footer/Footer";
 import HrManagerHomepage from "./components/user/hrManager/HrManagerHomepage";
 import TrainingManagerHomepage from "./components/user/trainingAdmin/TrainingAdminHomepage";
 import BusinessManagerHomepage from "./components/user/businessManager/BusinessManagerHompage";
+import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
+import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
+import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -22,7 +25,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route>
-            <Route path="/" element={<Homepage />} />
             <Route
               path="/login"
               element={
@@ -36,19 +38,10 @@ function App() {
             path="/user"
             element={loggedIn == true ? <User /> : <Homepage />}
           /> */}
-            <Route
-              path="/hr-manager-page"
-              element={
-                loggedIn == true && department == "hr" ? (
-                  <HrManagerHomepage />
-                ) : (
-                  <Homepage />
-                )
-              }
-            />
+
 
             <Route
-              path="/training-admin-page"
+              path="/training-admin-page/:deptId/:managerId"
               element={
                 loggedIn == true && department == "training" ? (
                   <TrainingManagerHomepage />
@@ -59,7 +52,18 @@ function App() {
             />
 
             <Route
-              path="/business-manager-page"
+              path="/training/createEmployee/:deptId/:managerId"
+              element={
+                loggedIn == true && department == "training" ? (
+                  <CreateTrainingEmployee />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+
+            <Route
+              path="/business-manager-page/:deptId/:managerId"
               element={
                 loggedIn == true && department == "business" ? (
                   <BusinessManagerHomepage />
@@ -68,6 +72,20 @@ function App() {
                 )
               }
             />
+            <Route path="/business/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "business" ? <CreateBusinessEmployee/> : <Homepage/>}/>
+
+
+            <Route
+              path="/hr-manager-page/:deptId/:managerId"
+              element={
+                loggedIn == true && department == "hr" ? (
+                  <HrManagerHomepage />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+            <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
