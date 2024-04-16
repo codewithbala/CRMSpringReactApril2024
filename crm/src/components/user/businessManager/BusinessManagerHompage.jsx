@@ -16,8 +16,8 @@ export default function BusinessManagerHomepage() {
 
   return (
     <div>
-      <h1>Hello HrManager</h1>
-      <button onClick={() => click()}>Create Hr Employee</button>
+      <h1>Hello Business Manager</h1>
+      <button onClick={() => click()}>Create Business Employee</button>
     </div>
   );
 }

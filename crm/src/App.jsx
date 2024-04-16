@@ -24,9 +24,10 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
+        
           <Route>
             <Route
-              path="/login"
+              path="/"
               element={
                 <Login
                   setLoggedIn={setLoggedIn}
