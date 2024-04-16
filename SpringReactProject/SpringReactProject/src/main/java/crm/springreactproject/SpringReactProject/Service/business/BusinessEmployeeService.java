@@ -3,6 +3,7 @@ package crm.springreactproject.SpringReactProject.Service.business;
 
 import crm.springreactproject.SpringReactProject.Repository.business.BusinessDevEmployeeRepository;
 import crm.springreactproject.SpringReactProject.model.business.BusinessDevEmployee;
+import crm.springreactproject.SpringReactProject.model.business.BusinessDevManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ public class BusinessEmployeeService {
         return businessDevEmployeeRepository.findById(id).get();
     }
 
+    public BusinessDevEmployee findByEmailId(String emailId) {
+        return businessDevEmployeeRepository.findByEmailId(emailId);
+    }
     public void createEmployee(BusinessDevEmployee employee){
         businessDevEmployeeRepository.save(employee);
     }

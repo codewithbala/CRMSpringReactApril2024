@@ -16,7 +16,6 @@ import lombok.Setter;
 public class BusinessDevEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer business_dev_employee_id;
 
     @Column(nullable=false)
@@ -33,7 +32,6 @@ public class BusinessDevEmployee {
     private String password;
 
     @Column(nullable=false)
-
     private String hireDate;
 
     @Column(nullable=false)
