@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,7 +14,7 @@ const Header = () => {
           height="50"
           width="50"
         />
-        <span className="logo_text">CRMSystem</span>
+        <Link to="/"><span className="logo_text">CRMSystem</span></Link>
       </div>
 
       <nav>

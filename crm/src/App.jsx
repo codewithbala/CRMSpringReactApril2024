@@ -6,25 +6,33 @@ import Homepage from "./components/homepage/homepage";
 import User from "./components/user/user";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import HrManagerHomepage from "./components/user/hrManager/HrManagerHomepage";
-import TrainingManagerHomepage from "./components/user/trainingAdmin/TrainingAdminHomepage";
-import BusinessManagerHomepage from "./components/user/businessManager/BusinessManagerHompage";
+
 import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
 import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 // import CreateCandidate from "./components/user/employee/CreateCandidate";
-import UpdateCandidate from "./components/user/employee/CreateCandidate";
+import UpdateCandidate from "./components/user/employee/UpdateCandidate";
+import EmployeeHomepage from "./components/user/employee/EmployeeHomepage";
+import ManagersPage from "./components/user/managers/ManagersPage";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState();
-  const [department, setDepartment] = useState();
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
+  const [department, setDepartment] = useState(localStorage.getItem("department"));
+  const [user,setUser] = useState(localStorage.getItem("user"));
 
-  useEffect(() => {}, [department]);
 
+
+  console.log("loggedin is"+typeof(loggedIn))
+
+  useEffect(() => {
+    console.log(user)
+  }, [department]);
+  console.log(user)
   return (
     <div>
-      <Header />
+      
       <BrowserRouter>
+      <Header />
         <Routes>
         
           <Route>
@@ -34,6 +42,7 @@ function App() {
                 <Login
                   setLoggedIn={setLoggedIn}
                   setTheDepartment={setDepartment}
+                  setUser={setUser}
                 />
               }
             />
@@ -42,18 +51,29 @@ function App() {
             element={<UpdateCandidate/>}
           />
 
-
+            {/* training admin */}
             <Route
-              path="/training-admin-page/:deptId/:managerId"
+              path="/training-admin-page"
               element={
                 loggedIn == true && department == "training" ? (
-                  <TrainingManagerHomepage />
+                  <ManagersPage department={department}/>
                 ) : (
                   <Homepage />
                 )
               }
             />
-
+            {/* training employee */}
+            <Route
+              path="/training-employee-page"
+              element={
+                loggedIn == true && department == "training-employee" ? (
+                  <EmployeeHomepage department={department}/>
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+            {/* create training employee */}
             <Route
               path="/training/createEmployee/:deptId/:managerId"
               element={
@@ -64,31 +84,59 @@ function App() {
                 )
               }
             />
-
+            {/* business manager */}
             <Route
-              path="/business-manager-page/:deptId/:managerId"
+              path="/business-manager-page"
               element={
                 loggedIn == true && department == "business" ? (
-                  <BusinessManagerHomepage />
+                  <ManagersPage department={department}/>
                 ) : (
                   <Homepage />
                 )
               }
             />
+            {/* Business employee*/}
+            <Route
+              path="/business-employee-page"
+              element={
+                loggedIn == true && department == "business-employee" ? (
+                  <EmployeeHomepage department={department}/>
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+            {/* create business employee */}
             <Route path="/business/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "business" ? <CreateBusinessEmployee/> : <Homepage/>}/>
 
-
+            {/* HR manager*/}
             <Route
-              path="/hr-manager-page/:deptId/:managerId"
+              path="/hr-manager-page"
               element={
                 loggedIn == true && department == "hr" ? (
-                  <HrManagerHomepage />
+                  <ManagersPage department={department}/>
                 ) : (
                   <Homepage />
                 )
               }
             />
+
+            <Route
+              path="/hr-employee-page"
+              element={
+                loggedIn == true && department == "hr-employee" ? (
+                  <EmployeeHomepage department={department}/>
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
+
             <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
+
+
+            <Route path="/create-candidate" element={ <UpdateCandidate/>} />
+
           </Route>
         </Routes>
       </BrowserRouter>
