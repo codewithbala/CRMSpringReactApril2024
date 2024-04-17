@@ -14,6 +14,7 @@ import CreateBusinessEmployee from "./components/user/businessManager/CreateBusi
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 // import CreateCandidate from "./components/user/employee/CreateCandidate";
 import UpdateCandidate from "./components/user/employee/CreateCandidate";
+import CreateCandidate from "./components/candidate/CreateCandidate";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -26,7 +27,6 @@ function App() {
       <Header />
       <BrowserRouter>
         <Routes>
-        
           <Route>
             <Route
               path="/"
@@ -37,11 +37,7 @@ function App() {
                 />
               }
             />
-            <Route
-            path="/update-candidate"
-            element={<UpdateCandidate/>}
-          />
-
+            <Route path="/update-candidate" element={<UpdateCandidate />} />
 
             <Route
               path="/training-admin-page/:deptId/:managerId"
@@ -75,8 +71,16 @@ function App() {
                 )
               }
             />
-            <Route path="/business/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "business" ? <CreateBusinessEmployee/> : <Homepage/>}/>
-
+            <Route
+              path="/business/createEmployee/:deptId/:managerId"
+              element={
+                loggedIn == true && department == "business" ? (
+                  <CreateBusinessEmployee />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
 
             <Route
               path="/hr-manager-page/:deptId/:managerId"
@@ -88,8 +92,19 @@ function App() {
                 )
               }
             />
-            <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
+            <Route
+              path="/hr/createEmployee/:deptId/:managerId"
+              element={
+                loggedIn == true && department == "hr" ? (
+                  <CreateHREmployee />
+                ) : (
+                  <Homepage />
+                )
+              }
+            />
           </Route>
+          /* For testing purposes only. Will remove. */
+          <Route path="/create-candidate" element={<CreateCandidate />} />
         </Routes>
       </BrowserRouter>
       <Footer />
