@@ -47,6 +47,7 @@ const CreateCandidate = () => {
   };
 
   const showOtherSourceField = () => {
+    console.log(source);
     return (
       <div className="form-group m-2">
         <label className="m-1">Specify Other Source</label>
@@ -56,7 +57,10 @@ const CreateCandidate = () => {
           className="form-control"
           id="source"
           name="source"
-          onChange={(e) => setSource(e.target.value)}
+          onChange={(e) => {
+            setSource(e.target.value);
+            console.log(source);
+          }}
           required
         />
       </div>
