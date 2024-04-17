@@ -19,12 +19,12 @@ public class HRManagerController {
     private HRManagerService hrManagerService;
 
     @PostMapping("/hr-manager-login")
-    public ResponseEntity<String> login(@RequestBody HRManager loginRequest) {
+    public ResponseEntity<HRManager> login(@RequestBody HRManager loginRequest) {
     	HRManager hrManger = hrManagerService.findByEmailId(loginRequest.getEmailId());
         if (hrManger != null && hrManger.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(hrManger.toString());
+            return ResponseEntity.ok(hrManger);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HRManager());
         }
     }
 }

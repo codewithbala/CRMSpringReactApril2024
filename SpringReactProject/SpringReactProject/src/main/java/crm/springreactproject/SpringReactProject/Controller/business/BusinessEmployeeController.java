@@ -42,19 +42,19 @@ public class BusinessEmployeeController {
         return businessEmployeeService.findById(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
         businessEmployeeService.deleteById(id);
         return "the employee with ID: "+id+" has been deleted";
     }
 
     @PostMapping("/business-employee-login")
-    public ResponseEntity<String> login(@RequestBody BusinessDevEmployee loginRequest) {
+    public ResponseEntity<BusinessDevEmployee> login(@RequestBody BusinessDevEmployee loginRequest) {
         BusinessDevEmployee businessDevEmployee = businessEmployeeService.findByEmailId(loginRequest.getEmailId());
         if (businessDevEmployee != null && businessDevEmployee.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(businessDevEmployee.toString());
+            return ResponseEntity.ok(businessDevEmployee);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BusinessDevEmployee());
         }
     }
 }

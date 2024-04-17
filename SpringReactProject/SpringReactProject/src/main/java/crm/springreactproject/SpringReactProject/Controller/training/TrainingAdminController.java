@@ -19,12 +19,12 @@ public class TrainingAdminController {
     private TrainingAdminService trainingAdminService;
 
     @PostMapping("/training-admin-login")
-    public ResponseEntity<String> login(@RequestBody TrainingAdmin loginRequest) {
+    public ResponseEntity<TrainingAdmin> login(@RequestBody TrainingAdmin loginRequest) {
     	TrainingAdmin trainingAdmin = trainingAdminService.findByEmailId(loginRequest.getEmailId());
         if (trainingAdmin != null && trainingAdmin.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(trainingAdmin.toString());
+            return ResponseEntity.ok(trainingAdmin);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new TrainingAdmin());
         }
     }
 }
