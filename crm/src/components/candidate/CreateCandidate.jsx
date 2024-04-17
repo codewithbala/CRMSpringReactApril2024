@@ -18,30 +18,98 @@ const CreateCandidate = () => {
   const [city, setCity] = useState("");
   const [experience, setExperience] = useState("");
   const [visaStatus, setVisaStatus] = useState("");
-  const [OPTStartDate, OPTEndDate] = useState("");
+  const [OPTStartDate, setOPTStartDate] = useState("");
+  const [OPTEndDate, setOPTEndDate] = useState("");
   const [showOtherSkillSet, setShowOtherSkillSet] = useState(false);
   const [visaDates, setVisaDates] = useState(false);
+  const [SSN, setSSN] = useState("");
+  const [source, setSource] = useState("");
+  const [communicationSkill, setCommunicationSkill] = useState("");
+  const [resume, setResume] = useState([]);
+  const [recruiterRemarks, setRecruiterRemarks] = useState("");
 
   let params = useParams();
   let navigate = useNavigate();
 
-  const switchOtherSkillSet = () => {
-    setShowOtherSkillSet(!showOtherSkillSet);
-  };
-
-  const switchVisaDates = () => {
-    setVisaDates(!visaDates);
-  };
-
   const showOtherSkillField = () => {
-    return `<label className="m-1">Specify Other Skill Set(s)</label>
-    <input
-      type="text"
-      className="form-control"
-      id="skillSet"
-      name="skillSet"
-      required
-    />`;
+    return (
+      <>
+        <label className="m-1">Specify Other Skill Set(s)</label>
+        <input
+          type="text"
+          className="form-control"
+          id="skillSet"
+          name="skillSet"
+          required
+        />
+      </>
+    );
+  };
+
+  const showOtherSourceField = () => {
+    console.log(source);
+    return (
+      <div className="form-group m-2">
+        <label className="m-1">Specify Other Source</label>
+        <input
+          type="text"
+          maxLength={50}
+          className="form-control"
+          id="source"
+          name="source"
+          onChange={(e) => {
+            setSource(e.target.value);
+            console.log(source);
+          }}
+          required
+        />
+      </div>
+    );
+  };
+
+  const specifyReference = () => {
+    return (
+      <div className="form-group m-2">
+        <label className="m-1">Specify Reference</label>
+        <input
+          type="text"
+          className="form-control"
+          id="source"
+          name="source"
+          onChange={(e) => setSource(e.target.value)}
+          required
+        />
+      </div>
+    );
+  };
+
+  const showVisaDateCalendars = () => {
+    return (
+      <>
+        <div className="form-group m-2">
+          <label className="m-1">OPT Start Date</label>
+          <input
+            type="date"
+            className="form-control"
+            name="OPTStartDate"
+            id="OPTStartDate"
+            onChange={(e) => setOPTStartDate(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group m-2">
+          <label className="m-1">OPT End Date</label>
+          <input
+            type="date"
+            className="form-control"
+            name="OPTEndDate"
+            id="OPTEndDate"
+            onChange={(e) => setOPTEndDate(e.target.value)}
+            required
+          />
+        </div>
+      </>
+    );
   };
 
   return (
@@ -86,14 +154,20 @@ const CreateCandidate = () => {
           <option value="Backend Java Stack">Backend Java Stack</option>
           <option value="10">10</option>
           <option value="11">11</option>
-          <option value="Other" onClick={switchOtherSkillSet}>
+          <option
+            value="Other"
+            onClick={() => {
+              setShowOtherSkillSet(!showOtherSkillSet);
+              console.log("value is: " + showOtherSkillSet);
+            }}
+          >
             Other
           </option>
         </select>
-        {/* show/hide field based on other response */}
-        <div className={showOtherSkillSet ? "form-group m-2" : ""}>
-          {showOtherSkillSet ? showOtherSkillField : ""}
-        </div>
+      </div>
+      {/* show/hide field based on other response */}
+      <div className={showOtherSkillSet ? "form-group m-2" : ""}>
+        {showOtherSkillSet ? showOtherSkillField() : ""}
       </div>
       <div className="form-group m-2">
         <label className="m-1">Batch Number</label>
@@ -636,6 +710,7 @@ const CreateCandidate = () => {
         <label className="m-1">Visa Status</label>
         <select
           className="form-select form-control"
+          value={visaStatus}
           name="visaStatus"
           id="visaStatus"
           onChange={(e) => setVisaStatus(e.target.value)}
@@ -647,10 +722,80 @@ const CreateCandidate = () => {
           <option value="US Citizen">US Citizen</option>
           <option value="TN">TN</option>
         </select>
-        <div>
-          /* Will render input here if OPT EAD or CPT are selected OPTStartDate
-          and OPTEndDate are dependent on these. */
-        </div>
+      </div>
+
+      {visaStatus === "OPT EAD" || visaStatus === "CPT"
+        ? showVisaDateCalendars()
+        : ""}
+      <div className="form-group m-2">
+        <label className="m-1">Social Security Number</label>
+        <input type="password" className="form-control" name="SSN" id="SSN" />
+      </div>
+      <div className="form-group m-2">
+        <label className="m-1">Source</label>
+        <select
+          className="form-select form-control"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+        >
+          <option value="Monster">Monster</option>
+          <option value="LinkedIn">LinkedIn</option>
+          <option value="Indeed">Indeed</option>
+          <option value="Dice">Dice</option>
+          <option value="CareerBuilder">CareerBuilder</option>
+          <option value="Reference">Reference</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      {source === "Other" ? showOtherSourceField() : ""}
+      {source === "Reference" ? specifyReference() : ""}
+      <div className="form-group m-2">
+        <label className="m-1">Communication Skills</label>
+        <select
+          className="form-select form-control"
+          name="communicationSkill"
+          id="communicationSkill"
+          onChange={(e) => setCommunicationSkill(e.target.value)}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div className="form-group m-2">
+        <label className="m-1">Resume Attachment</label>
+        <input
+          type="file"
+          className="form-control"
+          name="resume"
+          id="resume"
+          onChange={(e) => {
+            const [file] = e.target.files;
+            setResume(...resume, file);
+          }}
+        />
+      </div>
+      <div className="form-group m-2">
+        <label className="m-1">Recruiter's Remarks</label>
+        <textarea
+          className="form-control"
+          name="recruiterRemarks"
+          id="recruiterRemarks"
+          onChange={(e) => setRecruiterRemarks(e.target.value)}
+        ></textarea>
+        <button type="submit" className="btn btn-primary m-2">
+          Create Candidate
+        </button>
+        <button type="reset" className="btn btn-danger m-2">
+          Reset Form
+        </button>
       </div>
     </div>
   );
