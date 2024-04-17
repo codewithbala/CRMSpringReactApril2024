@@ -3,53 +3,51 @@ import "./header.css";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [showMenu, setShowMenu] = useState(false);
-
   return (
-    <header className="nav_container">
-      <div className="logo">
-        <img
-          src="../img/header_logo.svg"
-          className="logo_graphic"
-          height="50"
-          width="50"
-        />
-        <Link to="/"><span className="logo_text">CRMSystem</span></Link>
-      </div>
-
-      <nav>
-        <ul className={showMenu ? "open_menu" : "nav_link_container"}>
-          <li className="nav_item">
-            <a href="#" className="nav_link">
-              Link One
-            </a>
-          </li>
-          <li className="nav_item">
-            <a href="#" className="nav_link">
-              Link Two
-            </a>
-          </li>
-          <li className="nav_item">
-            <a href="#" className="nav_link">
-              Link Three
-            </a>
-          </li>
-          <li className="nav_item">
-            <a href="#" className="nav_link">
-              Link Four
-            </a>
-          </li>
-        </ul>
+    <header>
+      <nav className="navbar nav_color navbar-expand-lg navbar-dark">
+        <div className="container-fluid">
+          <img src="../img/header_logo.svg" className="logo_img" />
+          <a className="navbar-brand m-2" href="#">
+            CRMSystem
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Features
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Pricing
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link disabled" aria-disabled="true">
+                  Disabled
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <div className="nav_toggler">
-        <a
-          href="#"
-          className="menu_collapse"
-          onClick={() => setShowMenu(!showMenu)}
-        >
-          {showMenu ? "X" : <>&#8801;</>}
-        </a>
-      </div>
     </header>
   );
 };

@@ -34,7 +34,6 @@ function App() {
       <BrowserRouter>
       <Header />
         <Routes>
-        
           <Route>
             <Route
               path="/"
@@ -138,6 +137,8 @@ function App() {
             <Route path="/create-candidate" element={ <UpdateCandidate/>} />
 
           </Route>
+          /* For testing purposes only. Will remove. */
+          <Route path="/create-candidate" element={<CreateCandidate />} />
         </Routes>
       </BrowserRouter>
       <Footer />
