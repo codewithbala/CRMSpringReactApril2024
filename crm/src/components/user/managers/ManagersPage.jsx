@@ -6,7 +6,7 @@ import axios from "axios";
 export default function ManagersPage(props){
     const [managerId, setManagerId] = useState("");
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
-    const[guys, setGuys] = useState([])
+    const[employees, setEmployees] = useState([])
     const [link,setLink] = useState("");
     let baseUrl = "http://localhost:8080/api"
 
@@ -20,15 +20,19 @@ export default function ManagersPage(props){
 
       const  getAllEmployees = () => {
         axios.get(link).then(response => {
-          setGuys(response.data)
-          console.log(response.data)
-          console.log(`data${guys}`)
+          setEmployees(...employees, ...response.data)
+    
         }).catch(error => {
           console.log(error)
         })
       }
 
-  console.log(guys)
+      useEffect(() => {
+        console.log(`employees`+employees)
+      },[employees])
+
+
+  console.log(employees)
     useEffect(() => {
         if(department == "hr"){
           setLink(`${baseUrl}/hr/`)
@@ -42,9 +46,9 @@ export default function ManagersPage(props){
             setManagerId(user.business_dev_admin_id);
         }
             getAllEmployees();
-
+            console.log(`this is`+employees)
         
-    },[managerId, user])
+    },[managerId, user, link])
 
 
 
@@ -58,9 +62,9 @@ export default function ManagersPage(props){
         navigate("/");
       }
 
-      // if(guys?.length){
-      //   return(<p>Waiting on information</p>)
-      // }else{
+      if(employees.length < 1){
+        return(<p>Waiting on information</p>)
+      }else{
         return (
           <div className="container mt-4">
             <h1>Hello {user.firstName}</h1>
@@ -98,8 +102,9 @@ export default function ManagersPage(props){
             </table>
   
             <tbody>
-            {/* {guys?.map((employee, index) => (
-              <tr key={index}>
+            {/* {employees ? employees.map((employee, index) => {
+              return(
+                <tr key={index}>
                 <td>{employee.birthdate}</td>
                 <td>{employee.departmentId}</td>
                 <td>{employee.edLevel}</td>
@@ -111,14 +116,17 @@ export default function ManagersPage(props){
                 <td>{employee.salary}</td>
                 <td>{employee.gender}</td>
               </tr>
-            ))} */}
+              )
+            }
+              
+            ): null} */}
           </tbody>
   
             <button onClick={() => click()}>Create Business Employee</button>
             <button onClick={() => logout()}>Logout</button>
           </div>
         );
-      // }
+      }
     
       
 }
