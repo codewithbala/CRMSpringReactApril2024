@@ -29,7 +29,7 @@ const Header = (props) => {
 
   return (
     <header>
-      <nav className="navbar nav_color navbar-expand-lg navbar-dark">
+      {/* <nav className="navbar nav_color navbar-expand-lg navbar-dark">
         <div className="container-fluid">
           <img src="../img/header_logo.svg" className="logo_img" />
           <Link to= "/"><span className="navbar-brand m-2" href="#">
@@ -55,24 +55,14 @@ const Header = (props) => {
                   </span>
                 </Link>
               </li>
-              {/* <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
-                  Disabled
-                </a>
-              </li> */}
             </ul>
           </div>
         </div>
+      </nav> */}
+
+
+      <nav className="nav">
+
       </nav>
     </header>
   );

@@ -74,7 +74,7 @@ export default function ManagersPage(props){
           <div className="container mt-4">
             <h1>Hello {`${user.firstName} ${user.lastName}`}</h1>
 
-            List of Employees
+            <h3 className="mt-4">List of Employees</h3>
             <table className="table">
               <thead>
                 <tr>

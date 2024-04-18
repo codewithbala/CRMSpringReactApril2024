@@ -8,3 +8,10 @@
 .nav_color {
   background-color: #212529;
 }
+
+.nav{
+    width: 10vw;
+    height: 100vh;
+    background-color:green;
+    position: absolute;
+}
