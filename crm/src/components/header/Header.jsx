@@ -62,7 +62,17 @@ const Header = (props) => {
 
 
       <nav className="nav">
-
+        <ul>
+          <li>
+            <Link className="header-link" to={link}><p>Homepage</p></Link>
+          </li>
+          <li>
+            <p>Profile &nbsp; &nbsp; &nbsp; &nbsp;</p>
+          </li>
+          <li>
+            <p>Settings &nbsp; &nbsp;&nbsp;</p>
+          </li>
+        </ul>
       </nav>
     </header>
   );

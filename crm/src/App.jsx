@@ -31,7 +31,12 @@ function App() {
     <div>
       
       <BrowserRouter>
-      <Header department={department} />
+      <div className="row">
+        <div style={{position: "fixed"}} className="col-2">
+      <Header className="fixed" department={department} />
+       </div>
+       <div className="col"></div>
+       <div className="col-9">
         <Routes>
           <Route>
             <Route
@@ -133,7 +138,10 @@ function App() {
 
           </Route>
         </Routes>
+          </div>
+        </div>
       </BrowserRouter>
+      
       <Footer />
     </div>
   );

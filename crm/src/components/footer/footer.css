@@ -1,8 +1,8 @@
 footer {
   width: 100vw;
-  background: #949292;
+  background: white;
   padding: 1rem;
-  color: #322f2f;
+  color: white;
 }
 
 .footer_link_container {
@@ -11,7 +11,7 @@ footer {
 }
 
 .footer_link {
-  color: #f3f1f1;
+  color: white;
 }
 
 .footer_link:hover {
