@@ -10,6 +10,9 @@ import Footer from "./components/footer/Footer";
 
 import EmployeeHomepage from "./components/user/employee/EmployeeHomepage";
 import ManagersPage from "./components/user/managers/ManagersPage";
+import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
+import UpdateCandidate from "./components/user/employee/UpdateCandidate";
+import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
@@ -28,7 +31,12 @@ function App() {
     <div>
       
       <BrowserRouter>
-      <Header />
+      <div className="row">
+        <div style={{position: "fixed"}} className="col-2">
+      <Header className="fixed" department={department} />
+       </div>
+       <div className="col"></div>
+       <div className="col-9">
         <Routes>
           <Route>
             <Route
@@ -124,11 +132,17 @@ function App() {
               }
             />
 
-            <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
+            <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
+            
+            <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
 
           </Route>
         </Routes>
+          </div>
+        </div>
       </BrowserRouter>
+      
+      <Footer />
     </div>
   );
 }

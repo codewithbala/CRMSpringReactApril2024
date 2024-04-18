@@ -39,7 +39,7 @@ public class TrainingEmployeeController {
 
     @PutMapping("/update-employee/{id}")
     public TrainingEmployee updateEmployee(@PathVariable Integer id, @RequestBody TrainingEmployee employee){
-        employee.setHr_employee_id(id);
+        employee.setTraining_employee_id(id);
         trainingEmployeeService.createEmployee(employee);
         return trainingEmployeeService.findById(id);
     }
