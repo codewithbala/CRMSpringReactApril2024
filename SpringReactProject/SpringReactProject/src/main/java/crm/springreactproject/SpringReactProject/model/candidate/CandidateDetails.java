@@ -71,7 +71,4 @@ public class CandidateDetails {
     @Column(name="other_skills")
     private String otherSkills;
 
-
-
-
 }
