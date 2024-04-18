@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/candidates")
+@RequestMapping("/api/candidates")
 public class CandidateController {
 
     @Autowired
@@ -43,13 +43,13 @@ public class CandidateController {
     }
 
 
-    @DeleteMapping("/{candidateId}")
+    @DeleteMapping("/delete/{candidateId}")
     public ResponseEntity<String> deleteCandidate(@PathVariable Integer candidateId, CandidateDetails candidateDetails) {
         candidateService.deleteCandidate(candidateId, candidateDetails);
         return ResponseEntity.ok("Deleted Successfully");
     }
 
-    @PutMapping("/{candidateId}")
+    @PutMapping("/update-candidate/{id}")
     public CandidateDetails updateCandidate(@PathVariable Integer candidateId, @RequestBody CandidateDetails candidateDetails) {
         return candidateService.updateCandidate(candidateId, candidateDetails);
 
