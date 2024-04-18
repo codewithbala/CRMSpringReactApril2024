@@ -157,6 +157,12 @@ function App() {
               <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
               
               <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
+
+                {/* Create a new candidate */}
+                <Route
+                path="/candidates/create-candidate/"
+                element={<CreateCandidate department={department} />}
+              ></Route>
   
             </Route>
           </Routes>
