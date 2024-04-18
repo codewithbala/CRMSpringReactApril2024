@@ -107,7 +107,6 @@ function App() {
           <Route path="/create-candidate" element={<CreateCandidate />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
     </div>
   );
 }

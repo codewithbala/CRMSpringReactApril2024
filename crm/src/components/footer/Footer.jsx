@@ -2,34 +2,35 @@ import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="footer_link_container">
-        <ul className="footer_links">
-          <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link One
-            </a>
-          </li>
-          <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link Two
-            </a>
-          </li>
-          <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link Three
-            </a>
-          </li>
-          <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link Four
-            </a>
-          </li>
-        </ul>
-      </div>
-      <p className="footer_caption">
-        {<>&copy;</>} 2024, CRMSystem Solutions. All rights reserved.
-      </p>
+    <footer className="base-color py-3 my-4">
+      <ul className="nav justify-content-center border-bottom pb-3 mb-3">
+        <li className="nav-item">
+          <a href="#" className="nav-link px-2 text-body-secondary">
+            Home
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="#" className="nav-link px-2 text-body-secondary">
+            Features
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="#" className="nav-link px-2 text-body-secondary">
+            Pricing
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="#" className="nav-link px-2 text-body-secondary">
+            FAQs
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="#" className="nav-link px-2 text-body-secondary">
+            About
+          </a>
+        </li>
+      </ul>
+      <p className="text-center text-body-secondary">© 2024 Company, Inc</p>
     </footer>
   );
 };
