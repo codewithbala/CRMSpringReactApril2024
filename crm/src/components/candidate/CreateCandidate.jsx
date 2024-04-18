@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const CreateCandidate = () => {
+const CreateCandidate = (props) => {
   // State variables
   const [skillSet, setSkillSet] = useState("");
   const [batchNo, setBatchNo] = useState("");
@@ -33,6 +33,12 @@ const CreateCandidate = () => {
   // Non-state variables
   let params = useParams();
   let navigate = useNavigate();
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  useEffect(() => {
+    console.log("User is FROM USEEFFECT HOOK - " + typeof user);
+  }, []);
 
   // Toggle other skills input if selected
   const showOtherSkillField = () => {
@@ -117,11 +123,11 @@ const CreateCandidate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const baseUrl = "http://localhost:8080/api/training";
+    const baseUrl = "http://localhost:8080/api/candidates/create-candidate";
 
-    let responseBody = {
+    let requestBody = {
       id: params.id,
-      recruiterName: recruiterName,
+      recruiterName: params.recruiterName,
       candidateEntry: candidateEntry,
       skillSet: skillSet,
       batchNo: batchNo,
@@ -147,7 +153,12 @@ const CreateCandidate = () => {
       referenceName: referenceName,
     };
 
-    console.log(responseBody);
+    // console.log(responseBody);
+
+    // axios post function
+    axios.post(`${baseUrl}`, requestBody).then(() => {
+      navigate(`/business-manager-page`).catch((error) => console.log(error));
+    });
   };
 
   return (
@@ -161,7 +172,7 @@ const CreateCandidate = () => {
             className="form-control"
             id="recruiterName"
             name="recruiterName"
-            value={params.recruiterName}
+            value={`${user.firstName} ${user.lastName}`}
             required
           />
         </div>
