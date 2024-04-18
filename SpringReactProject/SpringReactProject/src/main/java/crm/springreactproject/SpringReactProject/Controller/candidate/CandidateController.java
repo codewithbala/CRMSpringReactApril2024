@@ -26,7 +26,7 @@ public class CandidateController {
     private Candidate candidateService;
 
 
-    @GetMapping
+    @GetMapping("/")
     public List<CandidateDetails> getAllCandidates() {
         return candidateService.fetchAllCandidate();
     }
@@ -37,7 +37,7 @@ public class CandidateController {
         return candidateService.fetchCandidateById(candidateId);
     }
 
-    @PostMapping
+    @PostMapping("/create-candidate")
     public CandidateDetails createCandidate(@RequestBody CandidateDetails candidateDetails) {
         return candidateService.createNewCandidate(candidateDetails);
     }
