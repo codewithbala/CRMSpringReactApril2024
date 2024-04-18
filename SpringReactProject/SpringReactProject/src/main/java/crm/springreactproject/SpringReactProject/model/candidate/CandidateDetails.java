@@ -65,7 +65,4 @@ public class CandidateDetails {
 
     private String recruiterRemarks;
 
-
-
-
 }
