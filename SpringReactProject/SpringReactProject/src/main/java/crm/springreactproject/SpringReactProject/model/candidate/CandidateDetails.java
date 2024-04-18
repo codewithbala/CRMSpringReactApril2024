@@ -64,6 +64,12 @@ public class CandidateDetails {
     private String resume;
 
     private String recruiterRemarks;
+    @Column(name="other_source")
+    private String otherSource;
+    @Column(name="referenceName")
+    private String referenceName;
+    @Column(name="other_skills")
+    private String otherSkills;
 
 
 
