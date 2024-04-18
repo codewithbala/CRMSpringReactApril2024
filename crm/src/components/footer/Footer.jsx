@@ -6,19 +6,13 @@ const Footer = () => {
       <div className="footer_link_container">
         <ul className="footer_links">
           <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link One
-            </a>
+
           </li>
           <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link Two
-            </a>
+
           </li>
           <li className="footer_links_li">
-            <a href="#" className="footer_link">
-              Link Three
-            </a>
+
           </li>
           <li className="footer_links_li">
             <a href="#" className="footer_link">

@@ -7,6 +7,7 @@ export default function ManagersPage(props){
     const [managerId, setManagerId] = useState("");
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const[employees, setEmployees] = useState([])
+    const[loading, setLoading] = useState(false);
     const [link,setLink] = useState("");
     let baseUrl = "http://localhost:8080/api"
 
@@ -18,21 +19,25 @@ export default function ManagersPage(props){
     // console.log(user.hr_manager_id)
     let data ;
 
-      const  getAllEmployees = () => {
-        axios.get(link).then(response => {
-          setEmployees(...employees, ...response.data)
-    
-        }).catch(error => {
-          console.log(error)
+
+      const getEmply = () => {
+
+
+
+        axios.get(`http://localhost:8080/api/${department}/`).then((response) => {
+          console.log(response.data)
+          setEmployees(response.data)
+          setLoading(true)
+        }).catch(errors => {
+          console.log(errors.message)
         })
       }
 
       useEffect(() => {
-        console.log(`employees`+employees)
-      },[employees])
+        getEmply();
+      },[])
+   
 
-
-  console.log(employees)
     useEffect(() => {
         if(department == "hr"){
           setLink(`${baseUrl}/hr/`)
@@ -45,11 +50,8 @@ export default function ManagersPage(props){
           setLink(`${baseUrl}/business/`)
             setManagerId(user.business_dev_admin_id);
         }
-            getAllEmployees();
-            console.log(`this is`+employees)
-        
-    },[managerId, user, link])
-
+    },[managerId, user])
+    console.log(link)
 
 
     function click (){
@@ -62,13 +64,17 @@ export default function ManagersPage(props){
         navigate("/");
       }
 
-      if(employees.length < 1){
+
+
+
+      if(loading == false){
         return(<p>Waiting on information</p>)
       }else{
         return (
           <div className="container mt-4">
-            <h1>Hello {user.firstName}</h1>
-  
+            <h1>Hello {`${user.firstName} ${user.lastName}`}</h1>
+
+            <h3 className="mt-4">List of Employees</h3>
             <table className="table">
               <thead>
                 <tr>
@@ -99,28 +105,32 @@ export default function ManagersPage(props){
                   <th>Gender</th>
             </tr>
               </thead>
-            </table>
-  
-            <tbody>
-            {/* {employees ? employees.map((employee, index) => {
-              return(
-                <tr key={index}>
-                <td>{employee.birthdate}</td>
-                <td>{employee.departmentId}</td>
-                <td>{employee.edLevel}</td>
-                <td>{employee.hireDate}</td>
-                <td>{employee.position}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.phoneNumber}</td>
-                <td>{employee.salary}</td>
-                <td>{employee.gender}</td>
-              </tr>
-              )
-            }
-              
-            ): null} */}
+              <tbody>        
+              {employees.map((employee, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{department == "hr" ? employee.hr_employee_id: department == "business"? employee.business_dev_employee_id: employee.training_employee_id }</td>
+                            <td>{employee.birthdate}</td>
+                            <td>{employee.birthdate}</td>
+                            <td>{employee.departmentId}</td>
+                            <td>{employee.edLevel}</td>
+                            <td>{employee.hireDate}</td>
+                            <td>{employee.position}</td>
+                            <td>{employee.firstName}</td>
+                            <td>{employee.lastName}</td>
+                            <td>{employee.phoneNumber}</td>
+                            <td>{employee.salary}</td>
+                            <td>{employee.gender}</td>
+                        </tr>
+                    );
+                })}
           </tbody>
+            </table>
+
+
+
+  
+
   
             <button onClick={() => click()}>Create Business Employee</button>
             <button onClick={() => logout()}>Logout</button>
