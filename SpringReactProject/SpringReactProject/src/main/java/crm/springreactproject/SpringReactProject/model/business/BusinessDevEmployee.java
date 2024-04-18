@@ -1,10 +1,7 @@
 package crm.springreactproject.SpringReactProject.model.business;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @NoArgsConstructor
@@ -12,11 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@ToString
 @Table(name="business_dev_employees")
 public class BusinessDevEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer business_dev_employee_id;
 
     @Column(nullable=false)
@@ -33,7 +30,6 @@ public class BusinessDevEmployee {
     private String password;
 
     @Column(nullable=false)
-
     private String hireDate;
 
     @Column(nullable=false)

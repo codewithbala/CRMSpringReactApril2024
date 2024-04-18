@@ -33,6 +33,7 @@ export default function (props) {
     callToPostApi(data);
   };
 
+
   const callToPostApi = (data) => {
     let baseUrl = "http://localhost:8080/api";
 
@@ -40,45 +41,70 @@ export default function (props) {
     apiMap.set("business", `${baseUrl}/business-manager-login`);
     apiMap.set("training", `${baseUrl}/training-admin-login`);
     apiMap.set("hr", `${baseUrl}/hr-manager-login`);
+    apiMap.set("business-employee", `${baseUrl}/business/business-employee-login`);
+    apiMap.set("training-employee", `${baseUrl}/training/training-employee-login`);
+    apiMap.set("hr-employee", `${baseUrl}/hr/hr-employee-login`);
 
     let apiEndpoint = apiMap.get(department);
     props.setTheDepartment(department);
+    localStorage.setItem("department", department)
+
 
     axios
       .post(apiEndpoint, data)
       .then((answer) => {
-        console.log(answer.data);
+        // console.log(answer.data);
+        const user = answer.data;
+        localStorage.setItem("user", JSON.stringify(user));
+          // props.setUser(user)
         // setIdentity(answer.data);
         // setHrManagerId(identity[0]);
-        let locationOfAdminId = answer.data.indexOf("id=")+3;
-        let locationOfDepartmentId = answer.data.indexOf("departmentId=")+13;
-        let managerId = answer.data.substring(locationOfAdminId,locationOfAdminId+1);
-        let deptId = answer.data.substring(locationOfDepartmentId,locationOfDepartmentId+1)
+        // let locationOfAdminId = answer.data.indexOf("id=")+3;
+        // let locationOfDepartmentId = answer.data.indexOf("departmentId=")+13;
+        // let managerId = answer.data.substring(locationOfAdminId,locationOfAdminId+1);
+        // let deptId = answer.data.substring(locationOfDepartmentId,locationOfDepartmentId+1)
+        
+        //to grab the substring for the employees table
 
-        console.log(managerId)
-        console.log(deptId)
         // setDepartment(identity[2])
         setResponse(answer.data);
-        unlockLoggedInPage(answer.status, managerId, deptId);
+        unlockLoggedInPage(answer.status, answer.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const unlockLoggedInPage = (answer, managerId, departmentId) => {
+  const unlockLoggedInPage = (answer, user) => {
     //if response from the api was 'login successful' unlock the login page
     if (answer == 200) {
-      props.setLoggedIn(true);
+      localStorage.setItem("loggedIn", true);
+
+      // props.setLoggedIn(true);
       if (department == "business") {
-        navigate(`/business-manager-page/${departmentId}/${managerId}`);
+        let departmentId = user.departmentId;
+        let managerId = user.business_dev_admin_id;
+        navigate(`/business-manager-page`);
       }
       if (department == "hr") {
         // navigate(`/hr-manager-page/`+departmentId+"/"+managerId);
-        navigate(`/hr-manager-page/${departmentId}/${managerId}`);
+        let departmentId = user.departmentId;
+        let managerId = user.hr_manager_id;
+        navigate(`/hr-manager-page`);
       }
       if (department == "training") {
-        navigate(`/training-admin-page/`+departmentId+"/"+managerId);
+        let departmentId = user.departmentId;
+        let managerId = user.training_admin_id;
+        navigate(`/training-admin-page`);
+      }
+      if(department == "training-employee"){
+        navigate(`/training-employee-page`);
+      }
+      if(department == "business-employee"){
+        navigate(`/business-employee-page`);
+      }
+      if(department == "hr-employee"){
+        navigate(`/hr-employee-page`);
       }
     } else {
       alert("Login Unsuccessful./.. please try again");
@@ -119,10 +145,13 @@ export default function (props) {
             ref={departmentRef}
             onChange={(e) => setDepartment(e.target.value)}
           >
-            <option defaultValue={""}>Choose Department</option>
-            <option value="hr">HR</option>
-            <option value="business">Business Development</option>
-            <option value="training">Training</option>
+            <option defaultValue={""}>Choose Position</option>
+            <option value="hr">HR Manager</option>
+            <option value="business">Business Development Admin</option>
+            <option value="training">Training Manager</option>
+            <option value="training-employee">Training-employee</option>
+            <option value="business-employee">Business-employee</option>
+            <option value="hr-employee">HR-employee</option>
           </select>
 
           <div className="d-grid gap-2 mt-3">

@@ -5,6 +5,8 @@ import crm.springreactproject.SpringReactProject.Service.hr.HREmployeeService;
 import crm.springreactproject.SpringReactProject.model.business.BusinessDevEmployee;
 import crm.springreactproject.SpringReactProject.model.hr.HREmployee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +46,15 @@ public class HREmployeeController {
     public String delete(@PathVariable Integer id){
         hrEmployeeService.deleteById(id);
         return "the employee with ID: "+id+" has been deleted";
+    }
+
+    @PostMapping("/hr-employee-login")
+    public ResponseEntity<HREmployee> login(@RequestBody HREmployee loginRequest) {
+        HREmployee hrEmployee = hrEmployeeService.findByEmailId(loginRequest.getEmailId());
+        if (hrEmployee != null && hrEmployee.getPassword().equals(loginRequest.getPassword())) {
+            return ResponseEntity.ok(hrEmployee);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HREmployee());
+        }
     }
 }

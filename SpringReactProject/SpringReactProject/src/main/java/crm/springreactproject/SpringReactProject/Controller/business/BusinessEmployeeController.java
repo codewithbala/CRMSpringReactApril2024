@@ -2,7 +2,10 @@ package crm.springreactproject.SpringReactProject.Controller.business;
 
 import crm.springreactproject.SpringReactProject.Service.business.BusinessEmployeeService;
 import crm.springreactproject.SpringReactProject.model.business.BusinessDevEmployee;
+import crm.springreactproject.SpringReactProject.model.business.BusinessDevManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,9 +42,19 @@ public class BusinessEmployeeController {
         return businessEmployeeService.findById(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Integer id){
         businessEmployeeService.deleteById(id);
         return "the employee with ID: "+id+" has been deleted";
+    }
+
+    @PostMapping("/business-employee-login")
+    public ResponseEntity<BusinessDevEmployee> login(@RequestBody BusinessDevEmployee loginRequest) {
+        BusinessDevEmployee businessDevEmployee = businessEmployeeService.findByEmailId(loginRequest.getEmailId());
+        if (businessDevEmployee != null && businessDevEmployee.getPassword().equals(loginRequest.getPassword())) {
+            return ResponseEntity.ok(businessDevEmployee);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BusinessDevEmployee());
+        }
     }
 }

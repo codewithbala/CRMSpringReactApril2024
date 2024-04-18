@@ -1,10 +1,7 @@
 package crm.springreactproject.SpringReactProject.model.hr;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
@@ -13,6 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class HREmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

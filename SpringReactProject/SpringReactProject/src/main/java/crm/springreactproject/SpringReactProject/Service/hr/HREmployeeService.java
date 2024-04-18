@@ -4,6 +4,7 @@ import crm.springreactproject.SpringReactProject.Repository.business.BusinessDev
 import crm.springreactproject.SpringReactProject.Repository.hr.HREmployeeRepository;
 import crm.springreactproject.SpringReactProject.model.business.BusinessDevEmployee;
 import crm.springreactproject.SpringReactProject.model.hr.HREmployee;
+import crm.springreactproject.SpringReactProject.model.training.TrainingEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,10 @@ public class HREmployeeService {
 
     public void createEmployee(HREmployee employee){
         hrEmployeeRepository.save(employee);
+    }
+
+    public HREmployee findByEmailId(String emailId) {
+        return hrEmployeeRepository.findByEmailId(emailId);
     }
 
     public void deleteById(Integer id){

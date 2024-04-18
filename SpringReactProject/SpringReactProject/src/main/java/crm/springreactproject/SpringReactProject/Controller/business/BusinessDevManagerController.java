@@ -18,12 +18,12 @@ public class BusinessDevManagerController {
     private BusinessDevManagerService businessDevManagerService;
 
     @PostMapping("/business-manager-login")
-    public ResponseEntity<String> login(@RequestBody BusinessDevManager loginRequest) {
+    public ResponseEntity<BusinessDevManager> login(@RequestBody BusinessDevManager loginRequest) {
     	BusinessDevManager businessDevManager = businessDevManagerService.findByEmailId(loginRequest.getEmailId());
         if (businessDevManager != null && businessDevManager.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok(businessDevManager.toString());
+            return ResponseEntity.ok(businessDevManager);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BusinessDevManager());
         }
     }
 }

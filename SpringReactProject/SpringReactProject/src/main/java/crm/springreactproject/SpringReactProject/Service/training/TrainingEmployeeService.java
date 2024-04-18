@@ -27,6 +27,10 @@ public class TrainingEmployeeService {
         trainingEmployee.save(employee);
     }
 
+    public TrainingEmployee findByEmailId(String emailId) {
+        return trainingEmployee.findByEmailId(emailId);
+    }
+
     public void deleteById(Integer id){
         trainingEmployee.deleteById(id);
     }
