@@ -1,8 +1,16 @@
 footer {
+<<<<<<< HEAD
   width: 100vw;
   background: white;
   padding: 1rem;
   color: white;
+=======
+  width: 120vw;
+  background: #949292;
+  padding: 1rem;
+  color: #322f2f;
+  margin: 0 auto;
+>>>>>>> 1bed90535ae3f16158224d399908742bac451068
 }
 
 .footer_link_container {

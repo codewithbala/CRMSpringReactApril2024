@@ -31,6 +31,6 @@ public class CandidateInterviewServiceImpl implements CandidateInterviewService{
     }
     @Override
     public void deleteCandidateInterview(Long id) {
-
+     candidateInterviewRepo.deleteById(id);
     }
 }

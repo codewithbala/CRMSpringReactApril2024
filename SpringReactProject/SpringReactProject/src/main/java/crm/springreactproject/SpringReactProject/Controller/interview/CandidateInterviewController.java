@@ -38,6 +38,11 @@ public class CandidateInterviewController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CandidateInterview> deleteInterviewById(@PathVariable Long id){
+        candidateInterviewService.deleteCandidateInterview(id);
+        return ResponseEntity.ok().build();
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<CandidateInterview> updateCandidateInterview(@PathVariable Long id,
