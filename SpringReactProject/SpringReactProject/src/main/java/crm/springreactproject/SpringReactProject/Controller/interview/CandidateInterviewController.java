@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 @CrossOrigin(origins="*")
 @RestController
-@CrossOrigin(origins = "*")
+
 @RequestMapping("/api/candidateInterviews")
 public class CandidateInterviewController {
     @Autowired
