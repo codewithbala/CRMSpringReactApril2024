@@ -73,6 +73,9 @@ public class CandidateImpl implements Candidate{
         existingCandidate.setCommunicationSkill(candidateDetails.getCommunicationSkill());
         existingCandidate.setResume(candidateDetails.getResume());
         existingCandidate.setRecruiterRemarks(candidateDetails.getRecruiterRemarks());
+        existingCandidate.setOtherSource(candidateDetails.getOtherSource());
+        existingCandidate.setReferenceName(candidateDetails.getReferenceName());
+        existingCandidate.setOtherSkills(candidateDetails.getOtherSkills());
 
 
         existingCandidate.setCity(candidateDetails.getCity());

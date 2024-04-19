@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@CrossOrigin(origins="*")
 @RestController
-@CrossOrigin(origins = "*")
+
 @RequestMapping("/api/candidateInterviews")
 public class CandidateInterviewController {
     @Autowired
@@ -38,6 +39,11 @@ public class CandidateInterviewController {
         }
 
 
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CandidateInterview> deleteInterviewById(@PathVariable Long id){
+        candidateInterviewService.deleteCandidateInterview(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/update-candidate-interview/{id}")
