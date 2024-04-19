@@ -167,6 +167,12 @@ function App() {
                 path="/candidates/create-candidate/"
                 element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
               ></Route>
+
+              {/* Create a new candidate */}
+                  <Route
+                path="/candidates/create-candidate/"
+                element={<CreateCandidate department={department} />}
+              ></Route>
   
             </Route>
           </Routes>
