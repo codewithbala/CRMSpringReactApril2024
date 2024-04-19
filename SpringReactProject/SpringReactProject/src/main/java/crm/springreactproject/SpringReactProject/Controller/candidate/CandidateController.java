@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/candidates")
 public class CandidateController {
 
