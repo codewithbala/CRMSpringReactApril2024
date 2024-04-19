@@ -1,6 +1,9 @@
 
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import TrainingEmployees from "./training-employees/TrainingEmployees";
+import GetAllCandidates from "../../candidate/GetAllCandidates";
+import HREmployee from "./hr-employee/HREmployee";
 
 
 export default function EmployeeHomepage(props){
@@ -13,6 +16,8 @@ export default function EmployeeHomepage(props){
     //get the department prop
     let department = props.department;
     console.log(user)
+
+    useEffect(() => {},[])
     
 
     useEffect(() => {
@@ -26,23 +31,24 @@ export default function EmployeeHomepage(props){
         }
     },[managerId, user])
 
+
     function click (){
-        navigate(`/${props.department}/createEmployee/${user.departmentId}/${managerId}`)
+        // navigate(`/${props.department}/createEmployee/${user.departmentId}/${managerId}`)
+        navigate("/candidates/create-candidate/")
      }
-     function logout() {
-       localStorage.setItem("loggedIn", false);
-       localStorage.setItem("department", "");
-       localStorage.removeItem("user")
-       navigate("/");
-     }
+
 
 
 
     return(
-        <div className="container mt-4">
+        <div className="container mt-5">
             <h1>Hello Employee {user.firstName} {user.lastName}</h1>
-            <button onClick={() => click()}>Create Candidate</button>
-          <button onClick={() => logout()}>Logout</button>
+            {props.department == "hr-employee" ? <HREmployee department={props.department} user={props.user} managerId={props.managerId}/> : <></>}
+            
+            {props.department == "training-employee" ? <TrainingEmployees/> : <></>}
+            
+            
+          
         </div>
     )
 }

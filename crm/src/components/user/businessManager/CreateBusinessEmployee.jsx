@@ -1,6 +1,6 @@
 // import BusinessManagerService from "./service/BusinessManagerService";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate  } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function CreateBusinessEmployee() {
@@ -26,33 +26,34 @@ export default function CreateBusinessEmployee() {
   /* discuss with team tomorrow on how to structure this */
 
   const onSubmit = (e) => {
-    const baseUrl = "http://localhost:8080/api/business"
+    const baseUrl = "http://localhost:8080/api/business";
     e.preventDefault();
 
-    let body = 
-    {
-    "manager_id": params.managerId,
-    "firstName": firstName,
-    "lastName": lastName,
-    "emailId": emailId,
-    "departmentId": params.deptId,
-    "password": password,
-    "hireDate": hireDate,
-    "job": job,
-    "edLevel": edLevel,
-    "sex": sex,
-    "birthdate": birthDate,
-    "salary": salary,
-    "midInitial": midInitial,
-    "phoneNum": phoneNum
-}
-    axios.post(`${baseUrl}/create-employee`, body).then(() => {
-        navigate(`/business-manager-page/${params.deptId}/${params.managerId}`)
-    }).catch((error) => {
-        console.log(error)
-    })
-  }
-
+    let body = {
+      manager_id: params.managerId,
+      firstName: firstName,
+      lastName: lastName,
+      emailId: emailId,
+      departmentId: params.deptId,
+      password: password,
+      hireDate: hireDate,
+      job: job,
+      edLevel: edLevel,
+      sex: sex,
+      birthdate: birthDate,
+      salary: salary,
+      midInitial: midInitial,
+      phoneNum: phoneNum,
+    };
+    axios
+      .post(`${baseUrl}/create-employee`, body)
+      .then(() => {
+        navigate(`/business-manager-page/${params.deptId}/${params.managerId}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -148,8 +149,13 @@ export default function CreateBusinessEmployee() {
             />
           </div>
           <div className="form-group m-2">
-            <label className="m-1" >Highest Level of Education</label>
-            <select name="edLevel" onChange={(e) => setEdLevel(e.target.value)} className="form-control" id="edLevel">
+            <label className="m-1">Highest Level of Education</label>
+            <select
+              name="edLevel"
+              onChange={(e) => setEdLevel(e.target.value)}
+              className="form-control"
+              id="edLevel"
+            >
               <option value="GED or less">GED or less</option>
               <option value="High school diploma, no college">
                 High school diploma
@@ -164,13 +170,18 @@ export default function CreateBusinessEmployee() {
           </div>
           <div className="form-group m-2">
             <label className="m-1">Gender</label>
-            <select name="sex"  onChange={(e) => setSex(e.target.value)} className="form-control" id="sex">
+            <select
+              name="sex"
+              onChange={(e) => setSex(e.target.value)}
+              className="form-control"
+              id="sex"
+            >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
           </div>
           <div className="form-group m-2">
-            <label className="m-1" >Date of Birth</label>
+            <label className="m-1">Date of Birth</label>
             <input
               type="date"
               className="form-control"

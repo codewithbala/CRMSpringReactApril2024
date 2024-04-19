@@ -60,7 +60,7 @@ const onSubmit = (e) => {
 }
 
   axios.post(`${baseUrl}`, body).then(() => {
-      navigate(`/training-admin-page/${params.deptId}/${params.managerId}`)
+      navigate(`/${props.department}-page`)
   }).catch((error) => {
       console.log(error)
   })

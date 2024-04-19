@@ -7,24 +7,28 @@ import User from "./components/user/user";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 
-
 import EmployeeHomepage from "./components/user/employee/EmployeeHomepage";
 import ManagersPage from "./components/user/managers/ManagersPage";
 import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
 import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
+import CreateCandidate from "./components/candidate/CreateCandidate";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
-  const [department, setDepartment] = useState(localStorage.getItem("department"));
-  const [user,setUser] = useState(localStorage.getItem("user"));
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("loggedIn") === "true"
+  );
+  const [department, setDepartment] = useState(
+    localStorage.getItem("department")
+  );
+  const [user, setUser] = useState(localStorage.getItem("user"));
+  //reload the app whenever the compoennt is called
+  useEffect(() => {
 
-
-
-  console.log("loggedin is"+typeof(loggedIn))
+  },[loggedIn])
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
   }, [department]);
   console.log(user)
   if(!loggedIn){
@@ -57,7 +61,7 @@ function App() {
           <div style={{position: "fixed"}} className="col-2">
         <Header className="fixed" department={department} />
          </div>
-         <div className="col"></div>
+         <div className="col-2"></div>
          <div className="col-9">
           <Routes>
             <Route>
@@ -157,6 +161,12 @@ function App() {
               <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
               
               <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
+
+                {/* Create a new candidate */}
+                <Route
+                path="/candidates/create-candidate/"
+                element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
+              ></Route>
   
             </Route>
           </Routes>
