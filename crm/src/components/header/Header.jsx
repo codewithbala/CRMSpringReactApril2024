@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmployeeHomepage from "../user/employee/EmployeeHomepage";
 
 const Header = (props) => {
 
+  const navigate = useNavigate();
   let link;
   switch(props.department){
     case "hr":
@@ -25,6 +26,13 @@ const Header = (props) => {
       case "hr-employee":
         link = "/hr-employee-page";
       break;
+  }
+
+  function logout() {
+    localStorage.setItem("loggedIn", false);
+    localStorage.setItem("department", "");
+    localStorage.removeItem("user")
+    navigate("/");
   }
 
   return (
@@ -72,6 +80,11 @@ const Header = (props) => {
           <li>
             <p>Settings &nbsp; &nbsp;&nbsp;</p>
           </li>
+
+          <li style={{marginTop: "30vh"}} onClick={() => logout()} className="logout">
+            Logout &nbsp; &nbsp; &nbsp;
+          </li>
+          
         </ul>
       </nav>
     </header>

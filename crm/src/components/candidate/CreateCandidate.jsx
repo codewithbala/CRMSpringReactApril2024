@@ -95,14 +95,10 @@ const CreateCandidate = (props) => {
    
     let requestBody = {
       "recruiterName": `${user.firstName} ${user.lastName}`,
-      "candidateEntry": "",
       "skillSet": skillSet,
       "batchNo": batchNo,
       "candidateStatus": candidateStatus,
       "firstName": firstName,
-
-
-
       "middleName": middleName,
       "lastName": lastName,
       "emailId": emailId,

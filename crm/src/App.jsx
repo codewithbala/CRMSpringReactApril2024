@@ -22,6 +22,10 @@ function App() {
     localStorage.getItem("department")
   );
   const [user, setUser] = useState(localStorage.getItem("user"));
+  //reload the app whenever the compoennt is called
+  useEffect(() => {
+
+  },[loggedIn])
 
   useEffect(() => {
     console.log(user);
@@ -57,7 +61,7 @@ function App() {
           <div style={{position: "fixed"}} className="col-2">
         <Header className="fixed" department={department} />
          </div>
-         <div className="col"></div>
+         <div className="col-2"></div>
          <div className="col-9">
           <Routes>
             <Route>
@@ -161,7 +165,7 @@ function App() {
                 {/* Create a new candidate */}
                 <Route
                 path="/candidates/create-candidate/"
-                element={<CreateCandidate department={department} />}
+                element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
               ></Route>
   
             </Route>
