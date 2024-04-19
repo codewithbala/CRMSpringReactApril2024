@@ -38,6 +38,7 @@ const CreateCandidate = (props) => {
 
   useEffect(() => {
     console.log("User is FROM USEEFFECT HOOK - " + typeof user);
+    console.log(user);
   }, []);
 
   // Toggle other skills input if selected
@@ -125,40 +126,73 @@ const CreateCandidate = (props) => {
 
     const baseUrl = "http://localhost:8080/api/candidates/create-candidate";
 
+    // prettier-ignore
     let requestBody = {
-      id: params.id,
-      recruiterName: params.recruiterName,
-      candidateEntry: candidateEntry,
-      skillSet: skillSet,
-      batchNo: batchNo,
-      candidateStatus: candidateStatus,
-      firstName: firstName,
-      middleName: middleName,
-      lastName: lastName,
-      emailId: emailId,
-      phoneNumber: phoneNumber,
-      college: college,
-      country: country,
-      state: state,
-      city: city,
-      experience: experience,
-      visaStatus: visaStatus,
-      OPTStartDate: OPTStartDate,
-      OPTEndDate: OPTEndDate,
-      SSN: SSN,
-      communicationSkill: communicationSkill,
-      resume: resume,
-      recruiterRemarks: recruiterRemarks,
-      otherSource: otherSource,
-      referenceName: referenceName,
+      "id": params.id,
+      "recruiterName": params.recruiterName,
+      // "candidateEntry": candidateEntry,
+      "skillSet": skillSet,
+      "batchNo": batchNo,
+      "candidateStatus": candidateStatus,
+      "firstName": firstName,
+      "middleName": middleName,
+      "lastName": lastName,
+      "emailId": emailId,
+      "phoneNumber": phoneNumber,
+      "college": college,
+      "country": country,
+      "state": state,
+      "city": city,
+      "experience": experience,
+      "visaStatus": visaStatus,
+      "OPTStartDate": OPTStartDate,
+      "OPTEndDate": OPTEndDate,
+      "SSN": SSN,
+      "communicationSkill": communicationSkill,
+      "resume": resume,
+      "recruiterRemarks": recruiterRemarks,
+      "otherSource": otherSource,
+      "otherSkills": otherSkills,
+      "referenceName": referenceName,
     };
 
-    // console.log(responseBody);
+    /* Start of function */
+    function isCyclic(obj) {
+      var seenObjects = [];
+
+      function detect(obj) {
+        if (obj && typeof obj === "object") {
+          if (seenObjects.indexOf(obj) !== -1) {
+            return true;
+          }
+          seenObjects.push(obj);
+          for (var key in obj) {
+            if (obj.hasOwnProperty(key) && detect(obj[key])) {
+              console.log(obj, "cycle at " + key);
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      return detect(obj);
+    }
+
+    console.log(isCyclic(requestBody));
+    /* End */
+
+    console.log("req body: " + requestBody);
 
     // axios post function
-    axios.post(`${baseUrl}`, requestBody).then(() => {
-      navigate(`/business-manager-page`).catch((error) => console.log(error));
-    });
+    axios
+      .post(`${baseUrl}`, requestBody)
+      .then(() => {
+        navigate(`/business-manager-page`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -183,7 +217,6 @@ const CreateCandidate = (props) => {
             className="form-control"
             id="candidateEntry"
             name="candidateEntry"
-            value={params.candidateEntry}
             required
           />
         </div>

@@ -13,6 +13,7 @@ import CreateBusinessEmployee from "./components/user/businessManager/CreateBusi
 import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
+import CandidateInterview from "./components/candidate/CandidateInterview";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -170,6 +171,17 @@ function App() {
                 path="/candidates/create-candidate/"
                 element={<CreateCandidate department={department} />}
               ></Route>
+
+              {/* Test route, will delete */}
+              <Route
+                path="/candidates/candidate-interview"
+                element={
+                  <CandidateInterview
+                    name={"Test Recruiter"}
+                    remarks={"Candidate did well during the interview"}
+                  />
+                }
+              />
             </Routes>
           </div>
         </div>
