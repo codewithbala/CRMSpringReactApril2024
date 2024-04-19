@@ -18,13 +18,13 @@ const Header = (props) => {
         link = "/training-admin-page";
       break;
       case "training-employee":
-        link = "/training-employee-page";
+        link = "/employee-page";
       break;
       case "business-employee":
-        link = "/business-employee-page";
+        link = "/employee-page";
       break;
       case "hr-employee":
-        link = "/hr-employee-page";
+        link = "/employee-page";
       break;
   }
 
@@ -32,6 +32,7 @@ const Header = (props) => {
     localStorage.setItem("loggedIn", false);
     localStorage.setItem("department", "");
     localStorage.removeItem("user")
+    props.setLoggedIn(localStorage.getItem("loggedIn"));
     navigate("/");
   }
 

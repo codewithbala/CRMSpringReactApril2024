@@ -13,25 +13,29 @@ import CreateBusinessEmployee from "./components/user/businessManager/CreateBusi
 import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
+import CandidateInterview from "./components/candidate/CandidateInterview";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("loggedIn") === "true"
+    // localStorage.getItem("loggedIn") === "true"
   );
   const [department, setDepartment] = useState(
     localStorage.getItem("department")
   );
   const [user, setUser] = useState(localStorage.getItem("user"));
   //reload the app whenever the compoennt is called
+  async function init(){
+    
+  }
   useEffect(() => {
-
-  },[loggedIn])
+    setLoggedIn(localStorage.getItem("loggedIn") === "true")
+  },[])
 
   useEffect(() => {
     console.log(user);
-  }, [department]);
+  }, [loggedIn,department]);
   console.log(user)
-  if(!loggedIn){
+  if(!loggedIn || window.location.pathname == "/"){
     return(
       <div>
         <BrowserRouter>
@@ -59,13 +63,13 @@ function App() {
         <BrowserRouter>
         <div className="row">
           <div style={{position: "fixed"}} className="col-2">
-        <Header className="fixed" department={department} />
+        <Header className="fixed" setLoggedIn={setLoggedIn} department={department} />
          </div>
          <div className="col-2"></div>
          <div className="col-9">
           <Routes>
             <Route>
-              <Route
+              {/* <Route
                 path="/"
                 element={
                   <Login
@@ -74,7 +78,7 @@ function App() {
                     setUser={setUser}
                   />
                 }
-              />
+              /> */}
   
   
               {/* training admin */}
@@ -89,7 +93,7 @@ function App() {
                 }
               />
               {/* training employee */}
-              <Route
+              {/* <Route
                 path="/training-employee-page"
                 element={
                   loggedIn == true && department == "training-employee" ? (
@@ -98,7 +102,7 @@ function App() {
                     <Homepage />
                   )
                 }
-              />
+              /> */}
               {/* create training employee */}
               <Route
                 path="/training/createEmployee/:deptId/:managerId"
@@ -121,8 +125,9 @@ function App() {
                   )
                 }
               />
+              
               {/* Business employee*/}
-              <Route
+              {/* <Route
                 path="/business-employee-page"
                 element={
                   loggedIn == true && department == "business-employee" ? (
@@ -131,7 +136,8 @@ function App() {
                     <Homepage />
                   )
                 }
-              />
+              /> */}
+
               {/* create business employee */}
               <Route path="/business/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "business" ? <CreateBusinessEmployee/> : <Homepage/>}/>
   
@@ -148,9 +154,9 @@ function App() {
               />
   
               <Route
-                path="/hr-employee-page"
+                path="/employee-page"
                 element={
-                  loggedIn == true && department == "hr-employee" ? (
+                  loggedIn == true && department.includes("employee") ? (
                     <EmployeeHomepage department={department}/>
                   ) : (
                     <Homepage />
@@ -167,6 +173,23 @@ function App() {
                 path="/candidates/create-candidate/"
                 element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
               ></Route>
+
+              {/* Create a new candidate
+                  <Route
+                path="/candidates/create-candidate/"
+                element={<CreateCandidate department={department} />}
+              ></Route> */}
+
+              {/* Test route, will delete */}
+              <Route
+                path="/candidates/candidate-interview"
+                element={
+                  <CandidateInterview
+                    
+                    remarks={"Candidate did well during the interview"}
+                  />
+                }
+              />
   
             </Route>
           </Routes>
