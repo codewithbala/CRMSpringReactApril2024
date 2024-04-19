@@ -22,7 +22,6 @@ export default function HREmployee(props){
     return(
         <div>
             <GetAllCandidates/>
-            <button onClick={() => click()}>Create Candidate</button>
             
         </div>
     )

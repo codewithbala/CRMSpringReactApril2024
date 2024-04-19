@@ -10,7 +10,7 @@ import Footer from "./components/footer/Footer";
 import EmployeeHomepage from "./components/user/employee/EmployeeHomepage";
 import ManagersPage from "./components/user/managers/ManagersPage";
 import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
-import UpdateCandidate from "./components/user/employee/UpdateCandidate";
+import UpdateCandidate from "./components/candidate/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
 import CandidateInterview from "./components/candidate/CandidateInterview";
@@ -23,7 +23,7 @@ function App() {
   const [department, setDepartment] = useState(
     localStorage.getItem("department")
   );
-  const [user, setUser] = useState(localStorage.getItem("user"));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   //reload the app whenever the compoennt is called
   async function init(){
     
@@ -64,7 +64,7 @@ function App() {
         <BrowserRouter>
         <div className="row">
           <div style={{position: "fixed"}} className="col-2">
-        <Header className="fixed" setLoggedIn={setLoggedIn} department={department} />
+        <Header className="fixed" user={user} setLoggedIn={setLoggedIn} department={department} />
          </div>
          <div className="col-2"></div>
          <div className="col-9">

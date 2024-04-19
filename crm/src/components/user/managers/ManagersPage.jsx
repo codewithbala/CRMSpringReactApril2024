@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import EmployeeCard from "../employee/employeeCards/EmployeeCards";
+import "../managers/ManagersPage.css"
 
 export default function ManagersPage(props){
     const [managerId, setManagerId] = useState("");
@@ -75,7 +77,7 @@ export default function ManagersPage(props){
             <h1>Hello {`${user.firstName} ${user.lastName}`}</h1>
 
             <h3 className="mt-4">List of Employees</h3>
-            <table className="table">
+            {/* <table className="table">
               <thead>
                 <tr>
                   <th>{department}_employee_id</th>
@@ -125,15 +127,18 @@ export default function ManagersPage(props){
                     );
                 })}
           </tbody>
-            </table>
+            </table> */}
+            <div className="employeeCardManager">
+              {employees.map((employee, index) => {
+                return(
+                  <div className="">
+                    <EmployeeCard name={`${employee.firstName} ${employee.lastName}`} edLevel={employee.edLevel} email={employee.emailId} start={employee.hireDate} pay={employee.salary}/>
+                  </div>
+                )
+              })}
+            </div>
 
 
-
-  
-
-  
-            <button onClick={() => click()}>Create Business Employee</button>
-            <button onClick={() => logout()}>Logout</button>
           </div>
         );
       }
