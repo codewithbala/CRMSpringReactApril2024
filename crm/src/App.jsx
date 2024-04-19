@@ -168,11 +168,22 @@ function App() {
                 element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
               ></Route>
 
-              {/* Create a new candidate */}
+              {/* Create a new candidate
                   <Route
                 path="/candidates/create-candidate/"
                 element={<CreateCandidate department={department} />}
-              ></Route>
+              ></Route> */}
+
+              {/* Test route, will delete */}
+              <Route
+                path="/candidates/candidate-interview"
+                element={
+                  <CandidateInterview
+                    name={"Test Recruiter"}
+                    remarks={"Candidate did well during the interview"}
+                  />
+                }
+              />
   
             </Route>
           </Routes>
