@@ -17,179 +17,191 @@ import CandidateInterview from "./components/candidate/CandidateInterview";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
-    localStorage.getItem("loggedIn") === "true"
+    // localStorage.getItem("loggedIn") === "true"
   );
   const [department, setDepartment] = useState(
     localStorage.getItem("department")
   );
   const [user, setUser] = useState(localStorage.getItem("user"));
+  //reload the app whenever the compoennt is called
+  async function init(){
+    
+  }
+  useEffect(() => {
+    setLoggedIn(localStorage.getItem("loggedIn") === "true")
+  },[])
 
   useEffect(() => {
     console.log(user);
-  }, [department]);
-  console.log(user);
-  return (
-    <div>
-      <BrowserRouter>
-        <div className="row">
-          <div style={{ position: "fixed" }} className="col-2">
-            <Header className="fixed" department={department} />
-          </div>
-          <div className="col"></div>
-          <div className="col-9">
-            <Routes>
-              <Route>
-                <Route
-                  path="/"
-                  element={
-                    <Login
-                      setLoggedIn={setLoggedIn}
-                      setTheDepartment={setDepartment}
-                      setUser={setUser}
-                    />
-                  }
-                />
-
-                {/* training admin */}
-                <Route
-                  path="/training-admin-page"
-                  element={
-                    loggedIn == true && department == "training" ? (
-                      <ManagersPage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-                {/* training employee */}
-                <Route
-                  path="/training-employee-page"
-                  element={
-                    loggedIn == true && department == "training-employee" ? (
-                      <EmployeeHomepage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-                {/* create training employee */}
-                <Route
-                  path="/training/createEmployee/:deptId/:managerId"
-                  element={
-                    loggedIn == true && department == "training" ? (
-                      <CreateTrainingEmployee />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-                {/* business manager */}
-                <Route
-                  path="/business-manager-page"
-                  element={
-                    loggedIn == true && department == "business" ? (
-                      <ManagersPage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-                {/* Business employee*/}
-                <Route
-                  path="/business-employee-page"
-                  element={
-                    loggedIn == true && department == "business-employee" ? (
-                      <EmployeeHomepage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-                {/* create business employee */}
-                <Route
-                  path="/business/createEmployee/:deptId/:managerId"
-                  element={
-                    loggedIn == true && department == "business" ? (
-                      <CreateBusinessEmployee />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-
-                {/* HR manager*/}
-                <Route
-                  path="/hr-manager-page"
-                  element={
-                    loggedIn == true && department == "hr" ? (
-                      <ManagersPage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-
-                <Route
-                  path="/hr-employee-page"
-                  element={
-                    loggedIn == true && department == "hr-employee" ? (
-                      <EmployeeHomepage department={department} />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-
-                <Route
-                  path="/hr/createEmployee/:deptId/:managerId"
-                  element={
-                    loggedIn == true && department == "hr" ? (
-                      <UpdateCandidate />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                />
-
-                <Route
-                  path="/:department/createEmployee/:deptId/:employeeId"
-                  element={
-                    loggedIn == true && department == "hr-employee" ? (
-                      <UpdateCandidate />
-                    ) : department == "training-employee" ? (
-                      <UpdateCandidate />
-                    ) : department == "business-employee" ? (
-                      <UpdateCandidate />
-                    ) : (
-                      <Homepage />
-                    )
-                  }
-                ></Route>
-              </Route>
-              {/* Create a new candidate */}
+  }, [loggedIn,department]);
+  console.log(user)
+  if(!loggedIn || window.location.pathname == "/"){
+    return(
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route>
               <Route
+                path="/"
+                element={
+                  <Login
+                    setLoggedIn={setLoggedIn}
+                    setTheDepartment={setDepartment}
+                    setUser={setUser}
+                  />
+                }
+              />
+            </Route>
+            </Routes>
+        </BrowserRouter>
+      </div>
+    )
+  }else{
+    return (
+      <div>
+        
+        <BrowserRouter>
+        <div className="row">
+          <div style={{position: "fixed"}} className="col-2">
+        <Header className="fixed" setLoggedIn={setLoggedIn} department={department} />
+         </div>
+         <div className="col-2"></div>
+         <div className="col-9">
+          <Routes>
+            <Route>
+              {/* <Route
+                path="/"
+                element={
+                  <Login
+                    setLoggedIn={setLoggedIn}
+                    setTheDepartment={setDepartment}
+                    setUser={setUser}
+                  />
+                }
+              /> */}
+  
+  
+              {/* training admin */}
+              <Route
+                path="/training-admin-page"
+                element={
+                  loggedIn == true && department == "training" ? (
+                    <ManagersPage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              />
+              {/* training employee */}
+              {/* <Route
+                path="/training-employee-page"
+                element={
+                  loggedIn == true && department == "training-employee" ? (
+                    <EmployeeHomepage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              /> */}
+              {/* create training employee */}
+              <Route
+                path="/training/createEmployee/:deptId/:managerId"
+                element={
+                  loggedIn == true && department == "training" ? (
+                    <CreateTrainingEmployee />
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              />
+              {/* business manager */}
+              <Route
+                path="/business-manager-page"
+                element={
+                  loggedIn == true && department == "business" ? (
+                    <ManagersPage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              />
+              
+              {/* Business employee*/}
+              {/* <Route
+                path="/business-employee-page"
+                element={
+                  loggedIn == true && department == "business-employee" ? (
+                    <EmployeeHomepage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              /> */}
+
+              {/* create business employee */}
+              <Route path="/business/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "business" ? <CreateBusinessEmployee/> : <Homepage/>}/>
+  
+              {/* HR manager*/}
+              <Route
+                path="/hr-manager-page"
+                element={
+                  loggedIn == true && department == "hr" ? (
+                    <ManagersPage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              />
+  
+              <Route
+                path="/employee-page"
+                element={
+                  loggedIn == true && department.includes("employee") ? (
+                    <EmployeeHomepage department={department}/>
+                  ) : (
+                    <Homepage />
+                  )
+                }
+              />
+  
+              <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
+              
+              <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
+
+                {/* Create a new candidate */}
+                <Route
+                path="/candidates/create-candidate/"
+                element={department == "hr-employee" ? <CreateCandidate department={department}/> : <Homepage/>}
+              ></Route>
+
+              {/* Create a new candidate
+                  <Route
                 path="/candidates/create-candidate/"
                 element={<CreateCandidate department={department} />}
-              ></Route>
+              ></Route> */}
 
               {/* Test route, will delete */}
               <Route
                 path="/candidates/candidate-interview"
                 element={
                   <CandidateInterview
-                    name={"Test Recruiter"}
+                    
                     remarks={"Candidate did well during the interview"}
                   />
                 }
               />
-            </Routes>
+  
+            </Route>
+          </Routes>
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
-
-      <Footer />
-    </div>
-  );
+        </BrowserRouter>
+        
+        <Footer />
+      </div>
+    );
+  }
+  
 }
 
 export default App;

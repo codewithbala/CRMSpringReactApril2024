@@ -12,12 +12,13 @@ import java.util.NoSuchElementException;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/candidateInterviews")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/candidateInterviews")
 public class CandidateInterviewController {
     @Autowired
     private CandidateInterviewService candidateInterviewService;
 
-    @PostMapping("/")
+    @PostMapping("/create-candidate-interview")
     public CandidateInterview createCandidateInterview(@RequestBody CandidateInterview candidateInterview) {
         return candidateInterviewService.saveCandidateInterview(candidateInterview);
     }
@@ -39,8 +40,13 @@ public class CandidateInterviewController {
 
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CandidateInterview> deleteInterviewById(@PathVariable Long id){
+        candidateInterviewService.deleteCandidateInterview(id);
+        return ResponseEntity.ok().build();
+    }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update-candidate-interview/{id}")
     public ResponseEntity<CandidateInterview> updateCandidateInterview(@PathVariable Long id,
                                                                        @RequestBody CandidateInterview candidateInterviewDetails) {
         return candidateInterviewService.getCandidateInterviewById(id)

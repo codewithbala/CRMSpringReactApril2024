@@ -71,6 +71,7 @@ export default function (props) {
         unlockLoggedInPage(answer.status, answer.data);
       })
       .catch((error) => {
+        alert("You have entered the wrong email/password")
         console.log(error);
       });
   };
@@ -80,7 +81,7 @@ export default function (props) {
     if (answer == 200) {
       localStorage.setItem("loggedIn", true);
 
-      // props.setLoggedIn(true);
+      props.setLoggedIn(localStorage.getItem("loggedIn") === "true");
       if (department == "business") {
         let departmentId = user.departmentId;
         let managerId = user.business_dev_admin_id;
@@ -98,13 +99,13 @@ export default function (props) {
         navigate(`/training-admin-page`);
       }
       if(department == "training-employee"){
-        navigate(`/training-employee-page`);
+        navigate(`/employee-page`);
       }
       if(department == "business-employee"){
-        navigate(`/business-employee-page`);
+        navigate(`/employee-page`);
       }
       if(department == "hr-employee"){
-        navigate(`/hr-employee-page`);
+        navigate(`/employee-page`);
       }
     } else {
       alert("Login Unsuccessful./.. please try again");

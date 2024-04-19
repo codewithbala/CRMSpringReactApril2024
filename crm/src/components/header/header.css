@@ -41,6 +41,9 @@
 .nav li {
   margin-top: 2vh;
 }
+/* .logout{
+  margin-top: 10vw;
+} */
 .nav li:hover, .header-link:hover {
   color: white;
   background-color: #31343b;
