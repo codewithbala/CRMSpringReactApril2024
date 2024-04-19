@@ -12,16 +12,22 @@ const CandidateInterview = ({ name, remarks, department }) => {
   const [loiAccepted, setLoiAccepted] = useState(false);
   const [joinedBatch, setJoinedBatch] = useState(false);
   const [candidateBatchStartDate, setCandidateBatchStartDate] = useState("");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  useEffect(() => {
+    
+  },[])
 
   const handleSubmit = (e) => {
-    const baseUrl = "http://localhost:8080/api/v1/candidateInterviews/";
+    e.preventDefault();
+    const baseUrl = "http://localhost:8080/api/candidateInterviews/create-candidate-interview";
 
     // prettier-ignore
     let requestBody = {
         "interviewDate": interviewDate,
         "trainerName": name,
         "interviewFeedback": interviewFeedback,
-        "candidatetureStatus": candidatetureStatus,
+        "candidatureStatus": "there",
         "bdRemarksFeedback": remarks,
         "loiSent": loiSent === "true",
         "loiAccepted": loiAccepted === "true",
@@ -59,7 +65,7 @@ const CandidateInterview = ({ name, remarks, department }) => {
             className="form-control"
             id="trainerName"
             name="trainerName"
-            value={name}
+            value={`${user.firstName} ${user.lastName}`}
           />
         </div>
         <div className="form-group m-2">

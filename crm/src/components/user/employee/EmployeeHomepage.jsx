@@ -32,13 +32,6 @@ export default function EmployeeHomepage(props){
     },[managerId, user])
 
 
-    function click (){
-        // navigate(`/${props.department}/createEmployee/${user.departmentId}/${managerId}`)
-        navigate("/candidates/create-candidate/")
-     }
-
-
-
 
     return(
         <div className="container mt-5">
