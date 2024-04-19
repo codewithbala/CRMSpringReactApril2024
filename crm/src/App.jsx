@@ -13,6 +13,7 @@ import CreateBusinessEmployee from "./components/user/businessManager/CreateBusi
 import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
+import CandidateInterview from "./components/candidate/CandidateInterview";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
