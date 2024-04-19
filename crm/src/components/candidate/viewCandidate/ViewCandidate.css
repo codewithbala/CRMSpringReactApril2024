@@ -1,0 +1,7 @@
+.candidate-photo{
+    max-height: 30vh;
+    border-radius: 10px;
+}
+.underlined{
+    text-decoration: underline;
+}

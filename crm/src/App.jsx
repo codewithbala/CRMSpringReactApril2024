@@ -14,6 +14,7 @@ import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
 import CandidateInterview from "./components/candidate/CandidateInterview";
+import ViewCandidate from "./components/candidate/viewCandidate/ViewCandidate";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -190,6 +191,8 @@ function App() {
                   />
                 }
               />
+
+              <Route path="/candidates/view-candidate/:id" element={<ViewCandidate/>}></Route>
   
             </Route>
           </Routes>

@@ -6,6 +6,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 export default function GetAllCandidates(){
     const [candidates, setCandidates] = useState([]);
     const [loading, setLoading] = useState(true)
+    let navigate = useNavigate();
 
     const getCandidates = () => {
         axios.get(`http://localhost:8080/api/candidates/`).then((response) => {
@@ -21,6 +22,9 @@ export default function GetAllCandidates(){
         getCandidates();
       },[])
     
+      function navigateToCandidate(id) {
+        navigate(`/candidates/view-candidate/${id}`)
+      }
 
     return(
         <div className="container">
@@ -38,13 +42,15 @@ export default function GetAllCandidates(){
                     <th>Phone Number</th>
 
                     <th>Skill Set</th>
+                    <th>asd</th>
 
 
                 </tr>
                <tbody>
                     {candidates.map((candidate, key) => {
                         return (
-                            <tr key={key} scope="row">
+                            <>
+                            <tr key={key} scope="row" className="">
                                 <td>{candidate.id}</td>
                                 <td>{candidate.batchNo}</td>
                                 
@@ -53,13 +59,14 @@ export default function GetAllCandidates(){
                                 <td>{candidate.middleName}</td>
                                 <td>{candidate.phoneNumber}</td>
                                 <td>{candidate.skillSet}</td>
-                            
+                                <button className="btn btn-primary" onClick={() => navigateToCandidate(candidate.id)}>View Candidate</button>
                            </tr>
-                            
-                            
-                            
+                           
+                           </>
                         )
+                        
                     })}
+                    
                 </tbody>
             </table>
 
