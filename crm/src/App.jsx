@@ -15,6 +15,8 @@ import CreateTrainingEmployee from "./components/user/trainingAdmin/createTraini
 import CreateCandidate from "./components/candidate/CreateCandidate";
 import CandidateInterview from "./components/candidate/CandidateInterview";
 import ViewCandidate from "./components/candidate/viewCandidate/ViewCandidate";
+import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
+import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -165,7 +167,7 @@ function App() {
                 }
               />
   
-              <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
+              <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
               
               <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
 
@@ -193,6 +195,7 @@ function App() {
               />
 
               <Route path="/candidates/view-candidate/:id" element={<ViewCandidate/>}></Route>
+              <Route path=":department/viewEmployee/:id" element={<ViewEmployee/>}></Route>
   
             </Route>
           </Routes>

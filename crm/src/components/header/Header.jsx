@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import EmployeeHomepage from "../user/employee/EmployeeHomepage";
 
 const Header = (props) => {
+  useEffect(() => {}, [])
   const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let link;
   switch (props.department) {
     case "hr":
@@ -48,20 +50,22 @@ const Header = (props) => {
     }
     return navText;
   }
+
   function navigateToCreateEmpoyee(){
-    if (props.department === "hr-employee") {
-      navText = "Create Candidate";
-    }if (
-      props.department === "training"
-    ){
-      navigate(`/training/createEmployee/${props.user.departmentId}/${props.user.training_admin_id}`)
-    }
-    if(props.department === "business"){
-      navigate(`/business/createEmployee/${props.user.departmentId}/${props.user.business_dev_admin_id}`)
-    }
-    if(props.department === "hr"){
-      navigate(`/hr/createEmployee/${props.user.departmentId}/${props.user.hr_manager_id}`)
-      
+    let link;
+    switch (props.department) {
+      case "hr":
+        navigate(`/hr/createEmployee/${user.departmentId}/${user.hr_manager_id}`)
+        break;
+      case "business":
+        navigate(`/business/createEmployee/${user.departmentId}/${user.business_dev_admin_id}`)
+        break;
+      case "training":
+        navigate(`/training/createEmployee/${user.departmentId}/${user.training_admin_id}`)
+        break;
+      case "hr-employee":
+        navigate("/candidates/create-candidate/");
+        break;
     }
   }
 
@@ -111,8 +115,8 @@ const Header = (props) => {
           <li>
             <p>Settings &nbsp; &nbsp;&nbsp;</p>
           </li>
-          <li onClick={() => navigateToCreateEmpoyee()}>
-            <p>{displayNavLinks()} &nbsp; &nbsp;&nbsp;</p>
+          <li >
+            <p onClick={() => navigateToCreateEmpoyee()}> {displayNavLinks()} &nbsp; &nbsp;&nbsp;</p>
           </li>
 
           <li

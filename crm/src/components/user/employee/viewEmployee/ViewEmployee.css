@@ -1,18 +1,21 @@
-.card{
-    height: 38vh;
-    width: 15vw;
-}
+
 .bolder{
     font-weight: bolder;
 }
 .lighter{
     font-weight: lighter;
 }
-.circle{
+.circleEmployee{
     background-color: beige;
-    height: 6vh;
-    width: 6vh;
+    height: 10vh;
+    width: 10vh;
     border-radius: 100px;
     text-align: center;
-    line-height: 6vh;
+    line-height: 10vh;
+    font-weight: bold;
+}
+
+.center{
+    
+    line-height: 10vh;
 }

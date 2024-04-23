@@ -48,7 +48,7 @@ export default function CreateBusinessEmployee() {
     axios
       .post(`${baseUrl}/create-employee`, body)
       .then(() => {
-        navigate(`/business-manager-page/${params.deptId}/${params.managerId}`);
+        navigate(`/business-manager-page`);
       })
       .catch((error) => {
         console.log(error);
@@ -156,6 +156,7 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="edLevel"
             >
+              <option>Choose an Option</option>
               <option value="GED or less">GED or less</option>
               <option value="High school diploma, no college">
                 High school diploma
@@ -176,6 +177,7 @@ export default function CreateBusinessEmployee() {
               className="form-control"
               id="sex"
             >
+              <option>Choose an Option</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
