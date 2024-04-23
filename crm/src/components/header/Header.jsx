@@ -1,72 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import EmployeeHomepage from "../user/employee/EmployeeHomepage";
 
 const Header = (props) => {
-  useEffect(() => {}, [])
+
   const navigate = useNavigate();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let link;
-  switch (props.department) {
+  switch(props.department){
     case "hr":
       link = "/hr-manager-page";
       break;
-    case "business":
-      link = "/business-manager-page";
+      case "business":
+        link = "/business-manager-page";
       break;
-    case "training":
-      link = "/training-admin-page";
+      case "training":
+        link = "/training-admin-page";
       break;
-    case "training-employee":
-      link = "/employee-page";
+      case "training-employee":
+        link = "/employee-page";
       break;
-    case "business-employee":
-      link = "/employee-page";
+      case "business-employee":
+        link = "/employee-page";
       break;
-    case "hr-employee":
-      link = "/employee-page";
+      case "hr-employee":
+        link = "/employee-page";
       break;
   }
 
   function logout() {
     localStorage.setItem("loggedIn", false);
     localStorage.setItem("department", "");
-    localStorage.removeItem("user");
+    localStorage.removeItem("user")
     props.setLoggedIn(localStorage.getItem("loggedIn"));
     navigate("/");
-  }
-
-  function displayNavLinks() {
-    let navText = "";
-    if (props.department === "hr-employee") {
-      navText = "Create Candidate";
-    } else if (
-      props.department === "hr" ||
-      props.department === "business" ||
-      props.department === "training"
-    ) {
-      navText = "Create Employee";
-    }
-    return navText;
-  }
-
-  function navigateToCreateEmpoyee(){
-    let link;
-    switch (props.department) {
-      case "hr":
-        navigate(`/hr/createEmployee/${user.departmentId}/${user.hr_manager_id}`)
-        break;
-      case "business":
-        navigate(`/business/createEmployee/${user.departmentId}/${user.business_dev_admin_id}`)
-        break;
-      case "training":
-        navigate(`/training/createEmployee/${user.departmentId}/${user.training_admin_id}`)
-        break;
-      case "hr-employee":
-        navigate("/candidates/create-candidate/");
-        break;
-    }
   }
 
   return (
@@ -102,12 +69,11 @@ const Header = (props) => {
         </div>
       </nav> */}
 
+
       <nav className="nav">
         <ul>
           <li>
-            <Link className="header-link" to={link}>
-              <p>Homepage</p>
-            </Link>
+            <Link className="header-link" to={link}><p>Homepage</p></Link>
           </li>
           <li>
             <p>Profile &nbsp; &nbsp; &nbsp; &nbsp;</p>
@@ -115,17 +81,11 @@ const Header = (props) => {
           <li>
             <p>Settings &nbsp; &nbsp;&nbsp;</p>
           </li>
-          <li >
-            <p onClick={() => navigateToCreateEmpoyee()}> {displayNavLinks()} &nbsp; &nbsp;&nbsp;</p>
-          </li>
 
-          <li
-            style={{ marginTop: "30vh" }}
-            onClick={() => logout()}
-            className="logout"
-          >
+          <li style={{marginTop: "30vh"}} onClick={() => logout()} className="logout">
             Logout &nbsp; &nbsp; &nbsp;
           </li>
+          
         </ul>
       </nav>
     </header>

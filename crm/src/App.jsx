@@ -10,13 +10,10 @@ import Footer from "./components/footer/Footer";
 import EmployeeHomepage from "./components/user/employee/EmployeeHomepage";
 import ManagersPage from "./components/user/managers/ManagersPage";
 import CreateBusinessEmployee from "./components/user/businessManager/CreateBusinessEmployee";
-import UpdateCandidate from "./components/candidate/UpdateCandidate";
+import UpdateCandidate from "./components/user/employee/UpdateCandidate";
 import CreateTrainingEmployee from "./components/user/trainingAdmin/createTrainingEmployee";
 import CreateCandidate from "./components/candidate/CreateCandidate";
 import CandidateInterview from "./components/candidate/CandidateInterview";
-import ViewCandidate from "./components/candidate/viewCandidate/ViewCandidate";
-import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
-import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -25,7 +22,7 @@ function App() {
   const [department, setDepartment] = useState(
     localStorage.getItem("department")
   );
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(localStorage.getItem("user"));
   //reload the app whenever the compoennt is called
   async function init(){
     
@@ -66,7 +63,7 @@ function App() {
         <BrowserRouter>
         <div className="row">
           <div style={{position: "fixed"}} className="col-2">
-        <Header className="fixed" user={user} setLoggedIn={setLoggedIn} department={department} />
+        <Header className="fixed" setLoggedIn={setLoggedIn} department={department} />
          </div>
          <div className="col-2"></div>
          <div className="col-9">
@@ -167,7 +164,7 @@ function App() {
                 }
               />
   
-              <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <CreateHREmployee/> : <Homepage/>}/>
+              <Route path ="/hr/createEmployee/:deptId/:managerId" element={loggedIn==true && department == "hr" ? <UpdateCandidate/> : <Homepage/>}/>
               
               <Route path="/:department/createEmployee/:deptId/:employeeId" element={ loggedIn==true && department == "hr-employee" ?<UpdateCandidate/> : department == "training-employee"?<UpdateCandidate/> : department == "business-employee"? <UpdateCandidate/> : <Homepage/>}></Route>
 
@@ -193,9 +190,6 @@ function App() {
                   />
                 }
               />
-
-              <Route path="/candidates/view-candidate/:id" element={<ViewCandidate/>}></Route>
-              <Route path=":department/viewEmployee/:id" element={<ViewEmployee/>}></Route>
   
             </Route>
           </Routes>
