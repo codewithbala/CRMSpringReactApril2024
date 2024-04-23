@@ -48,7 +48,7 @@ export default function CreateTrainingEmployee() {
     "phoneNum": phoneNum
 }
     axios.post(`${baseUrl}/create-employee`, body).then(() => {
-        navigate(`/training-admin-page/${params.deptId}/${params.managerId}`)
+        navigate(`/training-admin-page`)
     }).catch((error) => {
         console.log(error)
     })
