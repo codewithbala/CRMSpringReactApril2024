@@ -79,10 +79,10 @@ export default function ManagersPage(props){
           const filter = employees.filter( candidate => 
               candidate.firstName && candidate.firstName.toLowerCase().includes(search.toLowerCase()) ||
               candidate.lastName && candidate.lastName.toLowerCase().includes(search.toLowerCase()) || 
-              candidate.edLevel && candidate.edLevel === (search.toLowerCase()) || 
+              candidate.edLevel && candidate.edLevel.toLowerCase().includes(search.toLowerCase()) || 
               candidate.job && candidate.job === (search.toLowerCase()) || 
               candidate.salary && candidate.salary.toLowerCase().includes(search.toLowerCase()) || 
-              candidate.sex && candidate.sex.includes(search) 
+              candidate.sex && candidate.sex.includes(search.toLowerCase()) 
           )
           setEmployees(filter)
       }

@@ -79,21 +79,23 @@ export default function UpdatePasswordConfirmation(props){
     }
 
     return(
-        <div className="container">
-            <h1>Reset Password</h1>
+        <div className="Auth-form-container">
+            
 
+            <form className="Auth-form">
+                <h3 className="mx-5">Choose A Password</h3>
+                <div className="Auth-form-content">
+                        <label htmlFor="password">New Password</label>
+                        <input type="password" onChange={(e) => setPassword(e.target.value)} className="form-control"  placeholder="Enter a New Password"/>     
+                </div>
 
-            <div className="form-group">
-                    <label htmlFor="password">New Password</label>
-                    <input type="password" onChange={(e) => setPassword(e.target.value)} className="form-control"  placeholder="Enter a New Password"/>     
-            </div>
+                <div className="Auth-form-content mb-3 mt-2">
+                        <label htmlFor="exampleInputEmail1">Password Confirmation</label>
+                        <input type="password" onChange={(e) => setPasswordCopy(e.target.value)} className="form-control"  placeholder="Please Reapeat password"/>     
+                </div>
 
-            <div className="form-group mb-3 mt-2">
-                    <label htmlFor="exampleInputEmail1">Password Confirmation</label>
-                    <input type="password" onChange={(e) => setPasswordCopy(e.target.value)} className="form-control"  placeholder="Please Reapeat password"/>     
-            </div>
-
-            <div className="btn btn-danger"  onClick={(e) => resetPassword(e)}>Reset Password</div>
+                <div className="btn btn-danger mx-5"  onClick={(e) => resetPassword(e)}>Reset Password</div>
+            </form>
         </div>
     )
 }

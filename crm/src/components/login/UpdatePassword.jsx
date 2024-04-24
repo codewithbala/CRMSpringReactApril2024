@@ -50,49 +50,54 @@ export default function UpdatePassword(props){
 
 
     return(
-        <div className="container mt-5 mx-4 ">
-            <h1>Reset Password</h1>
-            <form className="form">
-            <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Choose Position</label>
-                    <br/>
-                    <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            onChange={(e) => setDepartment(e.target.value)}
-                    >
-                            <option defaultValue={""}>Choose Position</option>
-                            <option value="hr-manager">HR Manager</option>
-                            <option value="business-manager">Business Development Admin</option>
-                            <option value="training-admin">Training Manager</option>
-                            <option value="training">Training-employee</option>
-                            <option value="business">Business-employee</option>
-                            <option value="hr">HR-employee</option>
-                        </select>
-                </div>
-                <br/>
+        <div className="">
+            <div className="Auth-form-container">
+                    
+                    
+                    <form className="Auth-form">
+                        <h3 className="mx-5">Reset Password</h3>
+                    <div className="Auth-form-content">
+                            <label htmlFor="exampleInputEmail1">Choose Position</label>
+                            <br/>
+                            <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    onChange={(e) => setDepartment(e.target.value)}
+                            >
+                                    <option defaultValue={""}>Choose Position</option>
+                                    <option value="hr-manager">HR Manager</option>
+                                    <option value="business-manager">Business Development Admin</option>
+                                    <option value="training-admin">Training Manager</option>
+                                    <option value="training">Training-employee</option>
+                                    <option value="business">Business-employee</option>
+                                    <option value="hr">HR-employee</option>
+                                </select>
+                        </div>
+                        <br/>
 
-                <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email ID</label>
-                    <input type="email" onChange={(e) => setEmailId(e.target.value)} className="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>     
-                </div>
-                <br/>
+                        <div className="Auth-form-content">
+                            <label htmlFor="exampleInputEmail1">Email ID</label>
+                            <input type="email" onChange={(e) => setEmailId(e.target.value)} className="form-control" aria-describedby="emailHelp" placeholder="Enter email"/>     
+                        </div>
+                        <br/>
 
-                {/* <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Hire Date</label>
-                    <input type="text" onChange={(e) => setHireDate(e.target.value)} className="form-control" placeholder="Enter Hire Date"/>     
-                </div>
-                <br/> */}
+                        {/* <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Hire Date</label>
+                            <input type="text" onChange={(e) => setHireDate(e.target.value)} className="form-control" placeholder="Enter Hire Date"/>     
+                        </div>
+                        <br/> */}
 
-                {/* <div className="form-group mb-3">
-                    <label htmlFor="employeeId">Employee ID</label>
-                    <input type="text" onChange={(e) => setEmployeeId(e.target.value)} className="form-control" placeholder="Enter Employee Id"/>     
-                </div> */}
+                        {/* <div className="form-group mb-3">
+                            <label htmlFor="employeeId">Employee ID</label>
+                            <input type="text" onChange={(e) => setEmployeeId(e.target.value)} className="form-control" placeholder="Enter Employee Id"/>     
+                        </div> */}
 
-                <div className="btn btn-danger"  onClick={(e) => updatePassword(e)}>Reset Password</div>
+                        <div className="btn btn-danger mx-5"  onClick={(e) => updatePassword(e)}>Reset Password</div>
 
 
-            </form>
+                    </form>
+                                
+            </div>
         </div>
     )
 }
