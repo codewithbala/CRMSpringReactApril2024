@@ -60,7 +60,8 @@ public class CandidateDetails {
     private String source;
 
     private Integer communicationSkill;
-
+    
+    @Column
     private String resume;
 
     private String recruiterRemarks;
