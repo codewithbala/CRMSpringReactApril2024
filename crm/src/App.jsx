@@ -17,6 +17,8 @@ import CandidateInterview from "./components/candidate/CandidateInterview";
 import ViewCandidate from "./components/candidate/viewCandidate/ViewCandidate";
 import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
 import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
+import UpdatePassword from "./components/login/UpdatePassword";
+import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirmation";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -27,9 +29,9 @@ function App() {
   );
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   //reload the app whenever the compoennt is called
-  async function init(){
-    
-  }
+
+  const[userAuthenticated, setUserAuthenticated] = useState(false)
+
   useEffect(() => {
     setLoggedIn(localStorage.getItem("loggedIn") === "true")
   },[])
@@ -54,6 +56,8 @@ function App() {
                   />
                 }
               />
+              <Route path="/updatePasswordCheck" element={<UpdatePassword setUserAuthenticated={setUserAuthenticated}/>}></Route>
+              <Route path="/updateUserPassword/:department/:id" element={userAuthenticated ? <UpdatePasswordConfirmation setUserAuthenticated={setUserAuthenticated}/>: <Homepage/> }></Route>
             </Route>
             </Routes>
         </BrowserRouter>
@@ -196,6 +200,7 @@ function App() {
 
               <Route path="/candidates/view-candidate/:id" element={<ViewCandidate/>}></Route>
               <Route path=":department/viewEmployee/:id" element={<ViewEmployee/>}></Route>
+
   
             </Route>
           </Routes>

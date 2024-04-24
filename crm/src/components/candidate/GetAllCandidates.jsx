@@ -96,7 +96,7 @@ export default function GetAllCandidates(){
                         <th>Phone Number</th>
     
                         <th>Skill Set</th>
-                        <th>asd</th>
+                        <th></th>
     
     
                     </tr>

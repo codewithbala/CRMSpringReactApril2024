@@ -119,7 +119,7 @@ export default function ManagersPage(props){
               {employees.map((employee, index) => {
                 return(
                   <div className="">
-                    <EmployeeCard employeeId={department == "hr"? employee.hr_employee_id: department == "business" ? employee.business_dev_employee_id : department == "training" ? tarining_employee_id : "" } firstName={`${employee.firstName}`} lastName={employee.lastName} edLevel={employee.edLevel} email={employee.emailId} start={employee.hireDate} pay={employee.salary} department={props.department}/>
+                    <EmployeeCard employeeId={department == "hr"? employee.hr_employee_id: department == "business" ? employee.business_dev_employee_id : department == "training" ? employee.training_employee_id : "" } firstName={`${employee.firstName}`} lastName={employee.lastName} edLevel={employee.edLevel} email={employee.emailId} start={employee.hireDate} pay={employee.salary} department={props.department}/>
                   </div>
                 )
               })}
