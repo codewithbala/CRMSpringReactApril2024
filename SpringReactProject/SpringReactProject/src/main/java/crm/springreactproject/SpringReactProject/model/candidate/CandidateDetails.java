@@ -1,12 +1,14 @@
 package crm.springreactproject.SpringReactProject.model.candidate;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.*;
 
 @Entity
-@Table(name="candidate_details")
+@Table(name="candidate_interview")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +19,6 @@ public class CandidateDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
 
     private String recruiterName;
 
@@ -64,6 +65,13 @@ public class CandidateDetails {
     private String resume;
 
     private String recruiterRemarks;
+
+    private String tenthDayEvaluation;
+
+    private String trainingCompletionFeedback;
+
+    private String finalResume;
+
     @Column(name="other_source")
     private String otherSource;
     @Column(name="referenceName")
@@ -71,4 +79,49 @@ public class CandidateDetails {
     @Column(name="other_skills")
     private String otherSkills;
 
+    @Column(name = "interview_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date interviewDate;
+
+    @Column(name = "trainer_name")
+    @NotBlank(message = "Trainer name cannot be blank")
+    private String trainerName;
+
+    @Column(name = "interview_feedback", length = 2000)
+    @Size(max = 2000, message = "Interview feedback must be less than 300 words")
+    private String interviewFeedback;
+
+    @OneToOne
+    @JoinColumn(name = "candidate_details_id", referencedColumnName = "id")
+    private CandidateDetails candidateDetails;
+
+    @Column(name = "candidature_status")
+    @NotBlank(message = "Candidature status cannot be blank")
+    private String candidatureStatus;
+
+    @Column(name = "bd_remarks_feedback")
+    private String bdRemarksFeedback;
+
+    @Column(name = "loi_sent")
+    private Boolean loiSent;
+
+    @Column(name = "loi_accepted")
+    private Boolean loiAccepted;
+
+    @Column(name = "joined_batch")
+    private Boolean joinedBatch;
+
+    @Column(name = "candidate_batch_start_date")
+    @Temporal(TemporalType.DATE)
+    private Date candidateBatchStartDate;
+
+
+    /* Missing fields from US Staffing CRM 2024.xls file (Training tab)
+    * Brought in from CandidateInterview model */
+//    private String interviewFeedback; have
+//    private String candidatureStatus; have
+//    private String tenthDayEvaluation;
+//    private String trainingCompletionFeedback;
+//    private String finalResume;
+//    private String bdRemarksFeedback; have
 }

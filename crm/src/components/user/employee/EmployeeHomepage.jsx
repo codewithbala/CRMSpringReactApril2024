@@ -35,7 +35,7 @@ export default function EmployeeHomepage(props){
 
     return(
         <div className="container mt-5">
-            <h1>Hello Employee {user.firstName} {user.lastName}</h1>
+            <h1>Hello {} Employee {user.firstName} {user.lastName}</h1>
             {props.department == "hr-employee" ? <HREmployee department={props.department} user={props.user} managerId={props.managerId}/> : <></>}
             
             {props.department == "training-employee" ? <TrainingEmployees/> : <></>}

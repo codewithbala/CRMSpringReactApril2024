@@ -47,7 +47,7 @@ export default function CreateHREmployee() {
     "phoneNum": phoneNum
 }
     axios.post(`${baseUrl}/create-employee`, body).then(() => {
-        navigate(`/hr-manager-page/${params.deptId}/${params.managerId}`)
+        navigate(`/hr-manager-page`)
     }).catch((error) => {
         console.log(error)
     })

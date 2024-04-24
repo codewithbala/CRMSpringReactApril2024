@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import EmployeeHomepage from "../user/employee/EmployeeHomepage";
 
 const Header = (props) => {
+  useEffect(() => {}, [])
   const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   let link;
   switch (props.department) {
     case "hr":
@@ -47,6 +49,24 @@ const Header = (props) => {
       navText = "Create Employee";
     }
     return navText;
+  }
+
+  function navigateToCreateEmpoyee(){
+    let link;
+    switch (props.department) {
+      case "hr":
+        navigate(`/hr/createEmployee/${user.departmentId}/${user.hr_manager_id}`)
+        break;
+      case "business":
+        navigate(`/business/createEmployee/${user.departmentId}/${user.business_dev_admin_id}`)
+        break;
+      case "training":
+        navigate(`/training/createEmployee/${user.departmentId}/${user.training_admin_id}`)
+        break;
+      case "hr-employee":
+        navigate("/candidates/create-candidate/");
+        break;
+    }
   }
 
   return (
@@ -95,8 +115,8 @@ const Header = (props) => {
           <li>
             <p>Settings &nbsp; &nbsp;&nbsp;</p>
           </li>
-          <li>
-            <p>{displayNavLinks()} &nbsp; &nbsp;&nbsp;</p>
+          <li >
+            <p onClick={() => navigateToCreateEmpoyee()}> {displayNavLinks()} &nbsp; &nbsp;&nbsp;</p>
           </li>
 
           <li
