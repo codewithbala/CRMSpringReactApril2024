@@ -112,6 +112,10 @@ export default function (props) {
     }
   };
 
+  const updatePassword = () => {
+    navigate("updatePasswordCheck")
+  }
+
   useEffect(() => {}, [department]);
 
   return (
@@ -161,7 +165,7 @@ export default function (props) {
             </button>
           </div>
           <p className="forgot-password text-right mt-2">
-            Forgot <a href="#">password?</a>
+            Forgot <a href="" onClick={() => updatePassword()}>password?</a>
           </p>
         </div>
       </form>

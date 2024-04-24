@@ -79,10 +79,10 @@ export default function ManagersPage(props){
           const filter = employees.filter( candidate => 
               candidate.firstName && candidate.firstName.toLowerCase().includes(search.toLowerCase()) ||
               candidate.lastName && candidate.lastName.toLowerCase().includes(search.toLowerCase()) || 
-              candidate.edLevel && candidate.edLevel === (search.toLowerCase()) || 
+              candidate.edLevel && candidate.edLevel.toLowerCase().includes(search.toLowerCase()) || 
               candidate.job && candidate.job === (search.toLowerCase()) || 
               candidate.salary && candidate.salary.toLowerCase().includes(search.toLowerCase()) || 
-              candidate.sex && candidate.sex.includes(search) 
+              candidate.sex && candidate.sex.includes(search.toLowerCase()) 
           )
           setEmployees(filter)
       }
@@ -119,7 +119,7 @@ export default function ManagersPage(props){
               {employees.map((employee, index) => {
                 return(
                   <div className="">
-                    <EmployeeCard employeeId={department == "hr"? employee.hr_employee_id: department == "business" ? employee.business_dev_employee_id : department == "training" ? tarining_employee_id : "" } firstName={`${employee.firstName}`} lastName={employee.lastName} edLevel={employee.edLevel} email={employee.emailId} start={employee.hireDate} pay={employee.salary} department={props.department}/>
+                    <EmployeeCard employeeId={department == "hr"? employee.hr_employee_id: department == "business" ? employee.business_dev_employee_id : department == "training" ? employee.training_employee_id : "" } firstName={`${employee.firstName}`} lastName={employee.lastName} edLevel={employee.edLevel} email={employee.emailId} start={employee.hireDate} pay={employee.salary} department={props.department}/>
                   </div>
                 )
               })}

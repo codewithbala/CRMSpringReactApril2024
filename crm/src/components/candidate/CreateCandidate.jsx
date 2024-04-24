@@ -149,7 +149,7 @@ const CreateCandidate = (props) => {
 
     // axios post function
     axios.post(`http://localhost:8080/api/candidates/create-candidate`, requestBody).then(() => {
-      navigate(`/business-manager-page`)
+      navigate(`/employee-page`)
     }).catch((error) => {
       console.log(error)
     })
