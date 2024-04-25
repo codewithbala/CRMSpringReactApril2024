@@ -8,7 +8,7 @@ import lombok.*;
 import java.util.*;
 
 @Entity
-@Table(name="candidate_interview")
+@Table(name="candidate_detail")
 @Getter
 @Setter
 @NoArgsConstructor
