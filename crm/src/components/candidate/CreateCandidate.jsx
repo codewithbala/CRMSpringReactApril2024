@@ -38,6 +38,9 @@ const CreateCandidate = (props) => {
   const [loiSent, setLoiSent] = useState(false);
   const [loiAccepted, setLoiAccepted] = useState(false);
   const [joinedBatch, setJoinedBatch] = useState(false);
+  const [secondOpinionOther, setSecondOpinionOther] = useState("");
+  const [finalResume, setFinalResume] = useState("");
+  const [candidateBatchStartDate, setCandidateBatchStartDate] = useState("");
 
   const [batchNumberVariables, setBatchNumberVariables] = useState([]);
   // Non-state variables
@@ -393,6 +396,23 @@ const CreateCandidate = (props) => {
           id="tenthDayEvaluationOther"
           onChange={(e) => setTenthDayEvaluationOther(e.target.value)}
         />
+      </div>
+    );
+  };
+
+  const showSecondOpinionField = () => {
+    return (
+      <div className="form-group m-2">
+        <label htmlFor="secondOpinionOther" className="m-1">
+          Enter Second Opinion
+        </label>
+        <textarea
+          className="form-control"
+          maxLength={300}
+          name="secondOpinionOther"
+          id="secondOpinionOther"
+          onChange={(e) => setSecondOpinionOther(e.target.value)}
+        ></textarea>
       </div>
     );
   };
@@ -848,6 +868,7 @@ const CreateCandidate = (props) => {
             })}
           </select>
         </div>
+        {interviewFeedback === "Second Opinion" ? showSecondOpinionField() : ""}
         <div className="form-group m-2">
           <label htmlFor="candidatetureStatus" className="m-1">
             Candidature Status
@@ -919,6 +940,19 @@ const CreateCandidate = (props) => {
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
+        </div>
+
+        <div className="form-group m-2">
+          <label htmlFor="candidateBatchStartDate" className="m-1">
+            Batch Start Date
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="candidateBatchStartDate"
+            name="candidateBatchStartDate"
+            onChange={(e) => setCandidateBatchStartDate(e.target.value)}
+          />
         </div>
 
         <div className="form-group m-2">

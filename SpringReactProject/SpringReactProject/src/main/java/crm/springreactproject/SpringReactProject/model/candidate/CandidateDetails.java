@@ -22,6 +22,8 @@ public class CandidateDetails {
 
     private String recruiterName;
 
+    private String snvaEid;
+
     private Integer candidateEntry;
 
     private String skillSet;
@@ -68,6 +70,10 @@ public class CandidateDetails {
     private String recruiterRemarks;
 
     private String tenthDayEvaluation;
+
+    private String tenthDayEvaluationOther;
+
+    private String secondOpinionOther;
 
     private String trainingCompletionFeedback;
 
