@@ -8,7 +8,7 @@ import lombok.*;
 import java.util.*;
 
 @Entity
-@Table(name="candidate_interview")
+@Table(name="candidate_detail")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -80,8 +80,8 @@ public class CandidateDetails {
     private String otherSkills;
 
     @Column(name = "interview_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date interviewDate;
+
+    private String interviewDate;
 
     @Column(name = "trainer_name")
     @NotBlank(message = "Trainer name cannot be blank")
@@ -91,9 +91,7 @@ public class CandidateDetails {
     @Size(max = 2000, message = "Interview feedback must be less than 300 words")
     private String interviewFeedback;
 
-    @OneToOne
-    @JoinColumn(name = "candidate_details_id", referencedColumnName = "id")
-    private CandidateDetails candidateDetails;
+
 
     @Column(name = "candidature_status")
     @NotBlank(message = "Candidature status cannot be blank")
@@ -112,8 +110,8 @@ public class CandidateDetails {
     private Boolean joinedBatch;
 
     @Column(name = "candidate_batch_start_date")
-    @Temporal(TemporalType.DATE)
-    private Date candidateBatchStartDate;
+
+    private String candidateBatchStartDate;
 
 
     /* Missing fields from US Staffing CRM 2024.xls file (Training tab)
