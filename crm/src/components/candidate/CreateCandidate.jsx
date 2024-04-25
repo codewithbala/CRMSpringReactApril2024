@@ -30,24 +30,317 @@ const CreateCandidate = (props) => {
   const [otherSource, setOtherSource] = useState("");
   const [referenceName, setReferenceName] = useState("");
   const [otherSkills, setOtherSkills] = useState("");
+  const [interviewFeedback, setInterviewFeedback] = useState("");
+  const [candidatetureStatus, setCandidatetureStatus] = useState("");
+  const [tenthDayEvaluation, setTenthDayEvaluation] = useState("");
+  const [tenthDayEvaluationOther, setTenthDayEvaluationOther] = useState("");
+  const [interviewDate, setInterviewDate] = useState("");
+  const [loiSent, setLoiSent] = useState(false);
+  const [loiAccepted, setLoiAccepted] = useState(false);
+  const [joinedBatch, setJoinedBatch] = useState(false);
 
   const [batchNumberVariables, setBatchNumberVariables] = useState([]);
   // Non-state variables
   let params = useParams();
   let navigate = useNavigate();
-  const skills = ["Java", ".Net", "SQL", "Python", "AI/ML", "Spring MVC", "Backend Java Stack"];
-  let candidateStatusOption = ["Tech Screened", "Training", "On Bench", "Placed","Redeployed", "Passive", "No To Be Contacted"];
-  const country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+  const skills = [
+    "Java",
+    ".Net",
+    "SQL",
+    "Python",
+    "AI/ML",
+    "Spring MVC",
+    "Backend Java Stack",
+  ];
+  let candidateStatusOption = [
+    "Tech Screened",
+    "Training",
+    "On Bench",
+    "Placed",
+    "Redeployed",
+    "Passive",
+    "No To Be Contacted",
+  ];
+  const country_list = [
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "Andorra",
+    "Angola",
+    "Anguilla",
+    "Antigua &amp; Barbuda",
+    "Argentina",
+    "Armenia",
+    "Aruba",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belgium",
+    "Belize",
+    "Benin",
+    "Bermuda",
+    "Bhutan",
+    "Bolivia",
+    "Bosnia &amp; Herzegovina",
+    "Botswana",
+    "Brazil",
+    "British Virgin Islands",
+    "Brunei",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Cambodia",
+    "Cameroon",
+    "Cape Verde",
+    "Cayman Islands",
+    "Chad",
+    "Chile",
+    "China",
+    "Colombia",
+    "Congo",
+    "Cook Islands",
+    "Costa Rica",
+    "Cote D Ivoire",
+    "Croatia",
+    "Cruise Ship",
+    "Cuba",
+    "Cyprus",
+    "Czech Republic",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Estonia",
+    "Ethiopia",
+    "Falkland Islands",
+    "Faroe Islands",
+    "Fiji",
+    "Finland",
+    "France",
+    "French Polynesia",
+    "French West Indies",
+    "Gabon",
+    "Gambia",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Gibraltar",
+    "Greece",
+    "Greenland",
+    "Grenada",
+    "Guam",
+    "Guatemala",
+    "Guernsey",
+    "Guinea",
+    "Guinea Bissau",
+    "Guyana",
+    "Haiti",
+    "Honduras",
+    "Hong Kong",
+    "Hungary",
+    "Iceland",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Iraq",
+    "Ireland",
+    "Isle of Man",
+    "Israel",
+    "Italy",
+    "Jamaica",
+    "Japan",
+    "Jersey",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kuwait",
+    "Kyrgyz Republic",
+    "Laos",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Macau",
+    "Macedonia",
+    "Madagascar",
+    "Malawi",
+    "Malaysia",
+    "Maldives",
+    "Mali",
+    "Malta",
+    "Mauritania",
+    "Mauritius",
+    "Mexico",
+    "Moldova",
+    "Monaco",
+    "Mongolia",
+    "Montenegro",
+    "Montserrat",
+    "Morocco",
+    "Mozambique",
+    "Namibia",
+    "Nepal",
+    "Netherlands",
+    "Netherlands Antilles",
+    "New Caledonia",
+    "New Zealand",
+    "Nicaragua",
+    "Niger",
+    "Nigeria",
+    "Norway",
+    "Oman",
+    "Pakistan",
+    "Palestine",
+    "Panama",
+    "Papua New Guinea",
+    "Paraguay",
+    "Peru",
+    "Philippines",
+    "Poland",
+    "Portugal",
+    "Puerto Rico",
+    "Qatar",
+    "Reunion",
+    "Romania",
+    "Russia",
+    "Rwanda",
+    "Saint Pierre &amp; Miquelon",
+    "Samoa",
+    "San Marino",
+    "Satellite",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Singapore",
+    "Slovakia",
+    "Slovenia",
+    "South Africa",
+    "South Korea",
+    "Spain",
+    "Sri Lanka",
+    "St Kitts &amp; Nevis",
+    "St Lucia",
+    "St Vincent",
+    "St. Lucia",
+    "Sudan",
+    "Suriname",
+    "Swaziland",
+    "Sweden",
+    "Switzerland",
+    "Syria",
+    "Taiwan",
+    "Tajikistan",
+    "Tanzania",
+    "Thailand",
+    "Timor L'Este",
+    "Togo",
+    "Tonga",
+    "Trinidad &amp; Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Turks &amp; Caicos",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates",
+    "United Kingdom",
+    "Uruguay",
+    "Uzbekistan",
+    "Venezuela",
+    "Vietnam",
+    "Virgin Islands (US)",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe",
+  ];
 
-  let statesOfUS = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+  let statesOfUS = [
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ];
 
   let webSources = ["Moster", "LinkedIn", "Indeed", "Dice", "Career Builder"];
 
-  const communicationSkillsOptions = [1,2,3,4,5,6,7,8,9,10];
+  const communicationSkillsOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  let tenthDayEvaluationOptions = ["Suitable", "Not Suitable", "Other"];
+
+  let interviewFeedbackOptions = [
+    "Cleared",
+    "Not Cleared",
+    "On Hold",
+    "Second Opinion",
+  ];
 
   const batchNumberOption = () => {
-    for(let i = 0; i<101; i++){
-        setBatchNumberVariables(batchNumberVariables => [...batchNumberVariables, i]);
+    for (let i = 0; i < 101; i++) {
+      setBatchNumberVariables((batchNumberVariables) => [
+        ...batchNumberVariables,
+        i,
+      ]);
     }
   };
 
@@ -87,36 +380,52 @@ const CreateCandidate = (props) => {
     );
   };
 
+  const showOtherTenthDayField = () => {
+    return (
+      <div className="form-group m-2">
+        <label htmlFor="tenthDayEvaluationOther" className="m-1">
+          Please Specify Other
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          name="tenthDayEvaluationOther"
+          id="tenthDayEvaluationOther"
+          onChange={(e) => setTenthDayEvaluationOther(e.target.value)}
+        />
+      </div>
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const baseUrl = "http://localhost:8080/api/candidates/create-candidate";
-   
+
     let requestBody = {
-      "recruiterName": `${user.firstName} ${user.lastName}`,
-      "skillSet": skillSet,
-      "batchNo": batchNo,
-      "candidateStatus": candidateStatus,
-      "firstName": firstName,
-      "middleName": middleName,
-      "lastName": lastName,
-      "emailId": emailId,
-      "phoneNumber": phoneNumber,
-      "college": college,
-      "country": country,
-      "state": state,
-      "city": city,
-      "experience": experience,
-      "visaStatus": visaStatus,
-      "OPTStartDate": OPTStartDate,
-      "OPTEndDate": OPTEndDate,
-      "SSN": SSN,
-      "communicationSkill": communicationSkill,
-      "resume": "",
-      "recruiterRemarks": recruiterRemarks,
-      "otherSource": otherSource,
-      "referenceName": referenceName,
+      recruiterName: `${user.firstName} ${user.lastName}`,
+      skillSet: skillSet,
+      batchNo: batchNo,
+      candidateStatus: candidateStatus,
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      emailId: emailId,
+      phoneNumber: phoneNumber,
+      college: college,
+      country: country,
+      state: state,
+      city: city,
+      experience: experience,
+      visaStatus: visaStatus,
+      OPTStartDate: OPTStartDate,
+      OPTEndDate: OPTEndDate,
+      SSN: SSN,
+      communicationSkill: communicationSkill,
+      resume: "",
+      recruiterRemarks: recruiterRemarks,
+      otherSource: otherSource,
+      referenceName: referenceName,
     };
 
     /* Start of function */
@@ -148,12 +457,18 @@ const CreateCandidate = (props) => {
     console.log("req body: " + requestBody);
 
     // axios post function
-    axios.post(`http://localhost:8080/api/candidates/create-candidate`, requestBody).then(() => {
-      navigate(`/employee-page`)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+    axios
+      .post(
+        `http://localhost:8080/api/candidates/create-candidate`,
+        requestBody
+      )
+      .then(() => {
+        navigate(`/business-manager-page`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   //start of return function
   return (
@@ -193,9 +508,11 @@ const CreateCandidate = (props) => {
             onChange={(e) => setSkillSet(e.target.value)}
           >
             {skills.map((skill, key) => {
-              return(
-                <option key={key} value={skill}>{skill}</option> 
-              )
+              return (
+                <option key={key} value={skill}>
+                  {skill}
+                </option>
+              );
             })}
           </select>
         </div>
@@ -205,7 +522,7 @@ const CreateCandidate = (props) => {
           {showOtherSkillSet ? showOtherSkillField() : ""}
         </div> */}
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Batch Number</label>
           <select
             className="form-select form-control"
@@ -216,15 +533,16 @@ const CreateCandidate = (props) => {
           >
             <option>---</option>
             {batchNumberVariables.map((batchnumber, index) => {
-              return(
-                <option key={index} value={batchnumber}>{batchnumber}</option>
-              )
+              return (
+                <option key={index} value={batchnumber}>
+                  {batchnumber}
+                </option>
+              );
             })}
           </select>
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Candidate Status</label>
           <select
             className="form-select form-control"
@@ -232,17 +550,18 @@ const CreateCandidate = (props) => {
             id="candidateStatus"
             onChange={(e) => setCandidateStatus(e.target.value)}
           >
-               <option>---</option>
-              {candidateStatusOption.map((candidateStatus, key) => {
-                return(
-                  <option key={key} value={candidateStatus}>{candidateStatus}</option>
-                )
-              })}
+            <option>---</option>
+            {candidateStatusOption.map((candidateStatus, key) => {
+              return (
+                <option key={key} value={candidateStatus}>
+                  {candidateStatus}
+                </option>
+              );
+            })}
           </select>
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">First Name</label>
           <input
             type="text"
@@ -252,10 +571,9 @@ const CreateCandidate = (props) => {
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Middle Name</label>
           <input
             type="text"
@@ -264,10 +582,9 @@ const CreateCandidate = (props) => {
             name="middleName"
             onChange={(e) => setMiddleName(e.target.value)}
           />
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Last Name</label>
           <input
             type="text"
@@ -277,10 +594,9 @@ const CreateCandidate = (props) => {
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Email Address</label>
           <input
             type="email"
@@ -291,9 +607,8 @@ const CreateCandidate = (props) => {
             required
           />
         </div>
- 
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Telephone Number</label>
           <input
             type="tel"
@@ -303,10 +618,9 @@ const CreateCandidate = (props) => {
             onChange={(e) => setPhoneNumber(e.target.value)}
             required
           />
-        </div> 
+        </div>
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">College/University/Vocational School</label>
           <input
             type="text"
@@ -316,9 +630,9 @@ const CreateCandidate = (props) => {
             onChange={(e) => setCollege(e.target.value)}
             required
           />
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Country</label>
           <select
             className="form-select form-control"
@@ -329,15 +643,16 @@ const CreateCandidate = (props) => {
           >
             <option>---</option>
             {country_list.map((country, key) => {
-              return(
-                <option key={key} value={country}>{country}</option>
-              )
+              return (
+                <option key={key} value={country}>
+                  {country}
+                </option>
+              );
             })}
-            
           </select>
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">State</label>
           <select
             className="form-select form-control"
@@ -348,15 +663,17 @@ const CreateCandidate = (props) => {
           >
             <option>---</option>
             {statesOfUS.map((states, key) => {
-              return(
-                <option value={states} key={key}>{states}</option>
-              )
+              return (
+                <option value={states} key={key}>
+                  {states}
+                </option>
+              );
             })}
             <option value="Not in US/Other">Not in US/Other</option>
           </select>
-        </div> 
-        
-         <div className="form-group m-2">
+        </div>
+
+        <div className="form-group m-2">
           <label className="m-1">City</label>
           <input
             type="text"
@@ -365,9 +682,9 @@ const CreateCandidate = (props) => {
             name="city"
             onChange={(e) => setCity(e.target.value)}
           />
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Experience</label>
           <input
             type="text"
@@ -376,9 +693,9 @@ const CreateCandidate = (props) => {
             name="experience"
             onChange={(e) => setExperience(e.target.value)}
           />
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Visa Status</label>
           <select
             className="form-select form-control"
@@ -395,13 +712,13 @@ const CreateCandidate = (props) => {
             <option value="US Citizen">US Citizen</option>
             <option value="TN">TN</option>
           </select>
-        </div> 
+        </div>
 
         {visaStatus === "OPT EAD" || visaStatus === "CPT"
           ? showVisaDateCalendars()
           : ""}
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Social Security Number</label>
           <input
             type="password"
@@ -410,29 +727,29 @@ const CreateCandidate = (props) => {
             id="SSN"
             onChange={(e) => setSSN(e.target.value)}
           />
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Source</label>
           <select
             className="form-select form-control"
             onChange={(e) => setSource(e.target.value)}
           >
-            <option >Select Source</option>
+            <option>Select Source</option>
             {webSources.map((sources, key) => {
-              return(
-                  <option value={sources} key={key}>{sources}</option>
-              )
+              return (
+                <option value={sources} key={key}>
+                  {sources}
+                </option>
+              );
             })}
-
           </select>
-        </div> 
+        </div>
 
         {/* {source === "Other" ? showOtherSourceField() : ""}
         {source === "Reference" ? specifyReference() : ""} */}
 
-
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Communication Skills</label>
           <select
             className="form-select form-control"
@@ -442,15 +759,17 @@ const CreateCandidate = (props) => {
           >
             <option value="1">Choose Communication Skill Strength</option>
             {communicationSkillsOptions.map((communicationSkills, key) => {
-              return(
-              <option value={communicationSkills} key={key}>{communicationSkills}</option>
-              )
+              return (
+                <option value={communicationSkills} key={key}>
+                  {communicationSkills}
+                </option>
+              );
             })}
           </select>
-        </div> 
-        
-          {/* no built in functionality to store file in the server */}
-         <div className="form-group m-2">
+        </div>
+
+        {/* no built in functionality to store file in the server */}
+        <div className="form-group m-2">
           <label className="m-1">Resume Attachment</label>
           <input
             type="file"
@@ -462,9 +781,9 @@ const CreateCandidate = (props) => {
               setResume(...resume, file);
             }}
           />
-        </div> 
+        </div>
 
-         <div className="form-group m-2">
+        <div className="form-group m-2">
           <label className="m-1">Recruiter's Remarks</label>
           <textarea
             className="form-control"
@@ -472,17 +791,166 @@ const CreateCandidate = (props) => {
             id="recruiterRemarks"
             onChange={(e) => setRecruiterRemarks(e.target.value)}
           ></textarea>
-        </div> 
+        </div>
+        <div className="form-group m-2">
+          <h3 className="text-center">Candidate Interview Details</h3>
+        </div>
+        <div className="form-group m-2">
+          <label className="m-1" htmlFor="trainerName">
+            Trainer Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="trainerName"
+            name="trainerName"
+            value={`${user.firstName} ${user.lastName}`}
+          />
+        </div>
 
-        
-          <button type="submit" className="btn btn-primary m-2">
-            Create Candidate
-          </button>
+        <div className="form-group m-2">
+          <label htmlFor="interviewDate" className="m-1">
+            Interview Date
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="interviewDate"
+            name="interviewDate"
+            onChange={(e) => setInterviewDate(e.target.value)}
+          />
+        </div>
 
-          <button type="reset" className="btn btn-danger m-2">
-            Reset Form
-          </button>
+        <div className="form-group m-2">
+          <label className="m-1" htmlFor="interviewFeedback">
+            Interview Feedback
+          </label>
+          {/* <textarea
+            className="form-control"
+            maxLength={300}
+            name="interviewFeedback"
+            id="interviewFeedback"
+            onChange={(e) => setInterviewFeedback(e.target.value)}
+          ></textarea> */}
+          <select
+            className="form-select form-control"
+            name="interviewFeedback"
+            id="interviewFeedback"
+            onChange={(e) => setInterviewFeedback(e.target.value)}
+          >
+            <option>---</option>
+            {interviewFeedbackOptions.map((item, key) => {
+              return (
+                <option value={item} key={key}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="form-group m-2">
+          <label htmlFor="candidatetureStatus" className="m-1">
+            Candidature Status
+          </label>
+          <select
+            className="form-control"
+            name="candidatetureStatus"
+            id="candidatetureStatus"
+            onChange={(e) => setCandidatetureStatus(e.target.value)}
+          >
+            <option>Please choose status...</option>
+            <option value="Suitable">Suitable</option>
+            <option value="Not Suitable">Not Suitable</option>
+          </select>
+        </div>
 
+        <div className="form-group m-2">
+          <label htmlFor="bdRemarksFeedback" className="m-1">
+            BD Remarks/Feedback
+          </label>
+          <textarea
+            className="form-control"
+            name="bdRemarksFeedback"
+            id="bdRemarksFeedback"
+          />
+        </div>
+
+        <div className="form-group m-2">
+          <label htmlFor="loiSent" className="m-1">
+            LOI Sent
+          </label>
+          <select
+            className="form-control"
+            name="loiSent"
+            id="loiSent"
+            onChange={(e) => setLoiSent(e.target.value)}
+          >
+            <option>---</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div className="form-group m-2">
+          <label htmlFor="loiAccepted" className="m-1">
+            LOI Accepted
+          </label>
+          <select
+            className="form-control"
+            name="loiAccepted"
+            id="loiAccepted"
+            onChange={(e) => setLoiAccepted(e.target.value)}
+          >
+            <option>---</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div className="form-group m-2">
+          <label htmlFor="joinedBatch" className="m-1">
+            Joined Batch
+          </label>
+          <select
+            className="form-control"
+            name="joinedBatch"
+            id="joinedBatch"
+            onChange={(e) => setJoinedBatch(e.target.value)}
+          >
+            <option>---</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        <div className="form-group m-2">
+          <label htmlFor="tenthDayEvaluation" className="m-1">
+            Tenth Day Evaluation
+          </label>
+          <select
+            className="form-control"
+            name="tenthDayEvaluation"
+            id="tenthDayEvaluation"
+            onChange={(e) => setTenthDayEvaluation(e.target.value)}
+          >
+            <option>---</option>
+            {tenthDayEvaluationOptions.map((tenthDay, key) => {
+              return (
+                <option value={tenthDay} key={key}>
+                  {tenthDay}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        {tenthDayEvaluation === "Other" ? showOtherTenthDayField() : ""}
+
+        <button type="submit" className="btn btn-primary m-2">
+          Create Candidate
+        </button>
+
+        <button type="reset" className="btn btn-danger m-2">
+          Reset Form
+        </button>
       </form>
     </div>
   );
