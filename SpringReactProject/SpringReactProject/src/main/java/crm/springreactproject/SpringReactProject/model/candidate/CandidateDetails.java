@@ -68,6 +68,10 @@ public class CandidateDetails {
 
     private String tenthDayEvaluation;
 
+    private String tenthDayEvaluationOther;
+
+    private String secondOpinionOther;
+
     private String trainingCompletionFeedback;
 
     private String finalResume;
