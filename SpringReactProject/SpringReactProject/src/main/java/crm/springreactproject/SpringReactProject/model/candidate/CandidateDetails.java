@@ -22,6 +22,8 @@ public class CandidateDetails {
 
     private String recruiterName;
 
+    private String snvaEid;
+
     private Integer candidateEntry;
 
     private String skillSet;
@@ -62,6 +64,7 @@ public class CandidateDetails {
 
     private Integer communicationSkill;
 
+    @Column
     private String resume;
 
     private String recruiterRemarks;

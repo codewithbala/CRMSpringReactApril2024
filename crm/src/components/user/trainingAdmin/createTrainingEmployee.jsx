@@ -59,7 +59,7 @@ export default function CreateTrainingEmployee() {
     <div>
       <div className="container">
         <form onSubmit={(e) => onSubmit(e)}>
-          <h1 className="display-4 m-2">Create Business Employee</h1>
+          <h1 className="display-4 m-2">Create Training Employee</h1>
           <div className="form-group m-2">
             <label className="m-1">Administator ID</label>
             <input

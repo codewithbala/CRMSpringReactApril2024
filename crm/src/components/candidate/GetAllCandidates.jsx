@@ -43,16 +43,16 @@ export default function GetAllCandidates(){
                 candidate.emailId && candidate.emailId.toLowerCase().includes(search.toLowerCase()) ||
                 candidate.experience && candidate.experience.toLowerCase().includes(search.toLowerCase()) ||
                 candidate.skillSet && candidate.skillSet.toLowerCase().includes(search.toLowerCase()) ||
-                candidate.optendDate && candidate.optendDatetoLowerCase().includes(search) ||
-                candidate.optstartDate && candidate.optstartDatetoLowerCase().includes(search) ||
-                candidate.otherSkills && candidate.otherSkillstoLowerCase().includes(search) ||
-                candidate.otherSource && candidate.otherSourcetoLowerCase().includes(search) ||
-                candidate.phoneNumber && candidate.phoneNumbertoLowerCase().includes(search) ||
-                candidate.recruiterName && candidate.recruiterNametoLowerCase().includes(search) ||
-                candidate.recruiterRemarks && candidate.recruiterRemarkstoLowerCase().includes(search) ||
-                candidate.source && candidate.sourcetoLowerCase().includes(search) ||
-                candidate.ssn && candidate.ssntoLowerCase().includes(search) ||
-                candidate.visaStatus && candidate.visaStatustoLowerCase().includes(search)
+                candidate.optendDate && candidate.optendDate.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.optstartDate && candidate.optstartDate.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.otherSkills && candidate.otherSkills.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.otherSource && candidate.otherSource.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.phoneNumber && candidate.phoneNumber.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.recruiterName && candidate.recruiterName.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.recruiterRemarks && candidate.recruiterRemarks.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.source && candidate.source.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.ssn && candidate.ssn.toLowerCase().includes(search.toLowerCase()) ||
+                candidate.visaStatus && candidate.visaStatus.toLowerCase().includes(search.toLowerCase())
             )
             setCandidates(filter)
         }
@@ -96,7 +96,7 @@ export default function GetAllCandidates(){
                         <th>Phone Number</th>
     
                         <th>Skill Set</th>
-                        <th>asd</th>
+                        <th></th>
     
     
                     </tr>
