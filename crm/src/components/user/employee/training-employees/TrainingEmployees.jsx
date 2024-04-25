@@ -1,5 +1,6 @@
 import {React, useState} from "react";
 import { useParams, useNavigate  } from "react-router-dom";
+import GetAllCandidates from "../../../candidate/GetAllCandidates";
 
 export default function TrainingEmployees(){
     let navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function TrainingEmployees(){
 
     return(
         <div className="mt-4">
-            <button onClick={() => goReviewCandidateInterviews()}>Edit Candidate Interview</button>
+            <GetAllCandidates/>
         </div>
     )
 }

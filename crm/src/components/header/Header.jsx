@@ -41,7 +41,8 @@ const Header = (props) => {
     let navText = "";
     if (props.department === "hr-employee") {
       navText = "Create Candidate";
-    } else if (
+    }
+     else if (
       props.department === "hr" ||
       props.department === "business" ||
       props.department === "training"
@@ -66,6 +67,7 @@ const Header = (props) => {
       case "hr-employee":
         navigate("/candidates/create-candidate/");
         break;
+
     }
   }
 

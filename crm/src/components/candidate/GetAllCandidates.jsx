@@ -9,6 +9,7 @@ export default function GetAllCandidates(){
     const [loading, setLoading] = useState(true)
     let navigate = useNavigate();
     const [search, setSearch] = useState("");
+    const department = localStorage.getItem("department")
 
     const getCandidates = () => {
         axios.get(`http://localhost:8080/api/candidates/`).then((response) => {
@@ -19,6 +20,10 @@ export default function GetAllCandidates(){
           }).catch(errors => {
             console.log(errors.message)
         })
+    }
+
+    const updateCandidate = (id) => {
+        navigate(`/updateCandidate/${id}`)
     }
 
     function filter (search) {
@@ -115,6 +120,7 @@ export default function GetAllCandidates(){
                                     <td>{candidate.phoneNumber}</td>
                                     <td>{candidate.skillSet}</td>
                                     <td><button className="btn btn-primary" onClick={() => navigateToCandidate(candidate.id)}>View Candidate</button></td>
+                                    <td>{department == "training-employee" ? <button onClick={() => updateCandidate(candidate.id)} className="btn btn-secondary">Update Candidate</button>: <></>}</td>
                                </tr>
                                
                                </>

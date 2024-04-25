@@ -92,7 +92,7 @@ function App() {
                 }
               /> */}
   
-              <Route path="/trainerForm/" element={<TrainerFormView/> }></Route>
+              <Route path="/updateCandidate/:id" element={<TrainerFormView/> }></Route>
               {/* training admin */}
               <Route
                 path="/training-admin-page"
