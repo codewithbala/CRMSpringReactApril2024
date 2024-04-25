@@ -19,6 +19,7 @@ import CreateHREmployee from "./components/user/hrManager/CreateHREmployee";
 import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 import UpdatePassword from "./components/login/UpdatePassword";
 import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirmation";
+import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -58,6 +59,10 @@ function App() {
               />
               <Route path="/updatePasswordCheck" element={<UpdatePassword setUserAuthenticated={setUserAuthenticated}/>}></Route>
               <Route path="/updateUserPassword/:department/:id" element={userAuthenticated ? <UpdatePasswordConfirmation setUserAuthenticated={setUserAuthenticated}/>: <Homepage/> }></Route>
+
+              
+
+
             </Route>
             </Routes>
         </BrowserRouter>
@@ -87,7 +92,7 @@ function App() {
                 }
               /> */}
   
-  
+              <Route path="/trainerForm/" element={<TrainerFormView/> }></Route>
               {/* training admin */}
               <Route
                 path="/training-admin-page"
