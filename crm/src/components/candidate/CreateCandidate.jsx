@@ -31,7 +31,7 @@ const CreateCandidate = (props) => {
   const [referenceName, setReferenceName] = useState("");
   const [otherSkills, setOtherSkills] = useState("");
   const [interviewFeedback, setInterviewFeedback] = useState("");
-  const [candidatetureStatus, setCandidatetureStatus] = useState("");
+  const [candidatureStatus, setCandidatureStatus] = useState("");
   const [tenthDayEvaluation, setTenthDayEvaluation] = useState("");
   const [tenthDayEvaluationOther, setTenthDayEvaluationOther] = useState("");
   const [interviewDate, setInterviewDate] = useState("");
@@ -438,14 +438,32 @@ const CreateCandidate = (props) => {
       city: city,
       experience: experience,
       visaStatus: visaStatus,
+      source: source,
       OPTStartDate: OPTStartDate,
       OPTEndDate: OPTEndDate,
       SSN: SSN,
       communicationSkill: communicationSkill,
       resume: "",
       recruiterRemarks: recruiterRemarks,
+      tenthDayEvaluation: tenthDayEvaluation,
+      tenthDayEvaluationOther,
+      tenthDayEvaluationOther,
+      secondOpinionOther: secondOpinionOther,
+      trainingCompletionFeedback: props.trainingCompletionFeedback,
+      finalResume: finalResume,
       otherSource: otherSource,
       referenceName: referenceName,
+      otherSkills: otherSkills,
+      interviewDate: interviewDate,
+      trainerName: `${user.firstName} ${user.lastName}`,
+      interviewFeedback: interviewFeedback,
+      candidatureStatus: candidatureStatus,
+      bdRemarksFeedback: props.bdRemarksFeedback,
+      loiSent: loiSent,
+      loiAccepted: loiAccepted,
+      joinedBatch: joinedBatch,
+      candidateBatchStartDate,
+      candidateBatchStartDate,
     };
 
     /* Start of function */
@@ -877,7 +895,7 @@ const CreateCandidate = (props) => {
             className="form-control"
             name="candidatetureStatus"
             id="candidatetureStatus"
-            onChange={(e) => setCandidatetureStatus(e.target.value)}
+            onChange={(e) => setCandidatureStatus(e.target.value)}
           >
             <option>Please choose status...</option>
             <option value="Suitable">Suitable</option>
@@ -893,6 +911,7 @@ const CreateCandidate = (props) => {
             className="form-control"
             name="bdRemarksFeedback"
             id="bdRemarksFeedback"
+            value={props.bdRemarksFeedback}
           />
         </div>
 
