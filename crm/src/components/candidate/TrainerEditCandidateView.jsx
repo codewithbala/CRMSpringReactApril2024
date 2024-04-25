@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function TrainerFormView(){
     const [batchStatus, setBatchStatus] = useState()
@@ -11,13 +12,67 @@ export default function TrainerFormView(){
     const [candidate, setCandidate] = useState()
     const [loading, setLoading] = useState(true)
     const baseUrl = "http://localhost:8080/api"
+    const navigate = useNavigate();
+    const params = useParams();
 
     useEffect(() => {
         getCandidate();
     },[])
 
+    const submitorm = () => {
+        let body = {
+            "id": params.id,
+            "recruiterName": candidate.recruiterName,
+            "snvaEid": candidate.snvaEid,
+            "candidateEntry": candidate.candidateEntry,
+            "skillSet": candidate.skillSet,
+            "batchNo": candidate.batchNo,
+            "candidateStatus": candidate.candidateStatus,
+            "firstName": candidate.firstName,
+            "middleName": candidate.middleName,
+            "lastName": candidate.lastName,
+            "emailId": candidate.emailId,
+            "phoneNumber": candidate.phoneNumber,
+            "college": candidate.college,
+            "country": candidate.country,
+            "state": candidate.state,
+            "city": candidate.city,
+            "experience": candidate.experience,
+            "visaStatus": candidate.visaStatus,
+            "source": candidate.source,
+            "communicationSkill": candidate.communicationSkill,
+            "resume": candidate.resume,
+            "recruiterRemarks": candidate.recruiterRemarks,
+            "tenthDayEvaluation": dayEvaluation,
+            "tenthDayEvaluationOther": null,
+            "secondOpinionOther": null,
+            "trainingCompletionFeedback": trainingCompletionFeedback,
+            "finalResume": finalResume,
+            "otherSource": candidate.otherSource,
+            "referenceName": candidate.referenceName,
+            "otherSkills": candidate.otherSkills,
+            "interviewDate": candidate.interviewDate,
+            "trainerName": candidate.trainerName,
+            "interviewFeedback": interviewFeedback,
+            "candidatureStatus": candidateStatus,
+            "bdRemarksFeedback": candidate.bdRemarksFeedbaack,
+            "loiSent": candidate.loiSent,
+            "loiAccepted": candidate.loiAccepted,
+            "joinedBatch": candidate.joinedBatch,
+            "candidateBatchStartDate": candidate.candidateBatchStartDate,
+            "ssn": candidate.ssn,
+            "optendDate": candidate.optendDate,
+            "optstartDate": candidate.optstartDate
+        }
+        axios.put(`${baseUrl}/candidates/update-candidate/${params.id}`, body).then(() => {
+            navigate("/employee-page")
+        }).catch(error => {
+            alert(error)
+        })
+    }
+
     function getCandidate(){
-        axios.get(`${baseUrl}/candidates/1001`).then(response => {
+        axios.get(`${baseUrl}/candidates/${params.id}`).then(response => {
             console.log(response.data)
             setCandidate(response.data);
             setLoading(false)
@@ -158,7 +213,7 @@ export default function TrainerFormView(){
                 <div className="form-group m-2">
                     <label className="m-1">Final Resume</label>
                     <input
-                        type="text" className="form-control" value="" disabled/>
+                        type="text" className="form-control" value="" onChange={(e) => setFinalResume(e.target.value)} disabled/>
                 </div>
     
                 <div className="form-group m-2">
@@ -174,7 +229,7 @@ export default function TrainerFormView(){
                 </div>
     
                 </form>
-                <div className="btn btn-primary mt-3 mx-2">Subimit</div>
+                <div className="btn btn-primary mt-3 mx-2" onClick={() => submitorm()}>Subimit</div>
             </div>
         )
     }
