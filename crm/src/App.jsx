@@ -92,7 +92,7 @@ function App() {
                 }
               /> */}
   
-              <Route path="/updateCandidate/:id" element={<TrainerFormView/> }></Route>
+              <Route path="/updateCandidate/:id" element={department=="training-employee" ? <TrainerFormView/> : <Homepage/> }></Route>
               {/* training admin */}
               <Route
                 path="/training-admin-page"

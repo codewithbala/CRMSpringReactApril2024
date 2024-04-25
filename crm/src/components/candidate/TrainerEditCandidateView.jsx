@@ -229,7 +229,7 @@ export default function TrainerFormView(){
                 </div>
     
                 </form>
-                <div className="btn btn-primary mt-3 mx-2" onClick={() => submitorm()}>Subimit</div>
+                <div className="btn btn-primary mt-3 mx-2" onClick={() => submitorm()}>Submit</div>
             </div>
         )
     }
