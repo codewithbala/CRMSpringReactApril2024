@@ -183,9 +183,9 @@ export default function TrainerFormView(){
                 </div>
     
                 <div className="form-group m-2">
-                <label className="m-1">Interview Feedback</label>
+                <label className="m-1">Candiditure Status</label>
                 <select name="submissionStatus"  onChange={(e) => setCandidateStatus(e.target.value)} className="form-control" required>
-                    <option>Select One</option>
+                    <option >Select One</option>
                     <option value="Suitable">Suitable</option>
                     <option value="Not Suitable">Not Suitable</option>
                 </select>
@@ -213,7 +213,7 @@ export default function TrainerFormView(){
                 <div className="form-group m-2">
                     <label className="m-1">Final Resume</label>
                     <input
-                        type="text" className="form-control" value="" onChange={(e) => setFinalResume(e.target.value)} disabled/>
+                        type="text" className="form-control" value="" onChange={(e) => setFinalResume(e.target.value)} />
                 </div>
     
                 <div className="form-group m-2">

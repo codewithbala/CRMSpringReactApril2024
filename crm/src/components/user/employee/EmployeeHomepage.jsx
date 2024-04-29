@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import TrainingEmployees from "./training-employees/TrainingEmployees";
 import GetAllCandidates from "../../candidate/GetAllCandidates";
 import HREmployee from "./hr-employee/HREmployee";
+import BusinessEmployee from "./business-employee/BusinessEmployee";
 
 
 export default function EmployeeHomepage(props){
@@ -39,6 +40,7 @@ export default function EmployeeHomepage(props){
             {props.department == "hr-employee" ? <HREmployee department={props.department} user={props.user} managerId={props.managerId}/> : <></>}
             
             {props.department == "training-employee" ? <TrainingEmployees/> : <></>}
+            {props.department == "business-employee"? <BusinessEmployee/> : <></>}
             
             
           

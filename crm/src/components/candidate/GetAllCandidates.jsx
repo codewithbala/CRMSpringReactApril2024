@@ -22,8 +22,11 @@ export default function GetAllCandidates(){
         })
     }
 
-    const updateCandidate = (id) => {
-        navigate(`/updateCandidate/${id}`)
+    const trainerUpdateCandidate = (id) => {
+        navigate(`/trainer/updateCandidate/${id}`)
+    }
+    const businessEmployeeUpdateCandidate = (id) => {
+        navigate(`/business/updateCandidate/${id}`)
     }
 
     function filter (search) {
@@ -120,7 +123,8 @@ export default function GetAllCandidates(){
                                     <td>{candidate.phoneNumber}</td>
                                     <td>{candidate.skillSet}</td>
                                     <td><button className="btn btn-primary" onClick={() => navigateToCandidate(candidate.id)}>View Candidate</button></td>
-                                    <td>{department == "training-employee" ? <button onClick={() => updateCandidate(candidate.id)} className="btn btn-secondary">Update Candidate</button>: <></>}</td>
+                                    <td>{department == "training-employee" ? <button onClick={() => trainerUpdateCandidate(candidate.id)} className="btn btn-secondary">Update Candidate</button>: department == "business-employee" ? <button onClick={() => businessEmployeeUpdateCandidate(candidate.id)} className="btn btn-secondary">Update Candidate</button> :
+                                     <></>}</td>
                                </tr>
                                
                                </>

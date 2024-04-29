@@ -20,6 +20,7 @@ import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 import UpdatePassword from "./components/login/UpdatePassword";
 import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirmation";
 import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
+import BusinessEmployeeEditCandidateView from "./components/candidate/BusinessEmployeeEditCandidateView";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
@@ -92,7 +93,11 @@ function App() {
                 }
               /> */}
   
-              <Route path="/updateCandidate/:id" element={department=="training-employee" ? <TrainerFormView/> : <Homepage/> }></Route>
+              <Route path="/trainer/updateCandidate/:id" element={department=="training-employee" ? <TrainerFormView/> : <Homepage/> }></Route>
+
+              <Route path="/business/updateCandidate/:id" element={department=="business-employee" ? <BusinessEmployeeEditCandidateView/> : <Homepage/> }></Route>
+
+
               {/* training admin */}
               <Route
                 path="/training-admin-page"
