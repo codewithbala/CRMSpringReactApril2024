@@ -19,7 +19,7 @@ export default function TrainerFormView(){
         getCandidate();
     },[])
 
-    const submitorm = () => {
+    const submitForm = () => {
         let body = {
             "id": params.id,
             "recruiterName": candidate.recruiterName,
@@ -63,7 +63,30 @@ export default function TrainerFormView(){
             "ssn": candidate.ssn,
             "optendDate": candidate.optendDate,
             "optstartDate": candidate.optstartDate,
-            "positionTitle": candidate.positionTitle
+            "positionTitle": candidate.positionTitle,
+
+            "candidateName": candidate.candidateName,
+            "skillSetForBusinessView": candidate.skillSet,
+            "batchNoForBusinessView": candidate.batchNo,
+            "vendorPoc": candidate.vendorPoc,
+            "endClientName": candidate.endClientName,
+            "location": candidate.location,
+            "billRate": candidate.billRate,
+            "submissionStatus": candidate.submissionStatus,
+            "businessInterviewDate": candidate.businessInterviewDate,
+            "interviewTime": candidate.interviewTime,
+            "interviewResult": candidate.interviewResult,
+            "projectStartDate": candidate.projectStartDate,
+            "projectEndDate": candidate.projectEndDate,
+            "remarks": candidate.remarks,
+            "vendorTier": candidate.vendorTier,
+            "vendorName": candidate.vendorName,
+            "vendorSPOC": candidate.vendorSPOC,
+            "vendorEmail": candidate.vendorEmail,
+            "vendorContactNo": candidate.vendorContactNo,
+            "vendorLocation": candidate.vendorLocation,
+            "businessInterviewFeedback": candidate.businessInterviewFeedback,
+
         }
         axios.put(`${baseUrl}/candidates/update-candidate/${params.id}`, body).then(() => {
             navigate("/employee-page")
@@ -230,7 +253,7 @@ export default function TrainerFormView(){
                 </div>
     
                 </form>
-                <div className="btn btn-primary mt-3 mx-2" onClick={() => submitorm()}>Submit</div>
+                <div className="btn btn-primary mt-3 mx-2" onClick={() => submitForm()}>Submit</div>
             </div>
         )
     }

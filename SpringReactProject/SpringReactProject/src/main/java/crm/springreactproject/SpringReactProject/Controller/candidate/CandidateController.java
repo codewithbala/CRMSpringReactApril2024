@@ -53,6 +53,8 @@ public class CandidateController {
 
     @PutMapping("/update-candidate/{id}")
     public CandidateDetails updateCandidate(@PathVariable Integer id, @RequestBody CandidateDetails candidateDetails) {
+        candidateDetails.setId(id);
+        candidateService.createNewCandidate(candidateDetails);
         return candidateService.updateCandidate(id, candidateDetails);
 
 

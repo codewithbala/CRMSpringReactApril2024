@@ -20,8 +20,9 @@ import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 import UpdatePassword from "./components/login/UpdatePassword";
 import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirmation";
 import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
-import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEditCandidate";
-import BusinessEmployeeEditCandidateView from "./components/candidate/BusinessEmployeeEditCandidateView";
+import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
+import BusinessEmployeeEditCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
+
 
 function App() {
   const [loggedIn, setLoggedIn] =
@@ -111,7 +112,7 @@ function App() {
               /> */}
   
               <Route path="/trainer/updateCandidate/:id" element={department=="training-employee" ? <TrainerFormView/> : <Homepage/> }></Route>
-              <Route path="/business/updateCandidate/:id" element={department=="business-employee" ? <BusinessEmployeeEditCandidateView/> : <Homepage/> }></Route>
+              <Route path="/business/updateCandidate/:id" element={department=="business-employee" ? <BusinessEmployeeEditCandidate/> : <Homepage/> }></Route>
 
 
               {/* training admin */}
@@ -269,11 +270,11 @@ function App() {
                     element={<ViewEmployee />}
                   ></Route>
                 </Route>
-                {/* For testing purposes only */}
+                {/* For testing purposes only
                 <Route
                   path="/businessEmployee/update-business-candidate"
                   element={<UpdateBusinessCandidate />}
-                />
+                /> */}
               </Routes>
             </div>
           </div>
