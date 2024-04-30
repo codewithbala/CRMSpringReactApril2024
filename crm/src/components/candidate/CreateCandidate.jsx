@@ -446,8 +446,7 @@ const CreateCandidate = (props) => {
       resume: "",
       recruiterRemarks: recruiterRemarks,
       tenthDayEvaluation: tenthDayEvaluation,
-      tenthDayEvaluationOther,
-      tenthDayEvaluationOther,
+      tenthDayEvaluationOther: tenthDayEvaluationOther,
       secondOpinionOther: secondOpinionOther,
       trainingCompletionFeedback: props.trainingCompletionFeedback,
       finalResume: finalResume,
@@ -462,8 +461,7 @@ const CreateCandidate = (props) => {
       loiSent: loiSent,
       loiAccepted: loiAccepted,
       joinedBatch: joinedBatch,
-      candidateBatchStartDate,
-      candidateBatchStartDate,
+      candidateBatchStartDate: candidateBatchStartDate,
     };
 
     /* Start of function */
