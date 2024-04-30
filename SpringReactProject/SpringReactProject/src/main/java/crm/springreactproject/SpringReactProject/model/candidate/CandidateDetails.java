@@ -14,6 +14,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@SecondaryTable(name="candidate_business_view", pkJoinColumns = @PrimaryKeyJoinColumn(name = "svna_eid"))
 public class CandidateDetails {
 
     @Id
@@ -119,6 +120,80 @@ public class CandidateDetails {
     @Column(name = "candidate_batch_start_date")
 
     private String candidateBatchStartDate;
+
+
+
+
+    // for candidate view for business
+
+    @Column(table = "candidate_business_view")
+    String positionTitle;
+
+    @Column(table = "candidate_business_view")
+    String candidateName;
+
+    @Column(table = "candidate_business_view")
+    String skillSetForBusinessView;
+
+    @Column(table = "candidate_business_view")
+    String batchNoForBusinessView;
+
+
+    @Column(table = "candidate_business_view")
+    String vendorPoc;
+
+    @Column(table = "candidate_business_view")
+    String endClientName;
+
+    @Column(table = "candidate_business_view")
+    String location;
+
+    @Column(table = "candidate_business_view")
+    Float billRate;
+
+    @Column(table = "candidate_business_view")
+    String submissionStatus;
+
+    @Column(table = "candidate_business_view")
+    String businessInterviewDate;
+
+    @Column(table = "candidate_business_view")
+    String interviewTime;
+
+    @Column(table = "candidate_business_view")
+    String interviewResult;
+
+    @Column(table = "candidate_business_view")
+    String BusinessInterviewFeedback;
+
+    @Column(table = "candidate_business_view")
+    String projectStartDate;
+
+    @Column(table = "candidate_business_view")
+    String projectEndDate;
+
+
+    @Column(table = "candidate_business_view")
+    String remarks;
+
+    @Column(table = "candidate_business_view")
+    String vendorTier;
+
+    @Column(table = "candidate_business_view")
+    String vendorName;
+
+    @Column(table = "candidate_business_view")
+    String vendorSPOC;
+
+    @Column(table = "candidate_business_view")
+    String vendorEmail;
+
+    @Column(table = "candidate_business_view")
+    String vendorContactNo;
+
+    @Column(table = "candidate_business_view")
+    String vendorLocation;
+
 
 
     /* Missing fields from US Staffing CRM 2024.xls file (Training tab)

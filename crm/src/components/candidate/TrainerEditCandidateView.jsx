@@ -62,7 +62,8 @@ export default function TrainerFormView(){
             "candidateBatchStartDate": candidate.candidateBatchStartDate,
             "ssn": candidate.ssn,
             "optendDate": candidate.optendDate,
-            "optstartDate": candidate.optstartDate
+            "optstartDate": candidate.optstartDate,
+            "positionTitle": candidate.positionTitle
         }
         axios.put(`${baseUrl}/candidates/update-candidate/${params.id}`, body).then(() => {
             navigate("/employee-page")
