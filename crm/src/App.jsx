@@ -20,7 +20,7 @@ import ViewEmployee from "./components/user/employee/viewEmployee/ViewEmployee";
 import UpdatePassword from "./components/login/UpdatePassword";
 import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirmation";
 import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
-import UpdateBusinessCandidate from "./components/businessEmployee/UpdateBusinessCandidate";
+import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEditCandidate";
 import BusinessEmployeeEditCandidateView from "./components/candidate/BusinessEmployeeEditCandidateView";
 
 function App() {
