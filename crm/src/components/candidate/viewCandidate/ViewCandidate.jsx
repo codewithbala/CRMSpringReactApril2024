@@ -18,10 +18,11 @@ export default function ViewCandidate(){
             setLoading(false)
         })
     }
-
+console.log(candidate)
     useEffect(() => {
         console.log(candidate)
         getCandidateById();
+        
     },[])
 
 
@@ -29,6 +30,7 @@ export default function ViewCandidate(){
         <p>Loading</p>
     }else{
         return(
+        <div>
             <div className="row mt-5 container">
                 <div className="col">
                     <img className="candidate-photo" src={image}></img>
@@ -167,6 +169,119 @@ export default function ViewCandidate(){
                 </div>
     
             </div>
+
+            <div className="mx-3 row">
+                <h2 className="mt-4 mx-auto underlined">Business Development Information</h2>
+                <div className="col">
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vendor Name</h5>
+                                    <p>{candidate.vendorName}</p>
+                            </div>
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>VendorPoc</h5>
+                                    <p>{candidate.vendorPoc}</p>
+                            </div>
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>End Client Name </h5>
+                                    <p>{candidate.endClientName}</p>
+                            </div>
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>location</h5>
+                                    <p>{candidate.location}</p>
+                            </div>
+
+                </div>
+
+                <div className="col">
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Bill Rate</h5>
+                                    <p>{candidate.billRate}</p>
+                            </div>
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>submission Status</h5>
+                                    <p>{candidate.submissionStatus}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Interview Date</h5>
+                                    <p>{candidate.interviewDate}</p>
+                            </div>
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Interview Time</h5>
+                                    <p>{candidate.interviewTime}</p>
+                            </div>
+
+                </div>
+                <div className="col">
+
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Interview Result</h5>
+                                    <p>{candidate.interviewResult}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Interview Feedback</h5>
+                                    <p>{candidate.interviewFeedback}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Project Start Date</h5>
+                                    <p>{candidate.projectStartDate}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vendor Tier</h5>
+                                    <p>{candidate.vendorTier}</p>
+                            </div>
+                </div>
+                <div className="col">
+
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vender SPOC</h5>
+                                    <p>{candidate.vendorSPOC}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vendor Email</h5>
+                                    <p>{candidate.vendorEmail}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vendor Contact Number</h5>
+                                    <p>{candidate.vendorContactNo}</p>
+                            </div>
+
+                            <div>
+                                <h4 className="mt-4"></h4>
+                                    <h5>Vendor Location</h5>
+                                    <p>{candidate.vendorLocation}</p>
+                            </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+            
         )
     }
     
