@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UpdateBusinessCandidate = (props) => {
   /* will/can use props for autofill values */
+  const [candidate, setCandidate] = useState([]);
   const [positionTitle, setPositionTitle] = useState("");
   const [vendorName, setVendorName] = useState("");
   const [vendorPoc, setVendorPoc] = useState("");
