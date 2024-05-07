@@ -22,12 +22,11 @@ import UpdatePasswordConfirmation from "./components/login/UpdatePasswordConfirm
 import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
 import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
 import BusinessEmployeeEditCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
-
+import CreateQuestion from "./components/quiz/CreateQuestion";
 
 function App() {
-  const [loggedIn, setLoggedIn] =
-    useState();
-    // localStorage.getItem("loggedIn") === "true"
+  const [loggedIn, setLoggedIn] = useState();
+  // localStorage.getItem("loggedIn") === "true"
   const [department, setDepartment] = useState(
     localStorage.getItem("department")
   );
@@ -49,6 +48,7 @@ function App() {
       <div>
         <BrowserRouter>
           <Routes>
+            <Route path="/createquestion" element={<CreateQuestion />} />
             <Route>
               <Route
                 path="/"
@@ -110,24 +110,41 @@ function App() {
                   />
                 }
               /> */}
-  
-              <Route path="/trainer/updateCandidate/:id" element={department=="training-employee" ? <TrainerFormView/> : <Homepage/> }></Route>
-              <Route path="/business/updateCandidate/:id" element={department=="business-employee" ? <BusinessEmployeeEditCandidate/> : <Homepage/> }></Route>
 
+                  <Route
+                    path="/trainer/updateCandidate/:id"
+                    element={
+                      department == "training-employee" ? (
+                        <TrainerFormView />
+                      ) : (
+                        <Homepage />
+                      )
+                    }
+                  ></Route>
+                  <Route
+                    path="/business/updateCandidate/:id"
+                    element={
+                      department == "business-employee" ? (
+                        <BusinessEmployeeEditCandidate />
+                      ) : (
+                        <Homepage />
+                      )
+                    }
+                  ></Route>
 
-              {/* training admin */}
-              <Route
-                path="/training-admin-page"
-                element={
-                  loggedIn == true && department == "training" ? (
-                    <ManagersPage department={department}/>
-                  ) : (
-                    <Homepage />
-                  )
-                }
-              />
-              {/* training employee */}
-              {/* <Route
+                  {/* training admin */}
+                  <Route
+                    path="/training-admin-page"
+                    element={
+                      loggedIn == true && department == "training" ? (
+                        <ManagersPage department={department} />
+                      ) : (
+                        <Homepage />
+                      )
+                    }
+                  />
+                  {/* training employee */}
+                  {/* <Route
                 path="/training-employee-page"
                 element={
                   loggedIn == true && department == "training-employee" ? (

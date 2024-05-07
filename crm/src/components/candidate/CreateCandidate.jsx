@@ -4,6 +4,7 @@ import axios from "axios";
 
 const CreateCandidate = (props) => {
   // State variables
+  const [candidate, setCandidate] = useState([]);
   const [skillSet, setSkillSet] = useState("");
   const [batchNo, setBatchNo] = useState("");
   const [candidateStatus, setCandidateStatus] = useState("");
