@@ -1,12 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateQuestion = () => {
   const [topic, setTopic] = useState("");
-  const [questionTitle, setQuestionTitle] = useState("");
-  const [correctAnswer, setCorrectAnswer] = useState("");
-  const [answerOne, setAnswerOne] = useState("");
-  const [answerTwo, setAnswerTwo] = useState("");
-  const [answerThree, setAnswerThree] = useState("");
+  const [Question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [fake1, setFake1] = useState("");
+  const [fake2, setFake2] = useState("");
+  const [fake3, setFake3] = useState("");
 
   const quizTopics = [
     "Core Java",
@@ -16,10 +18,34 @@ const CreateQuestion = () => {
     "Front End",
   ];
 
+  let navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const baseUrl = "http://localhost:8080/api/quiz/create-quizQuestion";
+
+    let requestBody = {
+      topic: topic,
+      Question: Question,
+      answer: answer,
+      fake1: fake1,
+      fake2: fake2,
+      fake3: fake3,
+    };
+
+    console.log(requestBody);
+
+    axios
+      .post(baseUrl, requestBody)
+      .then(() => navigate("/"))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="container">
       <h1 className="display-4 m-2">Create New Question</h1>
-      <form action="#">
+      <form action="#" onSubmit={(e) => handleSubmit(e)}>
         <div className="form-control m-2">
           <label htmlFor="" className="m-1">
             Please Select Topic
@@ -46,7 +72,7 @@ const CreateQuestion = () => {
             type="text"
             className="form-control"
             name="questionTitle"
-            onChange={(e) => setQuestionTitle(e.target.value)}
+            onChange={(e) => setQuestion(e.target.value)}
           />
         </div>
         <div className="answers"></div>
@@ -60,28 +86,28 @@ const CreateQuestion = () => {
             className="form-control m-1"
             name="answers"
             placeholder="Enter correct answer"
-            onChange={(e) => setCorrectAnswer(e.target.value)}
+            onChange={(e) => setAnswer(e.target.value)}
           />
           <input
             type="text"
             className="form-control m-1"
             name="answers"
             placeholder="Enter wrong answer"
-            onChange={(e) => setAnswerOne(e.target.value)}
+            onChange={(e) => setFake1(e.target.value)}
           />
           <input
             type="text"
             className="form-control m-1"
             name="answers"
             placeholder="Enter wrong answer"
-            onChange={(e) => setAnswerTwo(e.target.value)}
+            onChange={(e) => setFake2(e.target.value)}
           />
           <input
             type="text"
             className="form-control m-1"
             name="answers"
             placeholder="Enter wrong answer"
-            onChange={(e) => setAnswerThree(e.target.value)}
+            onChange={(e) => setFake3(e.target.value)}
           />
         </div>
 
