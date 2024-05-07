@@ -499,7 +499,7 @@ const CreateCandidate = (props) => {
         requestBody
       )
       .then(() => {
-        navigate(`/business-manager-page`);
+        navigate(`/employee-page`);
       })
       .catch((error) => {
         console.log(error);
@@ -873,6 +873,7 @@ const CreateCandidate = (props) => {
             name="interviewFeedback"
             id="interviewFeedback"
             onChange={(e) => setInterviewFeedback(e.target.value)}
+            disabled
           >
             <option>---</option>
             {interviewFeedbackOptions.map((item, key) => {
@@ -894,6 +895,7 @@ const CreateCandidate = (props) => {
             name="candidatetureStatus"
             id="candidatetureStatus"
             onChange={(e) => setCandidatureStatus(e.target.value)}
+            disabled
           >
             <option>Please choose status...</option>
             <option value="Suitable">Suitable</option>
@@ -910,6 +912,7 @@ const CreateCandidate = (props) => {
             name="bdRemarksFeedback"
             id="bdRemarksFeedback"
             value={props.bdRemarksFeedback}
+            disabled
           />
         </div>
 
@@ -922,12 +925,14 @@ const CreateCandidate = (props) => {
             name="loiSent"
             id="loiSent"
             onChange={(e) => setLoiSent(e.target.value)}
+            disabled
           >
             <option>---</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
         </div>
+
         <div className="form-group m-2">
           <label htmlFor="loiAccepted" className="m-1">
             LOI Accepted
@@ -937,6 +942,7 @@ const CreateCandidate = (props) => {
             name="loiAccepted"
             id="loiAccepted"
             onChange={(e) => setLoiAccepted(e.target.value)}
+            disabled
           >
             <option>---</option>
             <option value="true">Yes</option>
@@ -952,6 +958,7 @@ const CreateCandidate = (props) => {
             name="joinedBatch"
             id="joinedBatch"
             onChange={(e) => setJoinedBatch(e.target.value)}
+            disabled
           >
             <option>---</option>
             <option value="true">Yes</option>
@@ -969,6 +976,7 @@ const CreateCandidate = (props) => {
             id="candidateBatchStartDate"
             name="candidateBatchStartDate"
             onChange={(e) => setCandidateBatchStartDate(e.target.value)}
+            disabled
           />
         </div>
 
@@ -981,6 +989,7 @@ const CreateCandidate = (props) => {
             name="tenthDayEvaluation"
             id="tenthDayEvaluation"
             onChange={(e) => setTenthDayEvaluation(e.target.value)}
+            disabled
           >
             <option>---</option>
             {tenthDayEvaluationOptions.map((tenthDay, key) => {
