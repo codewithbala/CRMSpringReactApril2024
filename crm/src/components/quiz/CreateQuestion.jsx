@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 const CreateQuestion = () => {
   const [topic, setTopic] = useState("");
-  const [Question, setQuestion] = useState("");
+  const [otherTopic, setOtherTopic] = useState("");
+  const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [fake1, setFake1] = useState("");
   const [fake2, setFake2] = useState("");
@@ -16,9 +17,26 @@ const CreateQuestion = () => {
     "Angular",
     "Spring Boot",
     "Front End",
+    "Other",
   ];
 
   let navigate = useNavigate();
+
+  const otherInputField = () => {
+    return (
+      <div className="form-control m-2">
+        <label htmlFor="" className="m-1">
+          Enter Topic
+        </label>
+        <input
+          type="text"
+          className="form-control m-1"
+          name="otherTopic"
+          onChange={(e) => setOtherTopic(e.target.value)}
+        />
+      </div>
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +45,8 @@ const CreateQuestion = () => {
 
     let requestBody = {
       topic: topic,
-      Question: Question,
+      otherTopic: otherTopic,
+      question: question,
       answer: answer,
       fake1: fake1,
       fake2: fake2,
@@ -64,6 +83,7 @@ const CreateQuestion = () => {
             })}
           </select>
         </div>
+        {topic === "Other" ? otherInputField() : ""}
         <div className="form-control m-2">
           <label htmlFor="" className="m-1">
             Enter Quiz Question

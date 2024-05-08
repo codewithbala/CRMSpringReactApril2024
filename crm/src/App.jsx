@@ -23,6 +23,7 @@ import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
 import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
 import BusinessEmployeeEditCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
 import CreateQuestion from "./components/quiz/CreateQuestion";
+import DisplayQuestions from "./components/quiz/DisplayQuestions";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -49,6 +50,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/createquestion" element={<CreateQuestion />} />
+            <Route path="/displayquestions" element={<DisplayQuestions />} />
+
             <Route>
               <Route
                 path="/"

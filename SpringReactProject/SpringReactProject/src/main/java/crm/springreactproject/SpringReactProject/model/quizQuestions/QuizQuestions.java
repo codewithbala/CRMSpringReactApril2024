@@ -23,7 +23,7 @@ public class QuizQuestions {
     String topic;
 
     @Column
-    String Question;
+    String question;
 
     @Column
     String answer;
@@ -36,6 +36,8 @@ public class QuizQuestions {
 
     @Column
     String fake3;
+
+
 
 
 }
