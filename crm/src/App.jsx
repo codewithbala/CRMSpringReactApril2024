@@ -23,6 +23,7 @@ import TrainerFormView from "./components/candidate/TrainerEditCandidateView";
 import UpdateBusinessCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
 import BusinessEmployeeEditCandidate from "./components/businessEmployee/BusinessEmployeeEditCandidate";
 import CreateQuestion from "./components/quiz/CreateQuestion";
+import QuizComponent from "./components/quiz/quizComponent/QuizComponent";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState();
@@ -76,6 +77,13 @@ function App() {
                   ) : (
                     <Homepage />
                   )
+                }
+              ></Route>
+
+              <Route
+                path="/quiz"
+                element={
+                  <QuizComponent/>
                 }
               ></Route>
             </Route>

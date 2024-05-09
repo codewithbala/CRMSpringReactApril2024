@@ -1,0 +1,23 @@
+.baby-blue{
+    background-color: #e1f8fe;
+
+    
+}
+.baby-blue-inner{
+    padding-top: 35%;
+    margin-left: 20%;
+}
+.quiz-page{
+    height: 100vh;
+    width: 100vw;
+}
+.h2Color{
+    color: #0c8cb3;
+}
+.quiz-right-container{
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+.questionsNumber{
+    color: #75b9d4;
+}
