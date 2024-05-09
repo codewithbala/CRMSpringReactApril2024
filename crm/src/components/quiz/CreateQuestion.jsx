@@ -22,22 +22,6 @@ const CreateQuestion = () => {
 
   let navigate = useNavigate();
 
-  const otherInputField = () => {
-    return (
-      <div className="form-control m-2">
-        <label htmlFor="" className="m-1">
-          Enter Topic
-        </label>
-        <input
-          type="text"
-          className="form-control m-1"
-          name="otherTopic"
-          onChange={(e) => setOtherTopic(e.target.value)}
-        />
-      </div>
-    );
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -83,7 +67,7 @@ const CreateQuestion = () => {
             })}
           </select>
         </div>
-        {topic === "Other" ? otherInputField() : ""}
+
         <div className="form-control m-2">
           <label htmlFor="" className="m-1">
             Enter Quiz Question
