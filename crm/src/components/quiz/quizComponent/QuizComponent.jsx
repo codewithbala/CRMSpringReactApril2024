@@ -11,10 +11,15 @@ export default function QuizComponent(){
     const[allAnswers, setAllAnswers] = useState([]);
     const[rightAns, setRightAns] = useState([])
 
+
     const[questionOnPage, setQuestionOnPage] = useState("")
     const[rightAnsOnPage, setRightAnsOnPage] = useState("");
     const[falseAnsOnPage, setFalseAnsOnPage] = useState([])
     const[ansCount, setAnsCount] = useState(0);
+    const[userAns, setUserAns] = useState([])
+    const[userAnsArray, setUserAnsArray] = useState([])
+    const[checked, setChecked] = useState(false)
+    const[rightAnsCount, setRightAnsCount] = useState(0);
 
     function getQuestionsFromDb(){
         let questions = [];
@@ -29,6 +34,7 @@ export default function QuizComponent(){
     console.log(questionsFromDb)
 
     function separateQuestionFromAnswers(questionsFromDb){
+        
         // console.log(questionsFromDb)
         questionsFromDb.filter((questions) => {
             setQuestions(prev => [...prev, questions.question])
@@ -42,7 +48,12 @@ export default function QuizComponent(){
     console.log(allAnswers)
 
     function incrementCount(){
-        setAnsCount(count => count+1)
+        if(ansCount < questions.length){
+           setAnsCount(count => count+1) 
+        }else{
+
+        }
+        
     }
     function goToNextQuestion(){
        
@@ -56,6 +67,22 @@ export default function QuizComponent(){
             
         }
     }
+
+    const calculateScore = () => {
+
+        let rightAnsCount = 0;
+        for(let i = 0; i<questions.length; i++){
+            if(userAnsArray[i] == rightAns[i]){
+                rightAnsCount += 1;
+            }
+        }
+        console.log(rightAnsCount/rightAns.length)
+    }
+
+    // const alternateCheck = () => {
+    //     setChecked(checked == true? !checked: checked);
+    // }
+
 
     useEffect(() => {
         getQuestionsFromDb()
@@ -72,7 +99,7 @@ export default function QuizComponent(){
         <div className="row quiz-page">
             <div className="col baby-blue">
                 <div className="baby-blue-inner">
-                    <h2 className="questionsNumber">Question {ansCount}/Many</h2>
+                    <h2 className="questionsNumber">Question {ansCount}/{rightAns && rightAns.length}</h2>
                     <p className="questionsNumber">Select One Answer</p>
                     <h1 className="h2Color">{questionOnPage ? questionOnPage: <button onClick={() => {goToNextQuestion(), incrementCount()}} className="btn btn-primary">Start Quiz</button>}{}</h1>
                     
@@ -82,19 +109,24 @@ export default function QuizComponent(){
                 <div className="quiz-right-container">
 
                     <form>
-                        {falseAnsOnPage.map((item, key) => {
+                        {falseAnsOnPage && falseAnsOnPage.map((item, key) => {
                             return(
-                                <div className="container form-control mt-3 ">
+                                <div key={key} className="container form-control mt-3 ">
                                 
-                                        <input type="radio" name="answers"/>
-                                        <label htmlFor={item}>{item}</label>
-                                    
-                                    
+                                        <input type="radio" name={ansCount} value={item}
+                                         onChange={(e) => setUserAns(e.target.value)}
+                                         
+                                         
+                                         />
+                                        <label htmlFor={item}>{item}</label>      
                                 </div>
                             )
                         })}
                     </form> 
-                    {ansCount > 0 ? <div className="btn btn-primary mt-3" onClick={() => incrementCount()}>Next</div> : <></>}
+                    
+                    {ansCount > 0 && ansCount <rightAns.length ? <div className="btn btn-primary mt-3" onClick={() => {incrementCount(), setUserAnsArray(last => [...last, userAns])}}>Next</div> : rightAns && rightAns.length == ansCount ? <div className="btn btn-warning mt-3" onClick={() => calculateScore()}>Submit Test</div>: <></>}
+
+                    {console.log(userAnsArray)}
                 </div>
 
             </div>
